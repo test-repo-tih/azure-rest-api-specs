@@ -6,7 +6,6 @@
     "azure-sdk-for-go": "test-repo-billy/azure-sdk-for-go",
     "azure-sdk-for-js": "test-repo-billy/azure-sdk-for-js",
     "azure-sdk-for-net": "test-repo-billy/azure-sdk-for-net",
-    "azure-sdk-for-node": "test-repo-billy/azure-sdk-for-node",
     "azure-sdk-for-ruby": "test-repo-billy/azure-sdk-for-ruby"
   }
 }
