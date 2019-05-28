@@ -16,7 +16,6 @@
   },
   "responses": {
     "200": {
-      "description": "Success",
       "body": {
         "timestamps": [
           "2018-03-01T00:00:00Z",
