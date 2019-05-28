@@ -487,7 +487,9 @@
     "ChangepointStatefulRequest": {
       "type": "object",
       "required": [
-        "series"
+        "begin",
+        "end",
+        "timeseriesId"
       ],
       "properties": {
         "timeseriesId": {
