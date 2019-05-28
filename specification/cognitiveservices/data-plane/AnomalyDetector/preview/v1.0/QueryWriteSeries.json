@@ -2,8 +2,7 @@
   "paths": {
     "/anomalydetector/v1.0/timeseries/{timeseriesId}/write": {
       "put": {
-        "summary": "Write time series point, when users have history data, they can fill these data to us in batch,\r\nif users would like to modify some history data, they can fill updated data in batch.\r\nwrite interface only stores data and do not detect these data",
-        "description": "TODO",
+        "description": "Insert or replace timeseries points for specified timeseriesId. Note that this interface only stores data and do not detect these data",
         "operationId": "WriteSeries",
         "consumes": [
           "application/json"
@@ -45,8 +44,7 @@
     },
     "/anomalydetector/v1.0/timeseries/{timeseriesId}/query": {
       "post": {
-        "summary": "Query timeseries with required field in each timestamp",
-        "description": "TODO",
+        "description": "Query timeseries with required field in each timestamp.",
         "operationId": "QuerySeries",
         "consumes": [
           "application/json"
