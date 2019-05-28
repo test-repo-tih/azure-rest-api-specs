@@ -1,0 +1,193 @@
+{
+  "paths": {
+    "/anomalydetector/v1.0/timeseries/{timeseriesId}/write": {
+      "put": {
+        "summary": "Write time series point, when users have history data, they can fill these data to us in batch,\r\nif users would like to modify some history data, they can fill updated data in batch.\r\nwrite interface only stores data and do not detect these data",
+        "description": "TODO",
+        "operationId": "WriteSeries",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [],
+        "parameters": [
+          {
+            "$ref": "#/parameters/timeseriesId"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "TODO",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Timeseries"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation."
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/APIError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Write Timeseries example": {
+            "$ref": "./examples/WriteSeries.json"
+          }
+        }
+      }
+    },
+    "/anomalydetector/v1.0/timeseries/{timeseriesId}/query": {
+      "post": {
+        "summary": "Query timeseries with required field in each timestamp",
+        "description": "TODO",
+        "operationId": "QuerySeries",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/timeseriesId"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Request body with required field in each timestamp.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/QueryRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation.",
+            "schema": {
+              "$ref": "#/definitions/QueryResponse"
+            }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/APIError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Query Timeseries example": {
+            "$ref": "./examples/QuerySeries.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Point": {
+      "type": "object",
+      "required": [
+        "timestamp",
+        "value"
+      ],
+      "properties": {
+        "timestamp": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Timestamp of a data point (ISO8601 format)."
+        },
+        "value": {
+          "type": "number",
+          "format": "float",
+          "description": "The measurement of that point, should be float."
+        }
+      }
+    },
+    "Timeseries": {
+      "type": "object",
+      "properties": {
+        "series": {
+          "type": "array",
+          "description": "Time series data points.",
+          "items": {
+            "$ref": "#/definitions/Point"
+          }
+        }
+      }
+    },
+    "QueryRequest": {
+      "type": "object",
+      "properties": {
+        "begin": {
+          "format": "date-time",
+          "type": "string",
+          "description": "Timestamp of begin time (ISO8601 format)."
+        },
+        "end": {
+          "format": "date-time",
+          "type": "string",
+          "description": "Timestamp of end time (ISO8601 format)."
+        },
+        "fields": {
+          "type": "array",
+          "description": "TODO",
+          "items": {
+            "enum": [
+              "none",
+              "isAnomaly",
+              "isChangePoint",
+              "isPositiveAnomaly",
+              "isNegativeAnomaly",
+              "value",
+              "expectedValue",
+              "upperMargin",
+              "lowerMargin",
+              "period"
+            ],
+            "type": "string"
+          }
+        }
+      }
+    },
+    "QueryResponse": {
+      "type": "object",
+      "properties": {
+        "timestamps": {
+          "description": "Timestamps of data points (ISO8601 format).",
+          "type": "array",
+          "items": {
+            "format": "date-time",
+            "type": "string"
+          }
+        },
+        "fieldValues": {
+          "description": "TODO",
+          "type": "array",
+          "items": {
+            "type": "array",
+            "items": {
+              "type": "object"
+            }
+          }
+        }
+      }
+    }
+  },
+  "parameters": {
+    "timeseriesId": {
+      "name": "timeseriesId",
+      "in": "path",
+      "description": "Id referencing a particular timeseries.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "maxLength": 64,
+      "pattern": "^[a-z0-9-_]+$"
+    }
+  }
+}
