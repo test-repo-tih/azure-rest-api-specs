@@ -2,7 +2,7 @@
   "paths": {
     "/anomalydetector/v1.0/timeseries/{timeseriesId}/write": {
       "put": {
-        "description": "Insert or replace timeseries points for specified timeseriesId. Note that this interface only stores data and do not detect these data",
+        "description": "Insert or replace timeseries points for specified timeseriesId. Note that this interface only stores data and do not detect these data.",
         "operationId": "WriteSeries",
         "consumes": [
           "application/json"
