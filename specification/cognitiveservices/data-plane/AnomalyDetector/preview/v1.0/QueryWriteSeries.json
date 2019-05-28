@@ -8,7 +8,9 @@
         "consumes": [
           "application/json"
         ],
-        "produces": [],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "$ref": "#/parameters/timeseriesId"
