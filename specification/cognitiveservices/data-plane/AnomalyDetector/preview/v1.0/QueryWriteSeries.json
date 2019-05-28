@@ -18,7 +18,7 @@
           {
             "name": "body",
             "in": "body",
-            "description": "TODO",
+            "description": "Request body for writing timeseries.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/Timeseries"
@@ -27,7 +27,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Successful operation."
+            "description": "A successful call returns an empty response body."
           },
           "default": {
             "description": "Error response.",
@@ -61,7 +61,7 @@
           {
             "name": "body",
             "in": "body",
-            "description": "Request body with required field in each timestamp.",
+            "description": "Request body for querying timeseries.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/QueryRequest"
@@ -137,7 +137,7 @@
         },
         "fields": {
           "type": "array",
-          "description": "TODO",
+          "description": "Name of timeseries field.",
           "items": {
             "enum": [
               "none",
@@ -168,7 +168,7 @@
           }
         },
         "fieldValues": {
-          "description": "TODO",
+          "description": "Values of queried timeseries field.",
           "type": "array",
           "items": {
             "type": "array",
