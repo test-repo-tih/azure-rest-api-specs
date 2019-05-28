@@ -146,7 +146,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Successful operation.",
+            "description": "Successful operation."
           },
           "default": {
             "description": "Error response.",
