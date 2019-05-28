@@ -115,9 +115,9 @@
     },
     "/timeseries/detect/changepoint": {
       "post": {
-        "summary": "Detect changepoint for the entire series",
-        "description": "This operation generates a model using an entire series, each point is detected with the same model. With this method, points before and after a certain point are used to determine whether it is an changepoint. The entire detection can give user an overall status of the time series.",
-        "operationId": "Detection_Changepoint",
+        "summary": "Detect change point for the entire series",
+        "description": "This operation generates a model using an entire series, each point is detected with the same model. With this method, points before and after a certain point are used to determine whether it is an change point. The entire detection can give user an overall status of the time series.",
+        "operationId": "Detection_ChangePoint",
         "parameters": [
           {
             "name": "body",
@@ -158,9 +158,9 @@
     },
     "/timeseries/{timeseriesId}/detect/changepoint": {
       "post": {
-        "summary": "Detect changepoint for the interval series",
-        "description": "detect last continuous points which haven't been detected before between begin and end time stamp, for example, if the last changepoint is time t, between t and end, there are N points, but between begin and end, there are M points, in this API, only N points will be detected.",
-        "operationId": "Detection_ChangepointStateful",
+        "summary": "Detect change point for the interval series",
+        "description": "detect last continuous points which haven't been detected before between begin and end time stamp, for example, if the last change point is time t, between t and end, there are N points, but between begin and end, there are M points, in this API, only N points will be detected.",
+        "operationId": "Detection_ChangePointStateful",
         "parameters": [
           {
             "name": "body",
@@ -168,7 +168,7 @@
             "description": "begin and end is needed. Advanced model parameters can also be set in the request if needed.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/ChangepointStatefulRequest"
+              "$ref": "#/definitions/ChangePointStatefulRequest"
             }
           }
         ],
@@ -182,7 +182,7 @@
           "200": {
             "description": "Successful operation.",
             "schema": {
-              "$ref": "#/definitions/ChangepointStatefulDetectResponse"
+              "$ref": "#/definitions/ChangePointStatefulDetectResponse"
             }
           },
           "default": {
@@ -194,7 +194,7 @@
         },
         "x-ms-examples": {
           "Find anomalies for the entire series in batch example": {
-            "$ref": "./examples/ChangepointStatefulDetect.json"
+            "$ref": "./examples/ChangePointStatefulDetect.json"
           }
         }
       }
@@ -431,7 +431,7 @@
       "properties": {
         "series": {
           "type": "array",
-          "description": "Time series data points. Points should be sorted by timestamp in ascending order to match the changepoint detection result.",
+          "description": "Time series data points. Points should be sorted by timestamp in ascending order to match the change point detection result.",
           "items": {
             "$ref": "#/definitions/Point"
           }
@@ -449,7 +449,7 @@
         "sensitivity": {
           "type": "integer",
           "format": "int32",
-          "description": "Optional argument, advanced model parameter, between 0-99, the lower the value is, the larger the trend error will be which means less changepoint will be accepted."
+          "description": "Optional argument, advanced model parameter, between 0-99, the lower the value is, the larger the trend error will be which means less change point will be accepted."
         }
       }
     },
@@ -468,7 +468,7 @@
         },
         "changePoints": {
           "type": "array",
-          "description": "Point's timestamp which is changepoint",
+          "description": "Point's timestamp which is change point",
           "items": {
             "type": "string",
             "format": "date-time"
@@ -476,7 +476,7 @@
         },
         "confidence": {
           "type": "array",
-          "description": "the changepoint confidence of each point",
+          "description": "the change point confidence of each point",
           "items": {
             "type": "number",
             "format": "float"
@@ -484,7 +484,7 @@
         }
       }
     },
-    "ChangepointStatefulRequest": {
+    "ChangePointStatefulRequest": {
       "type": "object",
       "required": [
         "begin",
@@ -518,11 +518,11 @@
         "sensitivity": {
           "type": "integer",
           "format": "int32",
-          "description": "Optional argument, advanced model parameter, between 0-99, the lower the value is, the larger the trend error will be which means less changepoint will be accepted."
+          "description": "Optional argument, advanced model parameter, between 0-99, the lower the value is, the larger the trend error will be which means less change point will be accepted."
         }
       }
     },
-    "ChangepointStatefulDetectResponse":{
+    "ChangePointStatefulDetectResponse":{
       "type": "object",
       "required": [
         "changePoints",
@@ -537,7 +537,7 @@
         },
         "changePoints": {
           "type": "array",
-          "description": "Point's timestamp which is changepoint",
+          "description": "Point's timestamp which is change point",
           "items": {
             "type": "string",
             "format": "date-time"
@@ -545,7 +545,7 @@
         },
         "confidence": {
           "type": "array",
-          "description": "the changepoint confidence of each point",
+          "description": "the change point confidence of each point",
           "items": {
             "type": "number",
             "format": "float"
