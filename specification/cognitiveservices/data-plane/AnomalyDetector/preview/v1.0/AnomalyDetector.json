@@ -112,6 +112,92 @@
           }
         }
       }
+    },
+    "/timeseries/detect/changepoint": {
+      "post": {
+        "summary": "Detect changepoint for the entire series",
+        "description": "This operation generates a model using an entire series, each point is detected with the same model. With this method, points before and after a certain point are used to determine whether it is an changepoint. The entire detection can give user an overall status of the time series.",
+        "operationId": "Detection_Changepoint",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Time series points is needed. Advanced model parameters can also be set in the request if needed.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ChangePointRequest"
+            }
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation.",
+            "schema": {
+              "$ref": "#/definitions/ChangePointDetectResponse"
+            }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/APIError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Find anomalies for the entire series in batch example": {
+            "$ref": "./examples/ChangePointDetect.json"
+          }
+        }
+      }
+    },
+    "/timeseries/{timeseriesId}/detect/changepoint": {
+      "post": {
+        "summary": "Detect changepoint for the interval series",
+        "description": "detect last continuous points which haven't been detected before between begin and end time stamp, for example, if the last changepoint is time t, between t and end, there are N points, but between begin and end, there are M points, in this API, only N points will be detected.",
+        "operationId": "Detection_ChangepointStateful",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "description": "begin and end is needed. Advanced model parameters can also be set in the request if needed.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ChangepointStatefulRequest"
+            }
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation.",
+            "schema": {
+              "$ref": "#/definitions/ChangepointStatefulDetectResponse"
+            }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/APIError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Find anomalies for the entire series in batch example": {
+            "$ref": "./examples/ChangepointStatefulDetect.json"
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -334,6 +420,134 @@
         "isPositiveAnomaly": {
           "type": "boolean",
           "description": "Anomaly status in positive direction of the latest point. True means the latest point is an anomaly and its real value is larger than the expected one."
+        }
+      }
+    },
+    "ChangePointRequest":{
+      "type": "object",
+      "required": [
+        "series"
+      ],
+      "properties": {
+        "series": {
+          "type": "array",
+          "description": "Time series data points. Points should be sorted by timestamp in ascending order to match the changepoint detection result.",
+          "items": {
+            "$ref": "#/definitions/Point"
+          }
+        },
+        "period": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Optional argument, periodic value of a time series. If the value is null or does not present, the API will determine the period automatically."
+        },
+        "stableTrendWindow": {
+          "type": "number",
+          "format": "int32",
+          "description": "Optional argument, advanced model parameter, a default stableTrendWindow will be used in detection."
+        },
+        "sensitivity": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Optional argument, advanced model parameter, between 0-99, the lower the value is, the larger the trend error will be which means less changepoint will be accepted."
+        }
+      }
+    },
+    "ChangePointDetectResponse":{
+      "type": "object",
+      "required": [
+        "changePoints",
+        "confidence",
+        "period"
+      ],
+      "properties": {
+        "period": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Frequency extracted from the series, zero means no recurrent pattern has been found."
+        },
+        "changePoints": {
+          "type": "array",
+          "description": "Point's timestamp which is changepoint",
+          "items": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "confidence": {
+          "type": "array",
+          "description": "the changepoint confidence of each point",
+          "items": {
+            "type": "number",
+            "format": "float"
+          }
+        }
+      }
+    },
+    "ChangepointStatefulRequest": {
+      "type": "object",
+      "required": [
+        "series"
+      ],
+      "properties": {
+        "timeseriesId": {
+          "$ref": "#/definitions/TimeSeriesId"
+        },
+        "begin": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The begin timestamp of you want to detect."
+        },
+        "end": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The end timestamp of you want to detect."
+        },
+        "period": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Optional argument, periodic value of a time series. If the value is null or does not present, the API will determine the period automatically."
+        },
+        "stableTrendWindow": {
+          "type": "number",
+          "format": "int32",
+          "description": "Optional argument, advanced model parameter, a default stableTrendWindow will be used in detection."
+        },
+        "sensitivity": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Optional argument, advanced model parameter, between 0-99, the lower the value is, the larger the trend error will be which means less changepoint will be accepted."
+        }
+      }
+    },
+    "ChangepointStatefulDetectResponse":{
+      "type": "object",
+      "required": [
+        "changePoints",
+        "confidence",
+        "period"
+      ],
+      "properties": {
+        "period": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Frequency extracted from the series, zero means no recurrent pattern has been found."
+        },
+        "changePoints": {
+          "type": "array",
+          "description": "Point's timestamp which is changepoint",
+          "items": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "confidence": {
+          "type": "array",
+          "description": "the changepoint confidence of each point",
+          "items": {
+            "type": "number",
+            "format": "float"
+          }
         }
       }
     }
