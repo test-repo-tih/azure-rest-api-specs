@@ -1,0 +1,36 @@
+{
+  "parameters": {
+    "Endpoint": "{Endpoint}",
+    "Content-Type": "application/json",
+    "Ocp-Apim-Subscription-Key": "{API key}",
+    "timeSeriesGroupId": "{timeSeriesGroupId}"
+  },
+  "responses": {
+    "200": {
+      "body": [
+        {
+          "granularity": "daily",
+          "dimensions": {
+            "Market": "en-us",
+            "Country": "Canada"
+          },
+          "customInterval": 1,
+          "retentionDurationInHours": 4320,
+          "description": "Sample Daily Series",
+          "name": "SampleSeries"
+        },
+        {
+          "granularity": "daily",
+          "dimensions": {
+            "Market": "en-us",
+            "Country": "UnitedStates"
+          },
+          "customInterval": 1,
+          "retentionDurationInHours": 4320,
+          "description": "Sample Daily Series",
+          "name": "SampleSeries"
+        }
+      ]
+    }
+  }
+}

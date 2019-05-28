@@ -1,0 +1,28 @@
+{
+  "parameters": {
+    "Endpoint": "{Endpoint}",
+    "Content-Type": "application/json",
+    "Ocp-Apim-Subscription-Key": "{API key}",
+    "timeSeriesId": "{timeSeriesId}"
+  },
+  "responses": {
+    "200": {
+      "body": [
+        {
+          "groupId": "f9f0114c-3c4c-4d3a-a6c7-f4d6d595f4f7",
+          "description": "Timesereis group example",
+          "name": "TimesereisGroupExample",
+          "granularity": "daily",
+          "customInterval": 1
+        },
+        {
+          "groupId": "f004d9f7-8393-430d-b80a-9a4793956c04",
+          "description": "Timesereis group example 1",
+          "name": "TimesereisGroupExample1",
+          "granularity": "daily",
+          "customInterval": 1
+        }
+      ]
+    }
+  }
+}
