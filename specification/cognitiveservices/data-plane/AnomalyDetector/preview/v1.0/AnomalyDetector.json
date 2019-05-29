@@ -192,7 +192,7 @@
       },
       "delete": {
         "summary": "Delete the specified timeseries.",
-        "description": "",
+        "description": "Delete the specified timeseries.",
         "operationId": "TimeSeries_Delete",
         "parameters": [
           {
@@ -261,8 +261,8 @@
     },
     "/timeseriesgroups/{timeSeriesGroupId}": {
       "get": {
-        "summary": "",
-        "description": "",
+        "summary": "Get meta infomation of the specified time series group.",
+        "description": "This operation fetches detailed infomation about the specified time series group.",
         "operationId": "TimeSeriesGroup_Get",
         "parameters": [
           {
@@ -296,8 +296,8 @@
         }
       },
       "put": {
-        "summary": "",
-        "description": "",
+        "summary": "Create a time series group.",
+        "description": "Create a time series group.",
         "operationId": "TimeSeriesGroup_Create",
         "parameters": [
           {
@@ -306,7 +306,7 @@
           {
             "name": "body",
             "in": "body",
-            "description": "",
+            "description": "GroupId and granularity are needed to create a time series group",
             "required": true,
             "schema": {
               "$ref": "#/definitions/TimeSeriesGroup"
@@ -337,8 +337,8 @@
         }
       },
       "delete": {
-        "summary": "",
-        "description": "",
+        "summary": "Delete a time series group.",
+        "description": "Delete a time series group.",
         "operationId": "TimeSeriesGroup_Delete",
         "parameters": [
           {
@@ -371,8 +371,8 @@
     },
     "/timeseriesgroups": {
       "get": {
-        "summary": "",
-        "description": "",
+        "summary": "List time series groups.",
+        "description": "List time series groups page by page using the \"next\" field. It means that all time series groups have been returned when the \"next\" field is null.",
         "operationId": "TimeSeriesGroup_List",
         "parameters": [
           {
@@ -408,7 +408,7 @@
     },
     "/timeseriesgroups/{timeSeriesGroupId}/inconsistency/detect": {
       "post": {
-        "summary": "Detect inconsistent time series from a group of similiar time series",
+        "summary": "Detect inconsistent time series from a group of similiar time series.",
         "description": "This operation helps detect the inconsistent series among a group series with similiar trend.",
         "operationId": "TimeSeriesGroup_InconsistencyDetect",
         "parameters": [
@@ -454,7 +454,7 @@
     },
     "/timeseriesgroups/{timeSeriesGroupId}/inconsistency/query": {
       "post": {
-        "summary": "Query time series properties from a group of similiar time series",
+        "summary": "Query time series properties from a group of similiar time series.",
         "description": "This operation helps query properties of one group, for example the inconsistent series among a group series with similiar trend.",
         "operationId": "TimeSeriesGroup_InconsistencyQuery",
         "parameters": [
@@ -464,7 +464,7 @@
           {
             "name": "body",
             "in": "body",
-            "description": "Start time and end time is necessary",
+            "description": "Start time and end time is necessary.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/InconsistencyQueryRequest"
@@ -984,11 +984,11 @@
         },
         "description": {
           "type": "string",
-          "description": ""
+          "description": "Description of the time series group"
         },
         "name": {
           "type": "string",
-          "description": ""
+          "description": "Name of the time series group"
         },
         "granularity": {
           "$ref": "#/definitions/Granularity"
@@ -1104,7 +1104,7 @@
     },
     "InconsistencyQueryResponse": {
       "type": "array",
-      "description": "Inconsistencies result at different timestamp",
+      "description": "Inconsistencies result at different timestamp.",
       "items": {
         "$ref": "#/definitions/Inconsistency"
       }
@@ -1342,7 +1342,7 @@
     },
     "timeSeriesId": {
       "name": "timeSeriesId",
-      "description": "",
+      "description": "Unique id for time series.",
       "x-ms-parameter-location": "method",
       "required": true,
       "type": "string",
@@ -1352,7 +1352,7 @@
     },
     "timeSeriesGroupId": {
       "name": "timeSeriesGroupId",
-      "description": "",
+      "description": "Unique id for time series group.",
       "x-ms-parameter-location": "method",
       "required": true,
       "type": "string",
@@ -1362,7 +1362,7 @@
     },
     "next": {
       "name": "next",
-      "description": "",
+      "description": "Use \"next\" as query parameter to get next page data.",
       "x-ms-parameter-location": "method",
       "required": false,
       "type": "string",
