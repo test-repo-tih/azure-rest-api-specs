@@ -113,6 +113,152 @@
         }
       }
     },
+    "/timeseries/{timeSeriesId}": {
+      "get": {
+        "summary": "Get meta information of the specified timeseries.",
+        "description": "corresponds to create series, get series meta with timeseries id.",
+        "operationId": "TimeSeries_Get",
+        "parameters": [
+          {
+            "$ref": "#/parameters/timeSeriesId"
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation.",
+            "schema": {
+              "$ref": "#/definitions/TimeSeries"
+            }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/APIError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get information of a time series example": {
+            "$ref": "./examples/TimeSeriesGet.json"
+          }
+        }
+      },
+      "put": {
+        "summary": "Creat a timeseries.",
+        "description": "Create series, user need to provide timeseriesId and granularity, if the series has dimension or name, description can be provided through the interface.",
+        "operationId": "TimeSeries_Create",
+        "parameters": [
+          {
+            "$ref": "#/parameters/timeSeriesId"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/TimeSeries"
+            }
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation."
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/APIError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create a new time series example": {
+            "$ref": "./examples/TimeSeriesCreate.json"
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete the specified timeseries.",
+        "description": "",
+        "operationId": "TimeSeries_Delete",
+        "parameters": [
+          {
+            "$ref": "#/parameters/timeSeriesId"
+          }
+        ],
+        "consumes": [
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation."
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/APIError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete a time series example": {
+            "$ref": "./examples/TimeSeriesDelete.json"
+          }
+        }
+      }
+    },
+    "/timeseries": {
+      "get": {
+        "summary": "List time series of each unique user.",
+        "description": "List time series of each unique user.",
+        "operationId": "TimeSeries_List",
+        "parameters": [
+          {
+            "$ref": "#/parameters/next"
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation.",
+            "schema": {
+              "$ref": "#/definitions/TimeSeriesList"
+            }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/APIError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get information of a time series example": {
+            "$ref": "./examples/TimeSeriesList.json"
+          }
+        }
+      }
+    },
     "/timeseriesgroups/{timeSeriesGroupId}": {
       "get": {
         "summary": "",
@@ -230,9 +376,6 @@
         "operationId": "TimeSeriesGroup_List",
         "parameters": [
           {
-            "$ref": "#/parameters/timeSeriesGroupId"
-          },
-          {
             "$ref": "#/parameters/next"
           }
         ],
@@ -246,7 +389,7 @@
           "200": {
             "description": "Successful operation.",
             "schema": {
-              "$ref": "#/definitions/TimeSeriesGroups"
+              "$ref": "#/definitions/TimeSeriesGroupList"
             }
           },
           "default": {
@@ -399,6 +542,12 @@
         "minutely"
       ]
     },
+    "CustomInterval": {
+      "type": "integer",
+      "format": "int32",
+      "x-nullable": false,
+      "description": "Custom Interval is used to set non-standard time interval, for example, if the series is 5 minutes, request can be set as {\"granularity\":\"minutely\", \"customInterval\":5}."
+    },
     "Request": {
       "type": "object",
       "required": [
@@ -417,9 +566,7 @@
           "$ref": "#/definitions/Granularity"
         },
         "customInterval": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Custom Interval is used to set non-standard time interval, for example, if the series is 5 minutes, request can be set as {\"granularity\":\"minutely\", \"customInterval\":5}."
+          "$ref": "#/definitions/CustomInterval"
         },
         "period": {
           "type": "integer",
@@ -581,13 +728,67 @@
     },
     "SeriesId": {
       "type": "string",
-      "description": "",
+      "description": "Unique id for time series.",
       "x-nullable": false
     },
     "GroupId": {
       "type": "string",
-      "description": "",
+      "description": "Unique id for time series group.",
       "x-nullable": false
+    },
+    "Dictionary": {
+      "type": "object",
+      "additionalProperties": {
+          "type": "string"
+      }
+    },
+    "TimeSeries": {
+      "type": "object",
+      "required": [
+        "seriesId",
+        "granularity"
+      ],
+      "properties": {
+        "seriesId": {
+          "$ref": "#/definitions/SeriesId"
+        },
+        "granularity": {
+          "$ref": "#/definitions/Granularity"
+        },
+        "dimensions": {
+          "$ref": "#/definitions/Dictionary"
+        },
+        "customInterval": {
+          "$ref": "#/definitions/CustomInterval"
+        },
+        "retentionDurationInHours": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Hours that the data is kept."
+        },
+        "description": {
+          "type": "string",
+          "description": "Descriptions for the time series."
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of the time series."
+        }
+      }
+    },
+    "TimeSeriesList": {
+      "properties": {
+        "series": {
+          "type": "array",
+          "description": "Array of TimeSeriesInfo objects.",
+          "items": {
+            "$ref": "#/definitions/TimeSeries"
+          }
+        },
+        "next": {
+          "type": "string"
+        }
+      }
     },
     "TimeSeriesGroup": {
       "type": "object",
@@ -611,13 +812,11 @@
           "$ref": "#/definitions/Granularity"
         },
         "customInterval": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Custom Interval is used to set non-standard time interval, for example, if the series is 5 minutes, request can be set as {\"granularity\":\"minutely\", \"customInterval\":5}."
+          "$ref": "#/definitions/CustomInterval"
         }
       }
     },
-    "TimeSeriesGroups": {
+    "TimeSeriesGroupList": {
       "properties": {
         "groups": {
           "type": "array",

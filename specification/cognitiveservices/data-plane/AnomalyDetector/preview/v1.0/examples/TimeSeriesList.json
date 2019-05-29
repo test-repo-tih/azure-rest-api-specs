@@ -1,0 +1,28 @@
+{
+  "parameters": {
+    "Endpoint": "{Endpoint}",
+    "Content-Type": "application/json",
+    "Ocp-Apim-Subscription-Key": "{API key}",
+    "next": null
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "series": [
+          {
+            "seriesId": "f9f0114c-3c4c-4d3a-a6c7-f4d6d595f4f7",
+            "granularity": "daily",
+            "dimensions": {
+              "Market": "en-us",
+              "Country": "Canada"
+            },
+            "retentionDurationInHours": 4320,
+            "description": "Sample Daily Series",
+            "name": "SampleSeries"
+          }
+        ],
+        "next": null
+      }
+    }
+  }
+}

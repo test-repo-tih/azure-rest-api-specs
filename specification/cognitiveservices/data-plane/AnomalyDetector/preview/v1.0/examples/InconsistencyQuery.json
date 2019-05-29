@@ -1,7 +1,6 @@
 {
   "parameters": {
     "Endpoint": "{Endpoint}",
-    "timeSeriesGroupId": "{timeSeriesGroupId}",
     "Content-Type": "application/json",
     "Ocp-Apim-Subscription-Key": "{API key}",
     "timeSeriesGroupId": "my_sg",
