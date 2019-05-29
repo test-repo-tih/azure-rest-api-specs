@@ -265,10 +265,17 @@
     },
     "/timeseries/{timeseriesId}/timeseriesgroups": {
       "get": {
-        "summary": "List groups that a series belongs to.",
-        "description": "List groups that a series belongs to. One timeseries could belong to multiple timeseries groups.",
+        "summary": "List TimeSeriesGroups that a TimeSeries belongs to.",
+        "description": "List TimeSeriesGroups that a TimeSeries belongs to. One TimeSeries could belong to multiple TimeSereiesGroups.",
         "operationId": "Timeseries_Timeseriesgroups_List",
-        "parameters": [],
+        "parameters": [
+          {
+            "$ref": "#/parameters/timeSeriesId"
+          },
+          {
+            "$ref": "#/parameters/next"
+          }
+        ],
         "consumes": [
           "application/json"
         ],
@@ -289,9 +296,6 @@
             }
           }
         },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
         "x-ms-examples": {
           "$ref": "./examples/GetTimeseriesgroupsByTimeseriesId.json"
         }
@@ -299,10 +303,17 @@
     },
     "/timeseries/timeseriesgroups/{timeseriesGroupId}/timeseries": {
       "get": {
-        "summary": "List timeseries that belongs to a timeseries group.",
-        "description": "List timeseries that belongs to a timeseries group. One timeseries group could have multiple timeseries.",
+        "summary": "List TimeSeries that belongs to a TimeSeriesGroup.",
+        "description": "List TimeSeries that belongs to a TimeSeriesGroup. One TimeSeriesGroup could have multiple TimeSeries.",
         "operationId": "Timeseriesgroups_Timeseries_List",
-        "parameters": [],
+        "parameters": [
+          {
+            "$ref": "#/parameters/timeseriesGroupId"
+          },
+          {
+            "$ref": "#/parameters/next"
+          }
+        ],
         "consumes": [
           "application/json"
         ],
@@ -323,9 +334,6 @@
             }
           }
         },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
         "x-ms-examples": {
           "$ref": "./examples/GetTimeseriesByTimeseriesGroupId.json"
         }
@@ -333,10 +341,17 @@
     },
     "/timeseries/timeseriesgroups/{timeseriesGroupId}/timeseries/{timeseriesId}": {
       "put": {
-        "summary": "Add a timeseries to timeseriesgroup.",
-        "description": "Add a timeseries to timeseriesgroup.",
+        "summary": "Add a TimeSeries to TimeSeriesGroup.",
+        "description": "Add a TimeSeries to TimeSeriesGroup.",
         "operationId": "Timeseriesgroups_Timeseries_Add",
-        "parameters": [],
+        "parameters": [
+          {
+            "$ref": "#/parameters/timeseriesGroupId"
+          },
+          {
+            "$ref": "#/parameters/timeseriesId"
+          }
+        ],
         "consumes": [
           "application/json"
         ],
@@ -355,14 +370,21 @@
           }
         },
         "x-ms-examples": {
-          "$ref": "./examples/RemoveTimeseriesFromTimeseriesGroup.json"
+          "$ref": "./examples/AddTimeseriesToTimeseriesGroup.json"
         }
       },
       "delete": {
-        "summary": "Remove a timeseries from timeseriesgroup.",
-        "description": "Remove a timeseries to timeseriesgroup.",
+        "summary": "Remove a TimeSeries from TimeSeriesGroup.",
+        "description": "Remove a TimeSeries from TimeSeriesGroup.",
         "operationId": "Timeseriesgroups_Timeseries_Remove",
-        "parameters": [],
+        "parameters": [
+          {
+            "$ref": "#/parameters/timeseriesGroupId"
+          },
+          {
+            "$ref": "#/parameters/timeseriesId"
+          }
+        ],
         "consumes": [
           "application/json"
         ],
