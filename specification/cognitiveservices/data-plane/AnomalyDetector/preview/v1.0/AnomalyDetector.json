@@ -497,6 +497,92 @@
           }
         }
       }
+    },
+    "/timeseries/changepoint/detect": {
+      "post": {
+        "summary": "Detect change point for the entire series",
+        "description": "Evaluate change point score of every series point",
+        "operationId": "ChangePoint_Detect",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Time series points and granularity is needed. Advanced model parameters can also be set in the request if needed.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ChangePointDetectRequest"
+            }
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation.",
+            "schema": {
+              "$ref": "#/definitions/ChangePointResponse"
+            }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/APIError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Find anomalies for the entire series in batch example": {
+            "$ref": "./examples/ChangePointDetect.json"
+          }
+        }
+      }
+    },
+    "/timeseries/{timeseriesId}/changepoint/detect": {
+      "post": {
+        "summary": "Detect change point for the interval series",
+        "description": "Evaluate change point score of every series point between start and end.",
+        "operationId": "TimeSeries_ChangePoint_Detect_InTimeRange",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "description": "timeseriesId, begin and end is needed. Advanced model parameters can also be set in the request if needed.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ChangePointDetectInTimeRangeRequest"
+            }
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation.",
+            "schema": {
+              "$ref": "#/definitions/ChangePointDetectInTimeRangeResponse"
+            }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/APIError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Find anomalies for the entire series in batch example": {
+            "$ref": "./examples/ChangePointDetectInTimeRange.json"
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -928,6 +1014,152 @@
       "description": "Inconsistencies result at different timestamp",
       "items": {
         "$ref": "#/definitions/Inconsistency"
+      }
+    },
+    "ChangePointDetectRequest":{
+      "type": "object",
+      "required": [
+        "granularity",
+        "series"
+      ],
+      "properties": {
+        "series": {
+          "type": "array",
+          "description": "Time series data points. Points should be sorted by timestamp in ascending order to match the change point detection result.",
+          "items": {
+            "$ref": "#/definitions/Point"
+          }
+        },
+        "granularity": {
+          "$ref": "#/definitions/Granularity"
+        },
+        "customInterval": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Custom Interval is used to set non-standard time interval, for example, if the series is 5 minutes, request can be set as {\"granularity\":\"minutely\", \"customInterval\":5}."
+        },
+        "period": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Optional argument, periodic value of a time series. If the value is null or does not present, the API will determine the period automatically."
+        },
+        "stableTrendWindow": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Optional argument, advanced model parameter, a default stableTrendWindow will be used in detection."
+        },
+        "threshold": {
+          "type": "number",
+          "format": "float",
+          "description": "Optional argument, advanced model parameter, between 0.0-1.0, the lower the value is, the larger the trend error will be which means less change point will be accepted."
+        }
+      }
+    },
+    "ChangePointResponse":{
+      "type": "object",
+      "required": [
+        "isChangePoint",
+        "confidenceScores",
+        "period"
+      ],
+      "properties": {
+        "period": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Frequency extracted from the series, zero means no recurrent pattern has been found."
+        },
+        "isChangePoint": {
+          "type": "array",
+          "description": "isChangePoint contains change point properties for each input point. True means an anomaly either negative or positive has been detected. The index of the array is consistent with the input series.",
+          "items": {
+            "type": "boolean"
+          }
+        },
+        "confidenceScores": {
+          "type": "array",
+          "description": "the change point confidence of each point",
+          "items": {
+            "type": "number",
+            "format": "float"
+          }
+        }
+      }
+    },
+    "ChangePointDetectInTimeRangeRequest": {
+      "type": "object",
+      "required": [
+        "begin",
+        "end",
+        "timeseriesId"
+      ],
+      "properties": {
+        "timeseriesId": {
+          "$ref": "#/definitions/TimeSeriesId"
+        },
+        "begin": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The begin timestamp of you want to detect."
+        },
+        "end": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The end timestamp of you want to detect."
+        },
+        "period": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Optional argument, periodic value of a time series. If the value is null or does not present, the API will determine the period automatically."
+        },
+        "stableTrendWindow": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Optional argument, advanced model parameter, a default stableTrendWindow will be used in detection."
+        },
+        "threshold": {
+          "type": "number",
+          "format": "float",
+          "description": "Optional argument, advanced model parameter, between 0.0-1.0, the lower the value is, the larger the trend error will be which means less change point will be accepted."
+        }
+      }
+    },
+    "ChangePointDetectInTimeRangeResponse": {
+      "type": "object",
+      "required": [
+        "isChangePoint",
+        "confidenceScores",
+        "period"
+      ],
+      "properties": {
+        "period": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Frequency extracted from the series, zero means no recurrent pattern has been found."
+        },
+        "isChangePoint": {
+          "type": "array",
+          "description": "ChangePoints contains change point properties for each input point. True means an anomaly either negative or positive has been detected. The index of the array is consistent with the input series.",
+          "items": {
+            "type": "boolean"
+          }
+        },
+        "confidenceScores": {
+          "type": "array",
+          "description": "the change point confidence of each point",
+          "items": {
+            "type": "number",
+            "format": "float"
+          }
+        },
+        "timestamps": {
+          "type": "array",
+          "description": "All timestamps in range",
+          "items": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Timestamp of a data point (ISO8601 format)."
+          }
+        }
       }
     }
   },
