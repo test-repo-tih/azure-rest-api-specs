@@ -1,8 +1,8 @@
 {
   "paths": {
-    "/timeseries/{timeseriesId}/write": {
+    "/timeseries/{timeSeriesId}/write": {
       "put": {
-        "description": "Insert or replace timeseries data for specified timeseriesId. Note that this interface only stores data and do not detect these data.",
+        "description": "Insert or replace timeseries data for specified timeSeriesId. Note that this interface only stores data and do not detect these data.",
         "operationId": "TimeSeries_Write",
         "consumes": [
           "application/json"
@@ -12,7 +12,7 @@
         ],
         "parameters": [
           {
-            "$ref": "#/parameters/timeseriesId"
+            "$ref": "#/parameters/timeSeriesId"
           },
           {
             "name": "body",
@@ -47,7 +47,7 @@
         }
       }
     },
-    "/timeseries/{timeseriesId}/query": {
+    "/timeseries/{timeSeriesId}/query": {
       "post": {
         "description": "Query timeseries with required field in each timestamp.",
         "operationId": "TimeSeries_Query",
@@ -59,7 +59,7 @@
         ],
         "parameters": [
           {
-            "$ref": "#/parameters/timeseriesId"
+            "$ref": "#/parameters/timeSeriesId"
           },
           {
             "name": "body",
