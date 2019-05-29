@@ -254,7 +254,7 @@
           }
         },
         "x-ms-pageable": {
-            "nextLinkName": "nextLink"
+            "nextLinkName": "next"
         },
         "x-ms-examples": {
           "Detect anomaly status of the latest point in time series example": {
@@ -534,7 +534,7 @@
             "$ref": "#/definitions/TimeSeriesGroup"
           }
         },
-        "nextLink": {
+        "next": {
           "type": "string"
         }
       }
