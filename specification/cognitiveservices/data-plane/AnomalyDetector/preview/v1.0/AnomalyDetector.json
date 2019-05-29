@@ -31,7 +31,7 @@
       "post": {
         "summary": "Detect anomalies for the entire series in batch.",
         "description": "This operation generates a model using an entire series, each point is detected with the same model. With this method, points before and after a certain point are used to determine whether it is an anomaly. The entire detection can give user an overall status of the time series.",
-        "operationId": "Detection_EntireDetect",
+        "operationId": "EntireDetect",
         "parameters": [
           {
             "name": "body",
@@ -74,7 +74,7 @@
       "post": {
         "summary": "Detect anomaly status of the latest point in time series.",
         "description": "This operation generates a model using points before the latest one. With this method, only historical points are used to determine whether the target point is an anomaly. The latest point detecting operation matches the scenario of real-time monitoring of business metrics.",
-        "operationId": "Detection_LastDetect",
+        "operationId": "LastDetect",
         "parameters": [
           {
             "name": "body",
@@ -109,6 +109,151 @@
         "x-ms-examples": {
           "Detect anomaly status of the latest point in time series example": {
             "$ref": "./examples/LastDetect.json"
+          }
+        }
+      }
+    },
+    "/timeseries/{timeSeriesId}": {
+      "get": {
+        "summary": "Get meta information of the specified timeseries.",
+        "description": "corresponds to create series, get series meta with timeseries id.",
+        "operationId": "TimeSeries_Get",
+        "parameters": [
+          {
+            "$ref": "#/parameters/timeSeriesId"
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation.",
+            "schema": {
+              "$ref": "#/definitions/TimeSeries"
+            }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/APIError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get information of a time series example": {
+            "$ref": "./examples/TimeSeriesGet.json"
+          }
+        }
+      },
+      "put": {
+        "summary": "Creat a timeseries.",
+        "description": "Create series, user need to provide timeseriesId and granularity, if the series has dimension or name, description can be provided through the interface.",
+        "operationId": "TimeSeries_Create",
+        "parameters": [
+          {
+            "$ref": "#/parameters/timeSeriesId"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/TimeSeries"
+            }
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation."
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/APIError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create a new time series example": {
+            "$ref": "./examples/TimeSeriesCreate.json"
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete the specified timeseries.",
+        "description": "",
+        "operationId": "TimeSeries_Delete",
+        "parameters": [
+          {
+            "$ref": "#/parameters/timeSeriesId"
+          }
+        ],
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation."
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/APIError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete a time series example": {
+            "$ref": "./examples/TimeSeriesDelete.json"
+          }
+        }
+      }
+    },
+    "/timeseries": {
+      "get": {
+        "summary": "List time series of each unique user.",
+        "description": "List time series of each unique user.",
+        "operationId": "TimeSeries_List",
+        "parameters": [
+          {
+            "$ref": "#/parameters/next"
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation.",
+            "schema": {
+              "$ref": "#/definitions/TimeSeriesList"
+            }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/APIError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get information of a time series example": {
+            "$ref": "./examples/TimeSeriesList.json"
           }
         }
       }
@@ -230,7 +375,7 @@
         "operationId": "TimeSeriesGroup_List",
         "parameters": [
           {
-            "$ref": "#/parameters/timeSeriesGroupId"
+            "$ref": "#/parameters/next"
           }
         ],
         "consumes": [
@@ -243,7 +388,7 @@
           "200": {
             "description": "Successful operation.",
             "schema": {
-              "$ref": "#/definitions/TimeSeriesGroups"
+              "$ref": "#/definitions/TimeSeriesGroupList"
             }
           },
           "default": {
@@ -253,12 +398,280 @@
             }
           }
         },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
         "x-ms-examples": {
           "Detect anomaly status of the latest point in time series example": {
             "$ref": "./examples/TimeSeriesGroupList.json"
+          }
+        }
+      }
+    },
+    "/timeseriesgroups/{timeSeriesGroupId}/inconsistency/detect": {
+      "post": {
+        "summary": "Detect inconsistent time series from a group of similiar time series",
+        "description": "This operation helps detect the inconsistent series among a group series with similiar trend.",
+        "operationId": "TimeSeriesGroup_InconsistencyDetect",
+        "parameters": [
+          {
+            "$ref": "#/parameters/timeSeriesGroupId"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Start time and end time is necessary, and a parameter called epsilon is needed to tune the result. Epsilon should be within 0 and 1.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/InconsistencyDetectionRequest"
+            }
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation.",
+            "schema": {
+              "$ref": "#/definitions/Inconsistency"
+            }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/APIError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Detect anomaly status of the latest point in time series example": {
+            "$ref": "./examples/InconsistencyDetect.json"
+          }
+        }
+      }
+    },
+    "/timeseriesgroups/{timeSeriesGroupId}/inconsistency/query": {
+      "post": {
+        "summary": "Query time series properties from a group of similiar time series",
+        "description": "This operation helps query properties of one group, for example the inconsistent series among a group series with similiar trend.",
+        "operationId": "TimeSeriesGroup_InconsistencyQuery",
+        "parameters": [
+          {
+            "$ref": "#/parameters/timeSeriesGroupId"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Start time and end time is necessary",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/InconsistencyQueryRequest"
+            }
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation.",
+            "schema": {
+              "$ref": "#/definitions/InconsistencyQueryResponse"
+            }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/APIError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Detect anomaly status of the latest point in time series example": {
+            "$ref": "./examples/InconsistencyQuery.json"
+          }
+        }
+      }
+    },
+    "/timeseries/changepoint/detect": {
+      "post": {
+        "summary": "Detect change point for the entire series",
+        "description": "Evaluate change point score of every series point",
+        "operationId": "ChangePoint_Detect",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Time series points and granularity is needed. Advanced model parameters can also be set in the request if needed.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ChangePointDetectRequest"
+            }
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation.",
+            "schema": {
+              "$ref": "#/definitions/ChangePointResponse"
+            }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/APIError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Find anomalies for the entire series in batch example": {
+            "$ref": "./examples/ChangePointDetect.json"
+          }
+        }
+      }
+    },
+    "/timeseries/{timeseriesId}/changepoint/detect": {
+      "post": {
+        "summary": "Detect change point for the interval series",
+        "description": "Evaluate change point score of every series point between start and end.",
+        "operationId": "TimeSeries_ChangePoint_Detect_InTimeRange",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "description": "timeseriesId, begin and end is needed. Advanced model parameters can also be set in the request if needed.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ChangePointDetectInTimeRangeRequest"
+            }
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation.",
+            "schema": {
+              "$ref": "#/definitions/ChangePointDetectInTimeRangeResponse"
+            }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/APIError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Find anomalies for the entire series in batch example": {
+            "$ref": "./examples/ChangePointDetectInTimeRange.json"
+          }
+        }
+      }
+    },
+    "/timeseries/{timeSeriesId}/write": {
+      "put": {
+        "description": "Insert or replace timeseries data for specified timeSeriesId. Note that this interface only stores data and do not detect these data.",
+        "operationId": "TimeSeries_Write",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/timeSeriesId"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Request body for writing timeseries.",
+            "required": true,
+            "x-ms-client-flatten": true,
+            "schema": {
+              "type": "array",
+              "description": "Time series data points.",
+              "items": {
+                "$ref": "#/definitions/Point"
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful call returns an empty response body."
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/APIError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Write Timeseries example": {
+            "$ref": "./examples/TimeSeriesWrite.json"
+          }
+        }
+      }
+    },
+    "/timeseries/{timeSeriesId}/query": {
+      "post": {
+        "description": "Query timeseries with required field in each timestamp.",
+        "operationId": "TimeSeries_Query",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/timeSeriesId"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Request body for querying timeseries.",
+            "required": true,
+            "x-ms-client-flatten": true,
+            "schema": {
+              "$ref": "#/definitions/TimeSeriesQueryRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation.",
+            "schema": {
+              "$ref": "#/definitions/TimeSeriesQueryResponse"
+            }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/APIError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Query Timeseries example": {
+            "$ref": "./examples/TimeSeriesQuery.json"
           }
         }
       }
@@ -451,6 +864,12 @@
         "minutely"
       ]
     },
+    "CustomInterval": {
+      "type": "integer",
+      "format": "int32",
+      "x-nullable": false,
+      "description": "Custom Interval is used to set non-standard time interval, for example, if the series is 5 minutes, request can be set as {\"granularity\":\"minutely\", \"customInterval\":5}."
+    },
     "Request": {
       "type": "object",
       "required": [
@@ -469,9 +888,7 @@
           "$ref": "#/definitions/Granularity"
         },
         "customInterval": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Custom Interval is used to set non-standard time interval, for example, if the series is 5 minutes, request can be set as {\"granularity\":\"minutely\", \"customInterval\":5}."
+          "$ref": "#/definitions/CustomInterval"
         },
         "period": {
           "type": "integer",
@@ -633,13 +1050,70 @@
     },
     "SeriesId": {
       "type": "string",
-      "description": "",
+      "description": "Unique id for time series.",
       "x-nullable": false
     },
     "GroupId": {
       "type": "string",
-      "description": "",
+      "description": "Unique id for time series group.",
       "x-nullable": false
+    },
+    "Dictionary": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "string"
+      }
+    },
+    "TimeSeries": {
+      "type": "object",
+      "required": [
+        "seriesId",
+        "granularity"
+      ],
+      "properties": {
+        "seriesId": {
+          "$ref": "#/definitions/SeriesId"
+        },
+        "granularity": {
+          "$ref": "#/definitions/Granularity"
+        },
+        "dimensions": {
+          "$ref": "#/definitions/Dictionary"
+        },
+        "customInterval": {
+          "$ref": "#/definitions/CustomInterval"
+        },
+        "retentionDurationInHours": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Hours that the data is kept."
+        },
+        "description": {
+          "type": "string",
+          "description": "Description for the time series."
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of the time series."
+        }
+      }
+    },
+    "TimeSeriesList": {
+      "required": [
+        "series"
+      ],
+      "properties": {
+        "series": {
+          "type": "array",
+          "description": "Array of TimeSeriesInfo objects.",
+          "items": {
+            "$ref": "#/definitions/TimeSeries"
+          }
+        },
+        "next": {
+          "type": "string"
+        }
+      }
     },
     "TimeSeriesGroup": {
       "type": "object",
@@ -663,13 +1137,14 @@
           "$ref": "#/definitions/Granularity"
         },
         "customInterval": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Custom Interval is used to set non-standard time interval, for example, if the series is 5 minutes, request can be set as {\"granularity\":\"minutely\", \"customInterval\":5}."
+          "$ref": "#/definitions/CustomInterval"
         }
       }
     },
-    "TimeSeriesGroups": {
+    "TimeSeriesGroupList": {
+      "required": [
+        "groups"
+      ],
       "properties": {
         "groups": {
           "type": "array",
@@ -678,7 +1153,7 @@
             "$ref": "#/definitions/TimeSeriesGroup"
           }
         },
-        "nextLink": {
+        "next": {
           "type": "string"
         }
       }
@@ -727,17 +1202,317 @@
         }
       }
     },
-    "TimeSeriesInfos": {
+    "InconsistencyDetectionRequest": {
+      "type": "object",
+      "required": [
+        "begin",
+        "end",
+        "epsilon"
+      ],
       "properties": {
-        "groups": {
+        "begin": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Start time of the time series group."
+        },
+        "end": {
+          "type": "string",
+          "format": "date-time",
+          "description": "End time of the time series group."
+        },
+        "epsilon": {
+          "type": "number",
+          "format": "float",
+          "description": "Parameter to be tuned to get inconsistency."
+        }
+      }
+    },
+    "Inconsistency": {
+      "type": "object",
+      "required": [
+        "inconsistentSeriesIds",
+        "scores",
+        "begin",
+        "end",
+        "epsilon"
+      ],
+      "properties": {
+        "inconsistentSeriesIds": {
           "type": "array",
-          "description": "Timeseries info array.",
+          "description": "IDs of inconsistent series in the time series group.",
           "items": {
-            "$ref": "#/definitions/TimeSeriesInfo"
+            "$ref": "#/definitions/SeriesId"
           }
         },
-        "nextLink": {
-          "type": "string"
+        "scores": {
+          "type": "array",
+          "description": "Scores of inconsistent series in the time series group.",
+          "items": {
+            "type": "number",
+            "format": "float",
+            "x-nullable": false
+          }
+        },
+        "begin": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Start time of the time series group."
+        },
+        "end": {
+          "type": "string",
+          "format": "date-time",
+          "description": "End time of the time series group."
+        },
+        "epsilon": {
+          "type": "number",
+          "format": "float",
+          "description": "Parameter to be tuned to get inconsistency."
+        }
+      }
+    },
+    "InconsistencyQueryRequest": {
+      "type": "object",
+      "required": [
+        "begin",
+        "end"
+      ],
+      "properties": {
+        "begin": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Start time of the time series group."
+        },
+        "end": {
+          "type": "string",
+          "format": "date-time",
+          "description": "End time of the time series group."
+        }
+      }
+    },
+    "InconsistencyQueryResponse": {
+      "type": "array",
+      "description": "Inconsistencies result at different timestamp",
+      "items": {
+        "$ref": "#/definitions/Inconsistency"
+      }
+    },
+    "ChangePointDetectRequest": {
+      "type": "object",
+      "required": [
+        "granularity",
+        "series"
+      ],
+      "properties": {
+        "series": {
+          "type": "array",
+          "description": "Time series data points. Points should be sorted by timestamp in ascending order to match the change point detection result.",
+          "items": {
+            "$ref": "#/definitions/Point"
+          }
+        },
+        "granularity": {
+          "$ref": "#/definitions/Granularity"
+        },
+        "customInterval": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Custom Interval is used to set non-standard time interval, for example, if the series is 5 minutes, request can be set as {\"granularity\":\"minutely\", \"customInterval\":5}."
+        },
+        "period": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Optional argument, periodic value of a time series. If the value is null or does not present, the API will determine the period automatically."
+        },
+        "stableTrendWindow": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Optional argument, advanced model parameter, a default stableTrendWindow will be used in detection."
+        },
+        "threshold": {
+          "type": "number",
+          "format": "float",
+          "description": "Optional argument, advanced model parameter, between 0.0-1.0, the lower the value is, the larger the trend error will be which means less change point will be accepted."
+        }
+      }
+    },
+    "ChangePointResponse": {
+      "type": "object",
+      "required": [
+        "isChangePoint",
+        "confidenceScores",
+        "period"
+      ],
+      "properties": {
+        "period": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Frequency extracted from the series, zero means no recurrent pattern has been found."
+        },
+        "isChangePoint": {
+          "type": "array",
+          "description": "isChangePoint contains change point properties for each input point. True means an anomaly either negative or positive has been detected. The index of the array is consistent with the input series.",
+          "items": {
+            "type": "boolean"
+          }
+        },
+        "confidenceScores": {
+          "type": "array",
+          "description": "the change point confidence of each point",
+          "items": {
+            "type": "number",
+            "format": "float"
+          }
+        }
+      }
+    },
+    "ChangePointDetectInTimeRangeRequest": {
+      "type": "object",
+      "required": [
+        "begin",
+        "end",
+        "timeseriesId"
+      ],
+      "properties": {
+        "timeseriesId": {
+          "$ref": "#/definitions/TimeSeriesId"
+        },
+        "begin": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The begin timestamp of you want to detect."
+        },
+        "end": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The end timestamp of you want to detect."
+        },
+        "period": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Optional argument, periodic value of a time series. If the value is null or does not present, the API will determine the period automatically."
+        },
+        "stableTrendWindow": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Optional argument, advanced model parameter, a default stableTrendWindow will be used in detection."
+        },
+        "threshold": {
+          "type": "number",
+          "format": "float",
+          "description": "Optional argument, advanced model parameter, between 0.0-1.0, the lower the value is, the larger the trend error will be which means less change point will be accepted."
+        }
+      }
+    },
+    "ChangePointDetectInTimeRangeResponse": {
+      "type": "object",
+      "required": [
+        "isChangePoint",
+        "confidenceScores",
+        "period"
+      ],
+      "properties": {
+        "period": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Frequency extracted from the series, zero means no recurrent pattern has been found."
+        },
+        "isChangePoint": {
+          "type": "array",
+          "description": "ChangePoints contains change point properties for each input point. True means an anomaly either negative or positive has been detected. The index of the array is consistent with the input series.",
+          "items": {
+            "type": "boolean"
+          }
+        },
+        "confidenceScores": {
+          "type": "array",
+          "description": "the change point confidence of each point",
+          "items": {
+            "type": "number",
+            "format": "float"
+          }
+        },
+        "timestamps": {
+          "type": "array",
+          "description": "All timestamps in range",
+          "items": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Timestamp of a data point (ISO8601 format)."
+          }
+        }
+      }
+    },
+    "TimeSeriesQueryRequest": {
+      "type": "object",
+      "required": [
+        "begin",
+        "end",
+        "fields"
+      ],
+      "properties": {
+        "begin": {
+          "format": "date-time",
+          "type": "string",
+          "description": "Timestamp of begin time (ISO8601 format)."
+        },
+        "end": {
+          "format": "date-time",
+          "type": "string",
+          "description": "Timestamp of end time (ISO8601 format)."
+        },
+        "fields": {
+          "type": "array",
+          "description": "Array of timeseries field.",
+          "items": {
+            "$ref": "#/definitions/TimeSeriesField"
+          }
+        }
+      }
+    },
+    "TimeSeriesField": {
+      "type": "string",
+      "description": "An enum value indicating name of time series field.",
+      "x-nullable": false,
+      "x-ms-enum": {
+        "name": "TimeSeriesField",
+        "modelAsString": false
+      },
+      "enum": [
+        "isAnomaly",
+        "isChangePoint",
+        "isPositiveAnomaly",
+        "isNegativeAnomaly",
+        "value",
+        "expectedValue",
+        "upperMargin",
+        "lowerMargin",
+        "period"
+      ]
+    },
+    "TimeSeriesQueryResponse": {
+      "type": "object",
+      "required": [
+        "timestamps",
+        "fieldValues"
+      ],
+      "properties": {
+        "timestamps": {
+          "description": "Timestamps of data points (ISO8601 format).",
+          "type": "array",
+          "items": {
+            "format": "date-time",
+            "type": "string"
+          }
+        },
+        "fieldValues": {
+          "description": "Values of queried timeseries field.",
+          "type": "array",
+          "items": {
+            "type": "array",
+            "items": {
+              "type": "object"
+            }
+          }
         }
       }
     }
@@ -771,6 +1546,14 @@
       "in": "path",
       "maxLength": 64,
       "pattern": "^[a-z0-9-_]+$"
+    },
+    "next": {
+      "name": "next",
+      "description": "",
+      "x-ms-parameter-location": "method",
+      "required": false,
+      "type": "string",
+      "in": "query"
     }
   }
 }
