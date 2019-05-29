@@ -206,7 +206,7 @@
             "description": "",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/TimeSeries"
+              "$ref": "#/definitions/TimeSeriesCreateRequest"
             }
           }
         ],
@@ -658,7 +658,7 @@
             "description": "GroupId and granularity are needed to create a time series group",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/TimeSeriesGroup"
+              "$ref": "#/definitions/TimeSeriesGroupCreateRequest"
             }
           }
         ],
@@ -1231,6 +1231,36 @@
         }
       }
     },
+    "TimeSeriesCreateRequest": {
+      "type": "object",
+      "required": [
+        "granularity"
+      ],
+      "properties": {
+        "granularity": {
+          "$ref": "#/definitions/Granularity"
+        },
+        "dimensions": {
+          "$ref": "#/definitions/Dictionary"
+        },
+        "customInterval": {
+          "$ref": "#/definitions/CustomInterval"
+        },
+        "retentionDurationInHours": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Hours that the data is kept."
+        },
+        "description": {
+          "type": "string",
+          "description": "Description for the time series."
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of the time series."
+        }
+      }
+    },
     "TimeSeriesList": {
       "required": [
         "series"
@@ -1258,6 +1288,28 @@
         "groupId": {
           "$ref": "#/definitions/GroupId"
         },
+        "description": {
+          "type": "string",
+          "description": "Description of the time series group"
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of the time series group"
+        },
+        "granularity": {
+          "$ref": "#/definitions/Granularity"
+        },
+        "customInterval": {
+          "$ref": "#/definitions/CustomInterval"
+        }
+      }
+    },
+    "TimeSeriesGroupCreateRequest": {
+      "type": "object",
+      "required": [
+        "granularity"
+      ],
+      "properties": {
         "description": {
           "type": "string",
           "description": "Description of the time series group"
