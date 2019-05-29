@@ -1032,6 +1032,7 @@
           "$ref": "#/definitions/Granularity"
         },
         "customInterval": {
+          "description": "Custom Interval is used to set non-standard time interval, for example, if the series is 5 minutes, request can be set as {\"granularity\":\"minutely\", \"customInterval\":5}.",
           "$ref": "#/definitions/CustomInterval"
         },
         "period": {
@@ -1222,9 +1223,11 @@
           "$ref": "#/definitions/Granularity"
         },
         "dimensions": {
+          "description": "Property of a time series",
           "$ref": "#/definitions/Dictionary"
         },
         "customInterval": {
+          "description": "Custom Interval is used to set non-standard time interval, for example, if the series is 5 minutes, request can be set as {\"granularity\":\"minutely\", \"customInterval\":5}.",
           "$ref": "#/definitions/CustomInterval"
         },
         "retentionDurationInHours": {
@@ -1252,9 +1255,11 @@
           "$ref": "#/definitions/Granularity"
         },
         "dimensions": {
+          "description": "Property of a time series",
           "$ref": "#/definitions/Dictionary"
         },
         "customInterval": {
+          "description": "Custom Interval is used to set non-standard time interval, for example, if the series is 5 minutes, request can be set as {\"granularity\":\"minutely\", \"customInterval\":5}.",
           "$ref": "#/definitions/CustomInterval"
         },
         "retentionDurationInHours": {
@@ -1311,6 +1316,7 @@
           "$ref": "#/definitions/Granularity"
         },
         "customInterval": {
+          "description": "Custom Interval is used to set non-standard time interval, for example, if the series is 5 minutes, request can be set as {\"granularity\":\"minutely\", \"customInterval\":5}.",
           "$ref": "#/definitions/CustomInterval"
         }
       }
@@ -1333,6 +1339,7 @@
           "$ref": "#/definitions/Granularity"
         },
         "customInterval": {
+          "description": "Custom Interval is used to set non-standard time interval, for example, if the series is 5 minutes, request can be set as {\"granularity\":\"minutely\", \"customInterval\":5}.",
           "$ref": "#/definitions/CustomInterval"
         }
       }
@@ -1465,6 +1472,7 @@
           "$ref": "#/definitions/Granularity"
         },
         "customInterval": {
+          "description": "Custom Interval is used to set non-standard time interval, for example, if the series is 5 minutes, request can be set as {\"granularity\":\"minutely\", \"customInterval\":5}.",
           "$ref": "#/definitions/CustomInterval"
         },
         "period": {
