@@ -446,6 +446,9 @@
         "operationId": "TimeSeries_ChangePoint_Detect_InTimeRange",
         "parameters": [
           {
+            "$ref": "#/parameters/timeSeriesId"
+          },
+          {
             "name": "body",
             "in": "body",
             "description": "timeSeriesId, begin and end is needed. Advanced model parameters can also be set in the request if needed.",
