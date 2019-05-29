@@ -3,7 +3,7 @@
   "info": {
     "version": "1.0",
     "title": "Anomaly Detector Client",
-    "description": "The Anomaly Detector API detects anomalies automatically in time series data. It supports two kinds of mode, one is for stateless using, another is for stateful using. In stateless mode, there are three functionalities. Entire Detect is for detecting the whole series with model trained by the time series, Last Detect is detecting last point with model trained by points before. ChangePoint Detect is for detecting trend changes in time series. In stateful mode, user can store time series, the stored time series will be used for detection anomalies. Under this mode, user can still use the aboving three functionalities by only giving a time range without preparing time series in client side. Besides the above three functionalities, stateful model also provide group based detection and labeling service. By leveraing labeling service user can provide labels for each detection result, these labels will be used for retuning or regenerating detection models. Inconsistency detection is a kind of group based detection, this detection will find inconsistency ones in a set of time series. By using anomaly detector service, business customers can discover incidents and establish a logic flow for root cause analysis."
+    "description": "The Anomaly Detector API detects anomalies automatically in time series data. It supports two kinds of mode, one is for stateless using, another is for stateful using. In stateless mode, there are three functionalities. Entire Detect is for detecting the whole series with model trained by the time series, Last Detect is detecting last point with model trained by points before. ChangePoint Detect is for detecting trend changes in time series. In stateful mode, user can store time series, the stored time series will be used for detection anomalies. Under this mode, user can still use the above three functionalities by only giving a time range without preparing time series in client side. Besides the above three functionalities, stateful model also provide group based detection and labeling service. By leveraging labeling service user can provide labels for each detection result, these labels will be used for retuning or regenerating detection models. Inconsistency detection is a kind of group based detection, this detection will find inconsistency ones in a set of time series. By using anomaly detector service, business customers can discover incidents and establish a logic flow for root cause analysis."
     },
   "securityDefinitions": {
     "apiKeyHeader": {
@@ -376,7 +376,7 @@
           "200": {
             "description": "Successful operation.",
             "schema": {
-              "$ref": "#/definitions/AnomalyDetectInTimeRangeReponse"
+              "$ref": "#/definitions/AnomalyDetectInTimeRangeResponse"
             }
           },
           "default": {
@@ -422,7 +422,7 @@
           "200": {
             "description": "Successful operation.",
             "schema": {
-              "$ref": "#/definitions/AnomalyDetectInTimeRangeReponse"
+              "$ref": "#/definitions/AnomalyDetectInTimeRangeResponse"
             }
           },
           "default": {
@@ -576,7 +576,7 @@
     "/timeseries/{timeSeriesId}/timeseriesgroups": {
       "get": {
         "summary": "List TimeSeriesGroups that a TimeSeries belongs to.",
-        "description": "List TimeSeriesGroups that a TimeSeries belongs to. One TimeSeries could belong to multiple TimeSereiesGroups.",
+        "description": "List TimeSeriesGroups that a TimeSeries belongs to. One TimeSeries could belong to multiple TimeSeriesGroups.",
         "operationId": "TimeSeries_ListGroups",
         "parameters": [
           {
@@ -615,8 +615,8 @@
     },
     "/timeseriesgroups/{timeSeriesGroupId}": {
       "get": {
-        "summary": "Get meta infomation of the specified time series group.",
-        "description": "This operation fetches detailed infomation about the specified time series group.",
+        "summary": "Get meta information of the specified time series group.",
+        "description": "This operation fetches detailed information about the specified time series group.",
         "operationId": "TimeSeriesGroup_Get",
         "parameters": [
           {
@@ -762,8 +762,8 @@
     },
     "/timeseriesgroups/{timeSeriesGroupId}/inconsistency/detect": {
       "post": {
-        "summary": "Detect inconsistent time series from a group of similiar time series.",
-        "description": "This operation helps detect the inconsistent series among a group series with similiar trend.",
+        "summary": "Detect inconsistent time series from a group of similar time series.",
+        "description": "This operation helps detect the inconsistent series among a group series with similar trend.",
         "operationId": "TimeSeriesGroup_InconsistencyDetect",
         "parameters": [
           {
@@ -808,8 +808,8 @@
     },
     "/timeseriesgroups/{timeSeriesGroupId}/inconsistency/query": {
       "post": {
-        "summary": "Query time series properties from a group of similiar time series.",
-        "description": "This operation helps query properties of one group, for example the inconsistent series among a group series with similiar trend.",
+        "summary": "Query time series properties from a group of similar time series.",
+        "description": "This operation helps query properties of one group, for example the inconsistent series among a group series with similar trend.",
         "operationId": "TimeSeriesGroup_InconsistencyQuery",
         "parameters": [
           {
@@ -1718,7 +1718,7 @@
         }
       }
     },
-    "AnomalyDetectInTimeRangeReponse": {
+    "AnomalyDetectInTimeRangeResponse": {
       "type": "object",
       "required": [
         "timestamps",
