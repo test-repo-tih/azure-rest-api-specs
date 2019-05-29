@@ -113,7 +113,7 @@
         }
       }
     },
-    "/timeseries/detect/changepoint": {
+    "/timeseries/changepoint/detect": {
       "post": {
         "summary": "Detect change point for the entire series",
         "description": "This operation generates a model using an entire series, each point is detected with the same model. With this method, points before and after a certain point are used to determine whether it is an change point. The entire detection can give user an overall status of the time series.",
@@ -156,7 +156,7 @@
         }
       }
     },
-    "/timeseries/{timeseriesId}/detect/changepoint": {
+    "/timeseries/{timeseriesId}/changepoint/detect": {
       "post": {
         "summary": "Detect change point for the interval series",
         "description": "detect last continuous points which haven't been detected before between begin and end time stamp, for example, if the last change point is time t, between t and end, there are N points, but between begin and end, there are M points, in this API, only N points will be detected.",
