@@ -122,10 +122,10 @@
           {
             "name": "body",
             "in": "body",
-            "description": "Time series points is needed. Advanced model parameters can also be set in the request if needed.",
+            "description": "Time series points and granularity is needed. Advanced model parameters can also be set in the request if needed.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/ChangePointRequest"
+              "$ref": "#/definitions/InputSeriesChangePointDetectionRequest"
             }
           }
         ],
@@ -139,7 +139,7 @@
           "200": {
             "description": "Successful operation.",
             "schema": {
-              "$ref": "#/definitions/ChangePointDetectResponse"
+              "$ref": "#/definitions/ChangePointResponse"
             }
           },
           "default": {
@@ -168,7 +168,7 @@
             "description": "begin and end is needed. Advanced model parameters can also be set in the request if needed.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/ChangePointStatefulRequest"
+              "$ref": "#/definitions/ChangePointDetectionRequest"
             }
           }
         ],
@@ -182,7 +182,7 @@
           "200": {
             "description": "Successful operation.",
             "schema": {
-              "$ref": "#/definitions/ChangePointStatefulDetectResponse"
+              "$ref": "#/definitions/ChangePointResponse"
             }
           },
           "default": {
@@ -423,9 +423,10 @@
         }
       }
     },
-    "ChangePointRequest":{
+    "InputSeriesChangePointDetectionRequest":{
       "type": "object",
       "required": [
+        "granularity",
         "series"
       ],
       "properties": {
@@ -435,6 +436,14 @@
           "items": {
             "$ref": "#/definitions/Point"
           }
+        },
+        "granularity": {
+          "$ref": "#/definitions/Granularity"
+        },
+        "customInterval": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Custom Interval is used to set non-standard time interval, for example, if the series is 5 minutes, request can be set as {\"granularity\":\"minutely\", \"customInterval\":5}."
         },
         "period": {
           "type": "integer",
@@ -453,7 +462,7 @@
         }
       }
     },
-    "ChangePointDetectResponse":{
+    "ChangePointResponse":{
       "type": "object",
       "required": [
         "changePoints",
@@ -479,12 +488,12 @@
           "description": "the change point confidence of each point",
           "items": {
             "type": "number",
-            "format": "float"
+            "format": "double"
           }
         }
       }
     },
-    "ChangePointStatefulRequest": {
+    "ChangePointDetectionRequest": {
       "type": "object",
       "required": [
         "begin",
@@ -519,37 +528,6 @@
           "type": "integer",
           "format": "int32",
           "description": "Optional argument, advanced model parameter, between 0-99, the lower the value is, the larger the trend error will be which means less change point will be accepted."
-        }
-      }
-    },
-    "ChangePointStatefulDetectResponse":{
-      "type": "object",
-      "required": [
-        "changePoints",
-        "confidence",
-        "period"
-      ],
-      "properties": {
-        "period": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Frequency extracted from the series, zero means no recurrent pattern has been found."
-        },
-        "changePoints": {
-          "type": "array",
-          "description": "Point's timestamp which is change point",
-          "items": {
-            "type": "string",
-            "format": "date-time"
-          }
-        },
-        "confidence": {
-          "type": "array",
-          "description": "the change point confidence of each point",
-          "items": {
-            "type": "number",
-            "format": "float"
-          }
         }
       }
     }

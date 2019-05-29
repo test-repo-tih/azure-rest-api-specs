@@ -1034,6 +1034,8 @@
           "value": 3233500
         }
       ],
+      "granularity": "minutely",
+      "customInterval": 5,
       "stableTrendWindow": 10,
       "sensitivity": 99,
       "period": 0
