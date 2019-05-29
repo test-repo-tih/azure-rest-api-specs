@@ -262,6 +262,98 @@
           }
         }
       }
+    },
+    "/timeseriesgroups/{timeSeriesGroupId}/inconsistency/detect": {
+      "post": {
+        "summary": "Detect inconsistent time series from a group of similiar time series",
+        "description": "This operation helps detect the inconsistent series among a group series with similiar trend.",
+        "operationId": "TimeSeriesGroup_InconsistencyDetect",
+        "parameters": [
+          {
+            "$ref": "#/parameters/timeSeriesGroupId"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Start time and end time is necessary, and a parameter called epsilon is needed to tune the result. Epsilon should be within 0 and 1.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/InconsistencyDetectionRequest"
+            }
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation.",
+            "schema": {
+              "$ref": "#/definitions/Inconsistency"
+            }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/APIError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Detect anomaly status of the latest point in time series example": {
+            "$ref": "./examples/InconsistencyDetect.json"
+          }
+        }
+      }
+    },
+    "/timeseriesgroups/{timeSeriesGroupId}/inconsistency/query": {
+      "post": {
+        "summary": "Query time series properties from a group of similiar time series",
+        "description": "This operation helps query properties of one group, for example the inconsistent series among a group series with similiar trend.",
+        "operationId": "TimeSeriesGroup_InconsistencyQuery",
+        "parameters": [
+          {
+            "$ref": "#/parameters/timeSeriesGroupId"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Start time and end time is necessary",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/InconsistencyQueryRequest"
+            }
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation.",
+            "schema": {
+              "$ref": "#/definitions/InconsistencyQueryResponse"
+            }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/APIError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Detect anomaly status of the latest point in time series example": {
+            "$ref": "./examples/InconsistencyQuery.json"
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -537,6 +629,100 @@
         "next": {
           "type": "string"
         }
+      }
+    },
+    "InconsistencyDetectionRequest": {
+      "type": "object",
+      "required": [
+        "begin",
+        "end",
+        "epsilon"
+      ],
+      "properties": {
+        "begin": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Start time of the time series group."
+        },
+        "end": {
+          "type": "string",
+          "format": "date-time",
+          "description": "End time of the time series group."
+        },
+        "epsilon": {
+          "type": "number",
+          "format": "float",
+          "description": "Parameter to be tuned to get inconsistency."
+        }
+      }
+    },
+    "Inconsistency": {
+      "type": "object",
+      "required": [
+        "inconsistentSeriesIds",
+        "scores",
+        "begin",
+        "end",
+        "epsilon"
+      ],
+      "properties": {
+        "inconsistentSeriesIds": {
+          "type": "array",
+          "description": "IDs of inconsistent series in the time series group.",
+          "items": {
+            "$ref": "#/definitions/SeriesId"
+          }
+        },
+        "scores": {
+          "type": "array",
+          "description": "Scores of inconsitent series in the time series group.",
+          "items": {
+            "type": "number",
+            "format": "float",
+            "x-nullable": false
+          }
+        },
+        "begin": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Start time of the time series group."
+        },
+        "end": {
+          "type": "string",
+          "format": "date-time",
+          "description": "End time of the time series group."
+        },
+        "epsilon": {
+          "type": "number",
+          "format": "float",
+          "description": "Parameter to be tuned to get inconsistency."
+        }
+      }
+    },
+    "InconsistencyQueryRequest": {
+      "type": "object",
+      "required": [
+        "begin",
+        "end"
+      ],
+      "properties": {
+        "begin": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Start time of the time series group."
+        },
+        "end": {
+          "type": "string",
+          "format": "date-time",
+          "description": "End time of the time series group."
+        }
+      }
+    },
+    "InconsistencyQueryResponse": {
+      "type": "array",
+      "description": "Inconsistencies result at different timestamp",
+      "items": {
+        "$ref": "#/definitions/Inconsistency"
       }
     }
   },
