@@ -31,7 +31,7 @@
       "post": {
         "summary": "Detect anomalies for the entire series in batch.",
         "description": "This operation generates a model using an entire series, each point is detected with the same model. With this method, points before and after a certain point are used to determine whether it is an anomaly. The entire detection can give user an overall status of the time series.",
-        "operationId": "Detection_EntireDetect",
+        "operationId": "EntireDetect",
         "parameters": [
           {
             "name": "body",
@@ -74,7 +74,7 @@
       "post": {
         "summary": "Detect anomaly status of the latest point in time series.",
         "description": "This operation generates a model using points before the latest one. With this method, only historical points are used to determine whether the target point is an anomaly. The latest point detecting operation matches the scenario of real-time monitoring of business metrics.",
-        "operationId": "Detection_LastDetect",
+        "operationId": "LastDetect",
         "parameters": [
           {
             "name": "body",
@@ -231,6 +231,9 @@
         "parameters": [
           {
             "$ref": "#/parameters/timeSeriesGroupId"
+          },
+          {
+            "$ref": "#/parameters/next"
           }
         ],
         "consumes": [
@@ -252,9 +255,6 @@
               "$ref": "#/definitions/APIError"
             }
           }
-        },
-        "x-ms-pageable": {
-            "nextLinkName": "next"
         },
         "x-ms-examples": {
           "Detect anomaly status of the latest point in time series example": {
@@ -569,6 +569,14 @@
       "in": "path",
       "maxLength": 64,
       "pattern": "^[a-z0-9-_]+$"
+    },
+    "next": {
+      "name": "next",
+      "description": "",
+      "x-ms-parameter-location": "method",
+      "required": false,
+      "type": "string",
+      "in": "query"
     }
   }
 }
