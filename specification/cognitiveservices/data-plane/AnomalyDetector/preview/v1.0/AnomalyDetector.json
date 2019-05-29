@@ -607,7 +607,7 @@
           }
         },
         "x-ms-examples": {
-          "$ref": "./examples/GetTimeseriesgroupsByTimeseriesId.json"
+          "$ref": "./examples/TimeSeriesListGroups.json"
         }
       }
     },
@@ -884,7 +884,7 @@
           }
         },
         "x-ms-examples": {
-          "$ref": "./examples/GetTimeseriesByTimeseriesGroupId.json"
+          "$ref": "./examples/TimeSeriesGroupListTimeSeries.json"
         }
       }
     },
@@ -919,7 +919,7 @@
           }
         },
         "x-ms-examples": {
-          "$ref": "./examples/AddTimeseriesToTimeseriesGroup.json"
+          "$ref": "./examples/TimeSeriesGroupAddTimeSeries.json"
         }
       },
       "delete": {
@@ -952,7 +952,7 @@
           }
         },
         "x-ms-examples": {
-          "$ref": "./examples/RemoveTimeseriesFromTimeseriesGroup.json"
+          "$ref": "./examples/TimeSeriesGroupDeleteTimeSeries.json"
         }
       }
     }
