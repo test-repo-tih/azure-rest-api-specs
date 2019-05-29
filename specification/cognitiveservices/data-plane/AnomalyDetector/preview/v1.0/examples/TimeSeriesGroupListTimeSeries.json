@@ -11,6 +11,7 @@
       "body": {
         "series":[
           {
+            "seriesId": "f9f0114c-3c4c-4d3a-a6c7-f4d6d595f4f7",
             "granularity": "daily",
             "dimensions": {
               "Market": "en-us",
