@@ -3,7 +3,7 @@
     "/timeseries/{timeseriesId}/write": {
       "put": {
         "description": "Insert or replace timeseries data for specified timeseriesId. Note that this interface only stores data and do not detect these data.",
-        "operationId": "Timeseries_Write",
+        "operationId": "TimeSeries_Write",
         "consumes": [
           "application/json"
         ],
@@ -21,7 +21,11 @@
             "required": true,
             "x-ms-client-flatten": true,
             "schema": {
-              "$ref": "#/definitions/Points"
+              "type": "array",
+              "description": "Time series data points.",
+              "items": {
+                "$ref": "#/definitions/Point"
+              }
             }
           }
         ],
@@ -46,7 +50,7 @@
     "/timeseries/{timeseriesId}/query": {
       "post": {
         "description": "Query timeseries with required field in each timestamp.",
-        "operationId": "Timeseries_Query",
+        "operationId": "TimeSeries_Query",
         "consumes": [
           "application/json"
         ],
@@ -91,40 +95,6 @@
     }
   },
   "definitions": {
-    "Point": {
-      "type": "object",
-      "required": [
-        "timestamp",
-        "value"
-      ],
-      "properties": {
-        "timestamp": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Timestamp of a data point (ISO8601 format)."
-        },
-        "value": {
-          "type": "number",
-          "format": "float",
-          "description": "The measurement of that point, should be float."
-        }
-      }
-    },
-    "Points": {
-      "type": "object",
-      "required": [
-        "series"
-      ],
-      "properties": {
-        "series": {
-          "type": "array",
-          "description": "Time series data points.",
-          "items": {
-            "$ref": "#/definitions/Point"
-          }
-        }
-      }
-    },
     "TimeSeriesQueryRequest": {
       "type": "object",
       "required": [
@@ -198,19 +168,6 @@
           }
         }
       }
-    }
-  },
-  "parameters": {
-    "timeseriesId": {
-      "name": "timeseriesId",
-      "in": "path",
-      "description": "Id referencing a particular timeseries.",
-      "required": true,
-      "type": "string",
-      "x-ms-parameter-location": "method",
-      "collectionFormat": "csv",
-      "maxLength": 64,
-      "pattern": "^[a-z0-9-_]+$"
     }
   }
 }
