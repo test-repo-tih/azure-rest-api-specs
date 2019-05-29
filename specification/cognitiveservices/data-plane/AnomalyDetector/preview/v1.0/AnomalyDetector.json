@@ -139,7 +139,7 @@
           "200": {
             "description": "Successful operation.",
             "schema": {
-              "$ref": "#/definitions/ChangePointResponse"
+              "$ref": "#/definitions/ChangePointDetectResponse"
             }
           },
           "default": {
@@ -1397,8 +1397,7 @@
         "inconsistentSeriesIds",
         "confidenceScores",
         "begin",
-        "end",
-        "epsilon"
+        "end"
       ],
       "properties": {
         "inconsistentSeriesIds": {
@@ -1500,7 +1499,7 @@
         }
       }
     },
-    "ChangePointResponse": {
+    "ChangePointDetectResponse": {
       "type": "object",
       "required": [
         "isChangePoint",
@@ -1517,7 +1516,8 @@
           "type": "array",
           "description": "isChangePoint contains change point properties for each input point. True means an anomaly either negative or positive has been detected. The index of the array is consistent with the input series.",
           "items": {
-            "type": "boolean"
+            "type": "boolean",
+            "x-nullable": false
           }
         },
         "confidenceScores": {
@@ -1525,7 +1525,8 @@
           "description": "the change point confidence of each point",
           "items": {
             "type": "number",
-            "format": "float"
+            "format": "float",
+            "x-nullable": false
           }
         }
       }
@@ -1582,7 +1583,8 @@
           "type": "array",
           "description": "ChangePoints contains change point properties for each input point. True means an anomaly either negative or positive has been detected. The index of the array is consistent with the input series.",
           "items": {
-            "type": "boolean"
+            "type": "boolean",
+            "x-nullable": false
           }
         },
         "confidenceScores": {
@@ -1590,7 +1592,8 @@
           "description": "the change point confidence of each point",
           "items": {
             "type": "number",
-            "format": "float"
+            "format": "float",
+            "x-nullable": false
           }
         },
         "timestamps": {
@@ -1599,6 +1602,7 @@
           "items": {
             "type": "string",
             "format": "date-time",
+            "x-nullable": false,
             "description": "Timestamp of a data point (ISO8601 format)."
           }
         }
@@ -1626,7 +1630,8 @@
           "type": "array",
           "description": "Array of timeseries field.",
           "items": {
-            "$ref": "#/definitions/TimeSeriesField"
+            "$ref": "#/definitions/TimeSeriesField",
+            "x-nullable": false
           }
         }
       }
@@ -1663,7 +1668,8 @@
           "type": "array",
           "items": {
             "format": "date-time",
-            "type": "string"
+            "type": "string",
+            "x-nullable": false
           }
         },
         "fieldValues": {
