@@ -151,7 +151,7 @@
       },
       "put": {
         "summary": "Creat a timeseries.",
-        "description": "Create series, user need to provide timeseriesId and granularity, if the series has dimension or name, description can be provided through the interface.",
+        "description": "Create series, user need to provide timeSeriesId and granularity, if the series has dimension or name, description can be provided through the interface.",
         "operationId": "TimeSeries_Create",
         "parameters": [
           {
@@ -541,7 +541,7 @@
         }
       }
     },
-    "/timeseries/{timeseriesId}/changepoint/detect": {
+    "/timeseries/{timeSeriesId}/changepoint/detect": {
       "post": {
         "summary": "Detect change point for the interval series",
         "description": "Evaluate change point score of every series point between start and end.",
@@ -550,7 +550,7 @@
           {
             "name": "body",
             "in": "body",
-            "description": "timeseriesId, begin and end is needed. Advanced model parameters can also be set in the request if needed.",
+            "description": "timeSeriesId, begin and end is needed. Advanced model parameters can also be set in the request if needed.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/ChangePointDetectInTimeRangeRequest"
@@ -603,7 +603,6 @@
             "in": "body",
             "description": "Request body for writing timeseries.",
             "required": true,
-            "x-ms-client-flatten": true,
             "schema": {
               "type": "array",
               "description": "Time series data points.",
@@ -650,7 +649,6 @@
             "in": "body",
             "description": "Request body for querying timeseries.",
             "required": true,
-            "x-ms-client-flatten": true,
             "schema": {
               "$ref": "#/definitions/TimeSeriesQueryRequest"
             }
@@ -1183,11 +1181,11 @@
       "required": [
         "begin",
         "end",
-        "timeseriesId"
+        "timeSeriesId"
       ],
       "properties": {
-        "timeseriesId": {
-          "$ref": "#/definitions/TimeSeriesId"
+        "timeSeriesId": {
+          "$ref": "#/definitions/SeriesId"
         },
         "begin": {
           "type": "string",

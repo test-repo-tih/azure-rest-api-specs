@@ -3,7 +3,7 @@
     "Endpoint": "{Endpoint}",
     "Content-Type": "application/json",
     "Ocp-Apim-Subscription-Key": "{API key}",
-    "timeseriesId":"f9f0114c-3c4c-4d3a-a6c7-f4d6d595f4f7",
+    "timeSeriesId":"f9f0114c-3c4c-4d3a-a6c7-f4d6d595f4f7",
     "body": {
       "begin":"2017-01-01T06:45:00Z",
       "end": "2017-01-02T04:05:00Z",
