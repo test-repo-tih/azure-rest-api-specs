@@ -674,11 +674,11 @@
         }
       }
     },
-    "/timeseries/{timeseriesId}/timeseriesgroups": {
+    "/timeseries/{timeSeriesId}/timeseriesgroups": {
       "get": {
         "summary": "List TimeSeriesGroups that a TimeSeries belongs to.",
         "description": "List TimeSeriesGroups that a TimeSeries belongs to. One TimeSeries could belong to multiple TimeSereiesGroups.",
-        "operationId": "Timeseries_Timeseriesgroups_List",
+        "operationId": "TimeSeries_ListGroups",
         "parameters": [
           {
             "$ref": "#/parameters/timeSeriesId"
@@ -697,7 +697,7 @@
           "200": {
             "description": "Successful operation.",
             "schema": {
-              "$ref": "#/definitions/TimeSeriesGroups"
+              "$ref": "#/definitions/TimeSeriesGroupList"
             }
           },
           "default": {
@@ -712,14 +712,14 @@
         }
       }
     },
-    "/timeseries/timeseriesgroups/{timeseriesGroupId}/timeseries": {
+    "/timeseries/timeseriesgroups/{timeSeriesGroupId}/timeseries": {
       "get": {
         "summary": "List TimeSeries that belongs to a TimeSeriesGroup.",
         "description": "List TimeSeries that belongs to a TimeSeriesGroup. One TimeSeriesGroup could have multiple TimeSeries.",
-        "operationId": "Timeseriesgroups_Timeseries_List",
+        "operationId": "TimeSeriesGroup_ListTimeSeries",
         "parameters": [
           {
-            "$ref": "#/parameters/timeseriesGroupId"
+            "$ref": "#/parameters/timeSeriesGroupId"
           },
           {
             "$ref": "#/parameters/next"
@@ -735,7 +735,7 @@
           "200": {
             "description": "Successful operation.",
             "schema": {
-              "$ref": "#/definitions/TimeSeriesInfos"
+              "$ref": "#/definitions/TimeSeriesList"
             }
           },
           "default": {
@@ -750,17 +750,17 @@
         }
       }
     },
-    "/timeseries/timeseriesgroups/{timeseriesGroupId}/timeseries/{timeseriesId}": {
+    "/timeseries/timeseriesgroups/{timeSeriesGroupId}/timeseries/{timeSeriesId}": {
       "put": {
         "summary": "Add a TimeSeries to TimeSeriesGroup.",
         "description": "Add a TimeSeries to TimeSeriesGroup.",
-        "operationId": "Timeseriesgroups_Timeseries_Add",
+        "operationId": "TimeSeriesGroup_AddTimeSeries",
         "parameters": [
           {
-            "$ref": "#/parameters/timeseriesGroupId"
+            "$ref": "#/parameters/timeSeriesGroupId"
           },
           {
-            "$ref": "#/parameters/timeseriesId"
+            "$ref": "#/parameters/timeSeriesId"
           }
         ],
         "consumes": [
@@ -787,13 +787,13 @@
       "delete": {
         "summary": "Remove a TimeSeries from TimeSeriesGroup.",
         "description": "Remove a TimeSeries from TimeSeriesGroup.",
-        "operationId": "Timeseriesgroups_Timeseries_Remove",
+        "operationId": "TimeSeriesGroup_DeleteTimeSeries",
         "parameters": [
           {
-            "$ref": "#/parameters/timeseriesGroupId"
+            "$ref": "#/parameters/timeSeriesGroupId"
           },
           {
-            "$ref": "#/parameters/timeseriesId"
+            "$ref": "#/parameters/timeSeriesId"
           }
         ],
         "consumes": [
@@ -1103,7 +1103,7 @@
       "properties": {
         "series": {
           "type": "array",
-          "description": "Array of TimeSeriesInfo objects.",
+          "description": "Array of TimeSeries objects.",
           "items": {
             "$ref": "#/definitions/TimeSeries"
           }
@@ -1153,50 +1153,6 @@
         },
         "next": {
           "type": "string"
-        }
-      }
-    },
-    "TimeSeriesInfo": {
-      "type": "object",
-      "required": [
-        "series",
-        "granularity"
-      ],
-      "properties": {
-        "seriesId": {
-          "type": "string",
-          "format": "uuid",
-          "description": "An unique id for the timeseries."
-        },
-        "granularity": {
-          "type": "string",
-          "description": "The granularity of the series."
-        },
-        "dimensions": {
-          "type": "array",
-          "description": "Dimensions",
-          "items": {
-            "type": "string",
-            "x-nullable": false
-          }
-        },
-        "customInterval": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Seconds between two time series points."
-        },
-        "retentionDurationInHours": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Hours that the data is kept."
-        },
-        "description": {
-          "type": "string",
-          "description": "Descriptions for the time series."
-        },
-        "name": {
-          "type": "string",
-          "description": "Name of the time series."
         }
       }
     },
