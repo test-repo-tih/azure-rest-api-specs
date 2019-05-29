@@ -199,8 +199,7 @@
             "$ref": "#/parameters/timeSeriesId"
           }
         ],
-        "consumes": [
-        ],
+        "consumes": [],
         "produces": [
           "application/json"
         ],
@@ -676,6 +675,150 @@
           }
         }
       }
+    },
+    "/timeseries/{timeseriesId}/timeseriesgroups": {
+      "get": {
+        "summary": "List TimeSeriesGroups that a TimeSeries belongs to.",
+        "description": "List TimeSeriesGroups that a TimeSeries belongs to. One TimeSeries could belong to multiple TimeSereiesGroups.",
+        "operationId": "Timeseries_Timeseriesgroups_List",
+        "parameters": [
+          {
+            "$ref": "#/parameters/timeSeriesId"
+          },
+          {
+            "$ref": "#/parameters/next"
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation.",
+            "schema": {
+              "$ref": "#/definitions/TimeSeriesGroups"
+            }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/APIError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "$ref": "./examples/GetTimeseriesgroupsByTimeseriesId.json"
+        }
+      }
+    },
+    "/timeseries/timeseriesgroups/{timeseriesGroupId}/timeseries": {
+      "get": {
+        "summary": "List TimeSeries that belongs to a TimeSeriesGroup.",
+        "description": "List TimeSeries that belongs to a TimeSeriesGroup. One TimeSeriesGroup could have multiple TimeSeries.",
+        "operationId": "Timeseriesgroups_Timeseries_List",
+        "parameters": [
+          {
+            "$ref": "#/parameters/timeseriesGroupId"
+          },
+          {
+            "$ref": "#/parameters/next"
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation.",
+            "schema": {
+              "$ref": "#/definitions/TimeSeriesInfos"
+            }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/APIError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "$ref": "./examples/GetTimeseriesByTimeseriesGroupId.json"
+        }
+      }
+    },
+    "/timeseries/timeseriesgroups/{timeseriesGroupId}/timeseries/{timeseriesId}": {
+      "put": {
+        "summary": "Add a TimeSeries to TimeSeriesGroup.",
+        "description": "Add a TimeSeries to TimeSeriesGroup.",
+        "operationId": "Timeseriesgroups_Timeseries_Add",
+        "parameters": [
+          {
+            "$ref": "#/parameters/timeseriesGroupId"
+          },
+          {
+            "$ref": "#/parameters/timeseriesId"
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful call returns an empty response body."
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/APIError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "$ref": "./examples/AddTimeseriesToTimeseriesGroup.json"
+        }
+      },
+      "delete": {
+        "summary": "Remove a TimeSeries from TimeSeriesGroup.",
+        "description": "Remove a TimeSeries from TimeSeriesGroup.",
+        "operationId": "Timeseriesgroups_Timeseries_Remove",
+        "parameters": [
+          {
+            "$ref": "#/parameters/timeseriesGroupId"
+          },
+          {
+            "$ref": "#/parameters/timeseriesId"
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful call returns an empty response body."
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/APIError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "$ref": "./examples/RemoveTimeseriesFromTimeseriesGroup.json"
+        }
+      }
     }
   },
   "definitions": {
@@ -918,7 +1061,7 @@
     "Dictionary": {
       "type": "object",
       "additionalProperties": {
-          "type": "string"
+        "type": "string"
       }
     },
     "TimeSeries": {
@@ -1012,6 +1155,50 @@
         },
         "next": {
           "type": "string"
+        }
+      }
+    },
+    "TimeSeriesInfo": {
+      "type": "object",
+      "required": [
+        "series",
+        "granularity"
+      ],
+      "properties": {
+        "seriesId": {
+          "type": "string",
+          "format": "uuid",
+          "description": "An unique id for the timeseries."
+        },
+        "granularity": {
+          "type": "string",
+          "description": "The granularity of the series."
+        },
+        "dimensions": {
+          "type": "array",
+          "description": "Dimensions",
+          "items": {
+            "type": "string",
+            "x-nullable": false
+          }
+        },
+        "customInterval": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Seconds between two time series points."
+        },
+        "retentionDurationInHours": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Hours that the data is kept."
+        },
+        "description": {
+          "type": "string",
+          "description": "Descriptions for the time series."
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of the time series."
         }
       }
     },
@@ -1109,7 +1296,7 @@
         "$ref": "#/definitions/Inconsistency"
       }
     },
-    "ChangePointDetectRequest":{
+    "ChangePointDetectRequest": {
       "type": "object",
       "required": [
         "granularity",
@@ -1148,7 +1335,7 @@
         }
       }
     },
-    "ChangePointResponse":{
+    "ChangePointResponse": {
       "type": "object",
       "required": [
         "isChangePoint",
