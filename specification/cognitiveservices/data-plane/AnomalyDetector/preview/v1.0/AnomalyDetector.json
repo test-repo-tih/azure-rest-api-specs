@@ -206,7 +206,7 @@
             "description": "",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/TimeSeries"
+              "$ref": "#/definitions/TimeSeriesCreateRequest"
             }
           }
         ],
@@ -446,6 +446,9 @@
         "operationId": "TimeSeries_ChangePoint_Detect_InTimeRange",
         "parameters": [
           {
+            "$ref": "#/parameters/timeSeriesId"
+          },
+          {
             "name": "body",
             "in": "body",
             "description": "timeSeriesId, begin and end is needed. Advanced model parameters can also be set in the request if needed.",
@@ -658,7 +661,7 @@
             "description": "GroupId and granularity are needed to create a time series group",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/TimeSeriesGroup"
+              "$ref": "#/definitions/TimeSeriesGroupCreateRequest"
             }
           }
         ],
@@ -770,7 +773,7 @@
             "description": "Start time and end time is necessary, and a parameter called epsilon is needed to tune the result. Epsilon should be within 0 and 1.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/InconsistencyDetectionRequest"
+              "$ref": "#/definitions/InconsistencyDetectRequest"
             }
           }
         ],
@@ -1231,6 +1234,36 @@
         }
       }
     },
+    "TimeSeriesCreateRequest": {
+      "type": "object",
+      "required": [
+        "granularity"
+      ],
+      "properties": {
+        "granularity": {
+          "$ref": "#/definitions/Granularity"
+        },
+        "dimensions": {
+          "$ref": "#/definitions/Dictionary"
+        },
+        "customInterval": {
+          "$ref": "#/definitions/CustomInterval"
+        },
+        "retentionDurationInHours": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Hours that the data is kept."
+        },
+        "description": {
+          "type": "string",
+          "description": "Description for the time series."
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of the time series."
+        }
+      }
+    },
     "TimeSeriesList": {
       "required": [
         "series"
@@ -1274,6 +1307,28 @@
         }
       }
     },
+    "TimeSeriesGroupCreateRequest": {
+      "type": "object",
+      "required": [
+        "granularity"
+      ],
+      "properties": {
+        "description": {
+          "type": "string",
+          "description": "Description of the time series group"
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of the time series group"
+        },
+        "granularity": {
+          "$ref": "#/definitions/Granularity"
+        },
+        "customInterval": {
+          "$ref": "#/definitions/CustomInterval"
+        }
+      }
+    },
     "TimeSeriesGroupList": {
       "required": [
         "groups"
@@ -1281,7 +1336,7 @@
       "properties": {
         "groups": {
           "type": "array",
-          "description": "All time series groups.",
+          "description": "A list of TimeSeriesGroup.",
           "items": {
             "$ref": "#/definitions/TimeSeriesGroup"
           }
@@ -1291,12 +1346,11 @@
         }
       }
     },
-    "InconsistencyDetectionRequest": {
+    "InconsistencyDetectRequest": {
       "type": "object",
       "required": [
         "begin",
-        "end",
-        "epsilon"
+        "end"
       ],
       "properties": {
         "begin": {
@@ -1320,7 +1374,7 @@
       "type": "object",
       "required": [
         "inconsistentSeriesIds",
-        "scores",
+        "confidenceScores",
         "begin",
         "end",
         "epsilon"
@@ -1333,7 +1387,7 @@
             "$ref": "#/definitions/SeriesId"
           }
         },
-        "scores": {
+        "confidenceScores": {
           "type": "array",
           "description": "Scores of inconsistent series in the time series group.",
           "items": {
@@ -1403,9 +1457,7 @@
           "$ref": "#/definitions/Granularity"
         },
         "customInterval": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Custom Interval is used to set non-standard time interval, for example, if the series is 5 minutes, request can be set as {\"granularity\":\"minutely\", \"customInterval\":5}."
+          "type": "#/definitions/CustomInterval"
         },
         "period": {
           "type": "integer",
@@ -1458,13 +1510,9 @@
       "type": "object",
       "required": [
         "begin",
-        "end",
-        "timeSeriesId"
+        "end"
       ],
       "properties": {
-        "timeSeriesId": {
-          "$ref": "#/definitions/SeriesId"
-        },
         "begin": {
           "type": "string",
           "format": "date-time",
@@ -1497,7 +1545,8 @@
       "required": [
         "isChangePoint",
         "confidenceScores",
-        "period"
+        "period",
+        "timestamps"
       ],
       "properties": {
         "period": {
