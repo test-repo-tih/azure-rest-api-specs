@@ -31,7 +31,7 @@
       "post": {
         "summary": "Detect anomalies for the entire time range",
         "description": "This operation will detect anomalies between begin and end time range, points between begin and end will be detected together with the same model",
-        "operationId": "TimeSeries_Entire_Detect_Post",
+        "operationId": "TimeSeries_Entire_Detect_InTimeRange",
         "parameters": [
           {
             "$ref": "#/parameters/timeSeriesId"
@@ -42,7 +42,7 @@
             "description": "Begin and end is required in the request. Advanced model parameters (period, sensitivity, maxAnomalyRatio) can also be set in the request.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/AnomalyDetectionRequest"
+              "$ref": "#/definitions/AnomalyDetectInTimeRangeRequest"
             }
           }
         ],
@@ -56,7 +56,7 @@
           "200": {
             "description": "Successful operation.",
             "schema": {
-              "$ref": "#/definitions/AnomalyDetectionResponse"
+              "$ref": "#/definitions/AnomalyDetectInTimeRangeReponse"
             }
           },
           "default": {
@@ -77,7 +77,7 @@
       "post": {
         "summary": "Detect anomaly status of the latest points that hasn't been detected before in the given time range",
         "description": "This operation can be used in streaming monitoring scenario, when user would like to monitor a time series, the user only need to provide a time range, last detect API will check where last detection ends and will return detection results between last detection and the end time",
-        "operationId": "TimeSeries_Last_Detect_Post",
+        "operationId": "TimeSeries_Last_Detect_InTimeRange",
         "parameters": [
           {
             "$ref": "#/parameters/timeSeriesId"
@@ -88,7 +88,7 @@
             "description": "Begin and end is required in the request. Advanced model parameters (period, sensitivity, maxAnomalyRatio) can also be set in the request.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/AnomalyDetectionRequest"
+              "$ref": "#/definitions/AnomalyDetectInTimeRangeRequest"
             }
           }
         ],
@@ -102,7 +102,7 @@
           "200": {
             "description": "Successful operation.",
             "schema": {
-              "$ref": "#/definitions/AnomalyDetectionResponse"
+              "$ref": "#/definitions/AnomalyDetectInTimeRangeReponse"
             }
           },
           "default": {
@@ -123,7 +123,7 @@
       "post": {
         "summary": "Label API is used for users to label detection status of a certain time stamp of a time series",
         "description": "This operation is used for users to label Anomaly or ChangePoint states of a certain time stamp, these label will be used for regenerate detection model",
-        "operationId": "TimeSeries_Label_Post",
+        "operationId": "TimeSeries_Label",
         "parameters": [
           {
             "$ref": "#/parameters/timeSeriesId"
@@ -165,7 +165,7 @@
   },
   
   "definitions": {
-    "AnomalyDetectionRequest": {
+    "AnomalyDetectInTimeRangeRequest": {
       "type": "object",
       "required": [
         "begin",
@@ -199,7 +199,7 @@
         }
       }
     },
-    "AnomalyDetectionResponse": {
+    "AnomalyDetectInTimeRangeReponse": {
       "type": "object",
       "required": [
         "timestamps",
