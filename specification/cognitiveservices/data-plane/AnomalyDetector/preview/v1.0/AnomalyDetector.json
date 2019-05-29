@@ -880,7 +880,7 @@
         },
         "scores": {
           "type": "array",
-          "description": "Scores of inconsitent series in the time series group.",
+          "description": "Scores of inconsistent series in the time series group.",
           "items": {
             "type": "number",
             "format": "float",
