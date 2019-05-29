@@ -38,7 +38,7 @@
         },
         "x-ms-examples": {
           "Write Timeseries example": {
-            "$ref": "./examples/WriteSeries.json"
+            "$ref": "./examples/TimeSeriesWrite.json"
           }
         }
       }
@@ -84,7 +84,7 @@
         },
         "x-ms-examples": {
           "Query Timeseries example": {
-            "$ref": "./examples/QuerySeries.json"
+            "$ref": "./examples/TimeSeriesQuery.json"
           }
         }
       }
@@ -112,6 +112,9 @@
     },
     "Points": {
       "type": "object",
+      "required": [
+        "series"
+      ],
       "properties": {
         "series": {
           "type": "array",
@@ -124,6 +127,11 @@
     },
     "TimeSeriesQueryRequest": {
       "type": "object",
+      "required": [
+        "begin",
+        "end",
+        "fields"
+      ],
       "properties": {
         "begin": {
           "format": "date-time",
@@ -137,27 +145,39 @@
         },
         "fields": {
           "type": "array",
-          "description": "Name of timeseries field.",
+          "description": "Array of timeseries field.",
           "items": {
-            "enum": [
-              "none",
-              "isAnomaly",
-              "isChangePoint",
-              "isPositiveAnomaly",
-              "isNegativeAnomaly",
-              "value",
-              "expectedValue",
-              "upperMargin",
-              "lowerMargin",
-              "period"
-            ],
-            "type": "string"
+            "$ref": "#/definitions/TimeSeriesField"
           }
         }
       }
     },
+    "TimeSeriesField": {
+      "type": "string",
+      "description": "An enum value indicating name of time series field.",
+      "x-nullable": false,
+      "x-ms-enum": {
+        "name": "TimeSeriesField",
+        "modelAsString": false
+      },
+      "enum": [
+        "isAnomaly",
+        "isChangePoint",
+        "isPositiveAnomaly",
+        "isNegativeAnomaly",
+        "value",
+        "expectedValue",
+        "upperMargin",
+        "lowerMargin",
+        "period"
+      ]
+    },
     "TimeSeriesQueryResponse": {
       "type": "object",
+      "required": [
+        "timestamps",
+        "fieldValues"
+      ],
       "properties": {
         "timestamps": {
           "description": "Timestamps of data points (ISO8601 format).",
