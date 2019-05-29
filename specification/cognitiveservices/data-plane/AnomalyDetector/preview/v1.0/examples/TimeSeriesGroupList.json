@@ -1,1 +1,28 @@
-{}
+{
+  "parameters": {
+    "Endpoint": "{Endpoint}",
+    "Content-Type": "application/json",
+    "Ocp-Apim-Subscription-Key": "{API key}",
+    "timeSeriesGroupId": "my_sg",
+    "next": null
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "groups": [
+          {
+            "groupId": "my_sg",
+            "name": "My First Series Group",
+            "granularity": "daily"
+          },
+          {
+            "groupId": "my_sg2",
+            "name": "My Second Series Group",
+            "granularity": "daily"
+          }
+        ],
+        "next": null
+      }
+    }
+  }
+}
