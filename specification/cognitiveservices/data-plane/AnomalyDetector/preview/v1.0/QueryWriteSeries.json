@@ -1,0 +1,173 @@
+{
+  "paths": {
+    "/timeseries/{timeseriesId}/write": {
+      "put": {
+        "description": "Insert or replace timeseries data for specified timeseriesId. Note that this interface only stores data and do not detect these data.",
+        "operationId": "TimeSeries_Write",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/timeseriesId"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Request body for writing timeseries.",
+            "required": true,
+            "x-ms-client-flatten": true,
+            "schema": {
+              "type": "array",
+              "description": "Time series data points.",
+              "items": {
+                "$ref": "#/definitions/Point"
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful call returns an empty response body."
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/APIError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Write Timeseries example": {
+            "$ref": "./examples/TimeSeriesWrite.json"
+          }
+        }
+      }
+    },
+    "/timeseries/{timeseriesId}/query": {
+      "post": {
+        "description": "Query timeseries with required field in each timestamp.",
+        "operationId": "TimeSeries_Query",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/timeseriesId"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Request body for querying timeseries.",
+            "required": true,
+            "x-ms-client-flatten": true,
+            "schema": {
+              "$ref": "#/definitions/TimeSeriesQueryRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation.",
+            "schema": {
+              "$ref": "#/definitions/TimeSeriesQueryResponse"
+            }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/APIError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Query Timeseries example": {
+            "$ref": "./examples/TimeSeriesQuery.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "TimeSeriesQueryRequest": {
+      "type": "object",
+      "required": [
+        "begin",
+        "end",
+        "fields"
+      ],
+      "properties": {
+        "begin": {
+          "format": "date-time",
+          "type": "string",
+          "description": "Timestamp of begin time (ISO8601 format)."
+        },
+        "end": {
+          "format": "date-time",
+          "type": "string",
+          "description": "Timestamp of end time (ISO8601 format)."
+        },
+        "fields": {
+          "type": "array",
+          "description": "Array of timeseries field.",
+          "items": {
+            "$ref": "#/definitions/TimeSeriesField"
+          }
+        }
+      }
+    },
+    "TimeSeriesField": {
+      "type": "string",
+      "description": "An enum value indicating name of time series field.",
+      "x-nullable": false,
+      "x-ms-enum": {
+        "name": "TimeSeriesField",
+        "modelAsString": false
+      },
+      "enum": [
+        "isAnomaly",
+        "isChangePoint",
+        "isPositiveAnomaly",
+        "isNegativeAnomaly",
+        "value",
+        "expectedValue",
+        "upperMargin",
+        "lowerMargin",
+        "period"
+      ]
+    },
+    "TimeSeriesQueryResponse": {
+      "type": "object",
+      "required": [
+        "timestamps",
+        "fieldValues"
+      ],
+      "properties": {
+        "timestamps": {
+          "description": "Timestamps of data points (ISO8601 format).",
+          "type": "array",
+          "items": {
+            "format": "date-time",
+            "type": "string"
+          }
+        },
+        "fieldValues": {
+          "description": "Values of queried timeseries field.",
+          "type": "array",
+          "items": {
+            "type": "array",
+            "items": {
+              "type": "object"
+            }
+          }
+        }
+      }
+    }
+  }
+}
