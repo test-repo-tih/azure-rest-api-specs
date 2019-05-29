@@ -3,7 +3,7 @@
     "Endpoint": "{Endpoint}",
     "Content-Type": "application/json",
     "Ocp-Apim-Subscription-Key": "{API key}",
-    "timeSeriesGroupId": "my_sg",
+    "timeSeriesGroupId": "4751cb38-4929-4579-8a94-dd1a21622913",
     "next": null
   },
   "responses": {
@@ -11,13 +11,8 @@
       "body": {
         "groups": [
           {
-            "groupId": "my_sg",
+            "groupId": "4751cb38-4929-4579-8a94-dd1a21622913",
             "name": "My First Series Group",
-            "granularity": "daily"
-          },
-          {
-            "groupId": "my_sg2",
-            "name": "My Second Series Group",
             "granularity": "daily"
           }
         ],

@@ -3,7 +3,7 @@
     "Endpoint": "{Endpoint}",
     "Content-Type": "application/json",
     "Ocp-Apim-Subscription-Key": "{API key}",
-    "timeSeriesGroupId": "my_sg"
+    "timeSeriesGroupId": "4751cb38-4929-4579-8a94-dd1a21622913"
   },
   "responses": {
     "200": {
