@@ -113,6 +113,49 @@
         }
       }
     },
+    "/timeseries/changepoint/detect": {
+      "post": {
+        "summary": "Detect change point for the entire series",
+        "description": "Evaluate change point score of every series point",
+        "operationId": "ChangePoint_Detect",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Time series points and granularity is needed. Advanced model parameters can also be set in the request if needed.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ChangePointDetectRequest"
+            }
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation.",
+            "schema": {
+              "$ref": "#/definitions/ChangePointResponse"
+            }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/APIError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Find anomalies for the entire series in batch example": {
+            "$ref": "./examples/ChangePointDetect.json"
+          }
+        }
+      }
+    },
     "/timeseries/{timeSeriesId}": {
       "get": {
         "summary": "Get meta information of the specified timeseries.",
@@ -255,6 +298,313 @@
           "Get information of a time series example": {
             "$ref": "./examples/TimeSeriesList.json"
           }
+        }
+      }
+    },
+    "/timeseries/{timeSeriesId}/write": {
+      "put": {
+        "description": "Insert or replace timeseries data for specified timeSeriesId. Note that this interface only stores data and do not detect these data.",
+        "operationId": "TimeSeries_Write",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/timeSeriesId"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Request body for writing timeseries.",
+            "required": true,
+            "schema": {
+              "type": "array",
+              "description": "Time series data points.",
+              "items": {
+                "$ref": "#/definitions/Point"
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful call returns an empty response body."
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/APIError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Write Timeseries example": {
+            "$ref": "./examples/TimeSeriesWrite.json"
+          }
+        }
+      }
+    },
+    "/timeseries/{timeSeriesId}/entire/detect": {
+      "post": {
+        "summary": "Detect anomalies for the entire time range",
+        "description": "This operation will detect anomalies between begin and end time range, points between begin and end will be detected together with the same model",
+        "operationId": "TimeSeries_Entire_Detect_InTimeRange",
+        "parameters": [
+          {
+            "$ref": "#/parameters/timeSeriesId"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Begin and end is required in the request. Advanced model parameters (period, sensitivity, maxAnomalyRatio) can also be set in the request.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AnomalyDetectInTimeRangeRequest"
+            }
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation.",
+            "schema": {
+              "$ref": "#/definitions/AnomalyDetectInTimeRangeReponse"
+            }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/APIError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Detect anomalies for all points in time range example": {
+            "$ref": "./examples/EntireDetectOfTimeRange.json"
+          }
+        }
+      }
+    },
+    "/timeseries/{timeSeriesId}/last/detect": {
+      "post": {
+        "summary": "Detect anomaly status of the latest points that hasn't been detected before in the given time range",
+        "description": "This operation can be used in streaming monitoring scenario, when user would like to monitor a time series, the user only need to provide a time range, last detect API will check where last detection ends and will return detection results between last detection and the end time",
+        "operationId": "TimeSeries_Last_Detect_InTimeRange",
+        "parameters": [
+          {
+            "$ref": "#/parameters/timeSeriesId"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Begin and end is required in the request. Advanced model parameters (period, sensitivity, maxAnomalyRatio) can also be set in the request.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AnomalyDetectInTimeRangeRequest"
+            }
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation.",
+            "schema": {
+              "$ref": "#/definitions/AnomalyDetectInTimeRangeReponse"
+            }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/APIError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Detect anomaly status of the latest points in time range example": {
+            "$ref": "./examples/LastDetectOfTimeRange.json"
+          }
+        }
+      }
+    },
+    "/timeseries/{timeSeriesId}/changepoint/detect": {
+      "post": {
+        "summary": "Detect change point for the interval series",
+        "description": "Evaluate change point score of every series point between start and end.",
+        "operationId": "TimeSeries_ChangePoint_Detect_InTimeRange",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "description": "timeSeriesId, begin and end is needed. Advanced model parameters can also be set in the request if needed.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ChangePointDetectInTimeRangeRequest"
+            }
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation.",
+            "schema": {
+              "$ref": "#/definitions/ChangePointDetectInTimeRangeResponse"
+            }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/APIError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Find anomalies for the entire series in batch example": {
+            "$ref": "./examples/ChangePointDetectInTimeRange.json"
+          }
+        }
+      }
+    },
+    "/timeseries/{timeSeriesId}/label": {
+      "post": {
+        "summary": "Label API is used for users to label detection status of a certain time stamp of a time series",
+        "description": "This operation is used for users to label Anomaly or ChangePoint states of a certain time stamp, these label will be used for regenerate detection model",
+        "operationId": "TimeSeries_Label",
+        "parameters": [
+          {
+            "$ref": "#/parameters/timeSeriesId"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "In Label request, user can set Anomaly|ChangePoint state (true, false, unknown) for a time range",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/LabelRequest"
+            }
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation."
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/APIError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Detect anomaly status of the latest points in time range example": {
+            "$ref": "./examples/Label.json"
+          }
+        }
+      }
+    },
+    "/timeseries/{timeSeriesId}/query": {
+      "post": {
+        "description": "Query timeseries with required field in each timestamp.",
+        "operationId": "TimeSeries_Query",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/timeSeriesId"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Request body for querying timeseries.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/TimeSeriesQueryRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation.",
+            "schema": {
+              "$ref": "#/definitions/TimeSeriesQueryResponse"
+            }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/APIError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Query Timeseries example": {
+            "$ref": "./examples/TimeSeriesQuery.json"
+          }
+        }
+      }
+    },
+    "/timeseries/{timeSeriesId}/timeseriesgroups": {
+      "get": {
+        "summary": "List TimeSeriesGroups that a TimeSeries belongs to.",
+        "description": "List TimeSeriesGroups that a TimeSeries belongs to. One TimeSeries could belong to multiple TimeSereiesGroups.",
+        "operationId": "TimeSeries_ListGroups",
+        "parameters": [
+          {
+            "$ref": "#/parameters/timeSeriesId"
+          },
+          {
+            "$ref": "#/parameters/next"
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation.",
+            "schema": {
+              "$ref": "#/definitions/TimeSeriesGroupList"
+            }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/APIError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "$ref": "./examples/GetTimeseriesgroupsByTimeseriesId.json"
         }
       }
     },
@@ -497,222 +847,7 @@
         }
       }
     },
-    "/timeseries/changepoint/detect": {
-      "post": {
-        "summary": "Detect change point for the entire series",
-        "description": "Evaluate change point score of every series point",
-        "operationId": "ChangePoint_Detect",
-        "parameters": [
-          {
-            "name": "body",
-            "in": "body",
-            "description": "Time series points and granularity is needed. Advanced model parameters can also be set in the request if needed.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/ChangePointDetectRequest"
-            }
-          }
-        ],
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful operation.",
-            "schema": {
-              "$ref": "#/definitions/ChangePointResponse"
-            }
-          },
-          "default": {
-            "description": "Error response.",
-            "schema": {
-              "$ref": "#/definitions/APIError"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Find anomalies for the entire series in batch example": {
-            "$ref": "./examples/ChangePointDetect.json"
-          }
-        }
-      }
-    },
-    "/timeseries/{timeSeriesId}/changepoint/detect": {
-      "post": {
-        "summary": "Detect change point for the interval series",
-        "description": "Evaluate change point score of every series point between start and end.",
-        "operationId": "TimeSeries_ChangePoint_Detect_InTimeRange",
-        "parameters": [
-          {
-            "name": "body",
-            "in": "body",
-            "description": "timeSeriesId, begin and end is needed. Advanced model parameters can also be set in the request if needed.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/ChangePointDetectInTimeRangeRequest"
-            }
-          }
-        ],
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful operation.",
-            "schema": {
-              "$ref": "#/definitions/ChangePointDetectInTimeRangeResponse"
-            }
-          },
-          "default": {
-            "description": "Error response.",
-            "schema": {
-              "$ref": "#/definitions/APIError"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Find anomalies for the entire series in batch example": {
-            "$ref": "./examples/ChangePointDetectInTimeRange.json"
-          }
-        }
-      }
-    },
-    "/timeseries/{timeSeriesId}/write": {
-      "put": {
-        "description": "Insert or replace timeseries data for specified timeSeriesId. Note that this interface only stores data and do not detect these data.",
-        "operationId": "TimeSeries_Write",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "$ref": "#/parameters/timeSeriesId"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "description": "Request body for writing timeseries.",
-            "required": true,
-            "schema": {
-              "type": "array",
-              "description": "Time series data points.",
-              "items": {
-                "$ref": "#/definitions/Point"
-              }
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "A successful call returns an empty response body."
-          },
-          "default": {
-            "description": "Error response.",
-            "schema": {
-              "$ref": "#/definitions/APIError"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Write Timeseries example": {
-            "$ref": "./examples/TimeSeriesWrite.json"
-          }
-        }
-      }
-    },
-    "/timeseries/{timeSeriesId}/query": {
-      "post": {
-        "description": "Query timeseries with required field in each timestamp.",
-        "operationId": "TimeSeries_Query",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "$ref": "#/parameters/timeSeriesId"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "description": "Request body for querying timeseries.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/TimeSeriesQueryRequest"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful operation.",
-            "schema": {
-              "$ref": "#/definitions/TimeSeriesQueryResponse"
-            }
-          },
-          "default": {
-            "description": "Error response.",
-            "schema": {
-              "$ref": "#/definitions/APIError"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Query Timeseries example": {
-            "$ref": "./examples/TimeSeriesQuery.json"
-          }
-        }
-      }
-    },
-    "/timeseries/{timeSeriesId}/timeseriesgroups": {
-      "get": {
-        "summary": "List TimeSeriesGroups that a TimeSeries belongs to.",
-        "description": "List TimeSeriesGroups that a TimeSeries belongs to. One TimeSeries could belong to multiple TimeSereiesGroups.",
-        "operationId": "TimeSeries_ListGroups",
-        "parameters": [
-          {
-            "$ref": "#/parameters/timeSeriesId"
-          },
-          {
-            "$ref": "#/parameters/next"
-          }
-        ],
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful operation.",
-            "schema": {
-              "$ref": "#/definitions/TimeSeriesGroupList"
-            }
-          },
-          "default": {
-            "description": "Error response.",
-            "schema": {
-              "$ref": "#/definitions/APIError"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "$ref": "./examples/GetTimeseriesgroupsByTimeseriesId.json"
-        }
-      }
-    },
-    "/timeseries/timeseriesgroups/{timeSeriesGroupId}/timeseries": {
+    "/timeseriesgroups/{timeSeriesGroupId}/timeseries": {
       "get": {
         "summary": "List TimeSeries that belongs to a TimeSeriesGroup.",
         "description": "List TimeSeries that belongs to a TimeSeriesGroup. One TimeSeriesGroup could have multiple TimeSeries.",
@@ -750,7 +885,7 @@
         }
       }
     },
-    "/timeseries/timeseriesgroups/{timeSeriesGroupId}/timeseries/{timeSeriesId}": {
+    "/timeseriesgroups/{timeSeriesGroupId}/timeseries/{timeSeriesId}": {
       "put": {
         "summary": "Add a TimeSeries to TimeSeriesGroup.",
         "description": "Add a TimeSeries to TimeSeriesGroup.",
@@ -815,141 +950,6 @@
         },
         "x-ms-examples": {
           "$ref": "./examples/RemoveTimeseriesFromTimeseriesGroup.json"
-        }
-      }
-    },
-    "/timeseries/{timeSeriesId}/entire/detect": {
-      "post": {
-        "summary": "Detect anomalies for the entire time range",
-        "description": "This operation will detect anomalies between begin and end time range, points between begin and end will be detected together with the same model",
-        "operationId": "TimeSeries_Entire_Detect_InTimeRange",
-        "parameters": [
-          {
-            "$ref": "#/parameters/timeSeriesId"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "description": "Begin and end is required in the request. Advanced model parameters (period, sensitivity, maxAnomalyRatio) can also be set in the request.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/AnomalyDetectInTimeRangeRequest"
-            }
-          }
-        ],
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful operation.",
-            "schema": {
-              "$ref": "#/definitions/AnomalyDetectInTimeRangeReponse"
-            }
-          },
-          "default": {
-            "description": "Error response.",
-            "schema": {
-              "$ref": "#/definitions/APIError"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Detect anomalies for all points in time range example": {
-            "$ref": "./examples/EntireDetectOfTimeRange.json"
-          }
-        }
-      }
-    },
-    "/timeseries/{timeSeriesId}/last/detect": {
-      "post": {
-        "summary": "Detect anomaly status of the latest points that hasn't been detected before in the given time range",
-        "description": "This operation can be used in streaming monitoring scenario, when user would like to monitor a time series, the user only need to provide a time range, last detect API will check where last detection ends and will return detection results between last detection and the end time",
-        "operationId": "TimeSeries_Last_Detect_InTimeRange",
-        "parameters": [
-          {
-            "$ref": "#/parameters/timeSeriesId"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "description": "Begin and end is required in the request. Advanced model parameters (period, sensitivity, maxAnomalyRatio) can also be set in the request.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/AnomalyDetectInTimeRangeRequest"
-            }
-          }
-        ],
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful operation.",
-            "schema": {
-              "$ref": "#/definitions/AnomalyDetectInTimeRangeReponse"
-            }
-          },
-          "default": {
-            "description": "Error response.",
-            "schema": {
-              "$ref": "#/definitions/APIError"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Detect anomaly status of the latest points in time range example": {
-            "$ref": "./examples/LastDetectOfTimeRange.json"
-          }
-        }
-      }
-    },
-    "/timeseries/{timeSeriesId}/label": {
-      "post": {
-        "summary": "Label API is used for users to label detection status of a certain time stamp of a time series",
-        "description": "This operation is used for users to label Anomaly or ChangePoint states of a certain time stamp, these label will be used for regenerate detection model",
-        "operationId": "TimeSeries_Label",
-        "parameters": [
-          {
-            "$ref": "#/parameters/timeSeriesId"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "description": "In Label request, user can set Anomaly|ChangePoint state (true, false, unknown) for a time range",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/LabelRequest"
-            }
-          }
-        ],
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful operation."
-          },
-          "default": {
-            "description": "Error response.",
-            "schema": {
-              "$ref": "#/definitions/APIError"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Detect anomaly status of the latest points in time range example": {
-            "$ref": "./examples/Label.json"
-          }
         }
       }
     }
