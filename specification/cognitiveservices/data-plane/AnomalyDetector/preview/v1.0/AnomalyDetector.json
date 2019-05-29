@@ -768,7 +768,7 @@
         },
         "description": {
           "type": "string",
-          "description": "Descriptions for the time series."
+          "description": "Description for the time series."
         },
         "name": {
           "type": "string",
@@ -777,6 +777,9 @@
       }
     },
     "TimeSeriesList": {
+      "required": [
+        "series"
+      ],
       "properties": {
         "series": {
           "type": "array",
@@ -817,6 +820,9 @@
       }
     },
     "TimeSeriesGroupList": {
+      "required": [
+        "groups"
+      ],
       "properties": {
         "groups": {
           "type": "array",
