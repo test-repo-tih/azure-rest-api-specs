@@ -1223,6 +1223,7 @@
           "$ref": "#/definitions/Granularity"
         },
         "dimensions": {
+          "description": "Property of a time series",
           "$ref": "#/definitions/Dictionary"
         },
         "customInterval": {
@@ -1254,6 +1255,7 @@
           "$ref": "#/definitions/Granularity"
         },
         "dimensions": {
+          "description": "Property of a time series",
           "$ref": "#/definitions/Dictionary"
         },
         "customInterval": {
