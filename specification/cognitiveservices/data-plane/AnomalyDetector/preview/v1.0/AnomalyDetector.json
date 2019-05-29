@@ -607,7 +607,9 @@
           }
         },
         "x-ms-examples": {
+          "Get TimeSeriesGroups of a TimeSeries" : {
           "$ref": "./examples/TimeSeriesListGroups.json"
+          }
         }
       }
     },
@@ -884,7 +886,9 @@
           }
         },
         "x-ms-examples": {
-          "$ref": "./examples/TimeSeriesGroupListTimeSeries.json"
+          "Get TimeSeries of a TimeSeriesGroup" : {
+            "$ref": "./examples/TimeSeriesGroupListTimeSeries.json"
+          }
         }
       }
     },
@@ -919,7 +923,9 @@
           }
         },
         "x-ms-examples": {
-          "$ref": "./examples/TimeSeriesGroupAddTimeSeries.json"
+          "Add TimeSeries to a TimeSeriesGroup" : {
+            "$ref": "./examples/TimeSeriesGroupAddTimeSeries.json"
+          }
         }
       },
       "delete": {
@@ -952,7 +958,9 @@
           }
         },
         "x-ms-examples": {
-          "$ref": "./examples/TimeSeriesGroupDeleteTimeSeries.json"
+          "Delete TimeSeries from a TimeSeriesGroup" : {
+            "$ref": "./examples/TimeSeriesGroupDeleteTimeSeries.json"
+          }
         }
       }
     }
