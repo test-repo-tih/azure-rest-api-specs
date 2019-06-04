@@ -3,7 +3,7 @@
     "Endpoint": "{Endpoint}",
     "Content-Type": "application/json",
     "Ocp-Apim-Subscription-Key": "{API key}",
-    "timeSeriesGroupId": "my_sg",
+    "timeSeriesGroupId": "4751cb38-4929-4579-8a94-dd1a21622913",
     "body": {
         "begin": "2018-05-01T00:00:00Z",
         "end": "2018-06-10T00:00:00Z"
@@ -21,8 +21,7 @@
             0.4,
             0.6
           ],
-          "begin": "2018-05-29T00:00:00Z",
-          "end": "2018-06-10T00:00:00Z",
+          "timestamp": "2018-05-29T00:00:00Z",
           "epsilon": 0.5
         },
         {
@@ -34,8 +33,7 @@
             0.1,
             0.6
           ],
-          "begin": "2018-04-30T00:00:00Z",
-          "end": "2018-05-02T00:00:00Z",
+          "timestamp": "2018-04-30T00:00:00Z",
           "epsilon": 0.5
         }
       ]
