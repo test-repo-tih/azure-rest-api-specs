@@ -1,0 +1,24 @@
+{
+  "parameters": {
+    "Endpoint": "{Endpoint}",
+    "Content-Type": "application/json",
+    "Ocp-Apim-Subscription-Key": "{API key}",
+    "timeSeriesId": "f9f0114c-3c4c-4d3a-a6c7-f4d6d595f4f7",
+    "body": {
+      "timestamp": "2017-01-02T04:05:00Z",
+      "stableTrendWindow": 10,
+      "threshold": 0.99,
+      "period": 0
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "period": 0,
+        "isChangePoint": true,
+        "confidenceScore": 1,
+        "timestamp": "2017-01-02T02:10:00Z"
+      }
+    }
+  }
+}

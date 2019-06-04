@@ -1,0 +1,26 @@
+{
+  "parameters": {
+    "Endpoint": "{Endpoint}",
+    "Content-Type": "application/json",
+    "Ocp-Apim-Subscription-Key": "{API key}",
+    "timeSeriesId": "f9f0114c-3c4c-4d3a-a6c7-f4d6d595f4f7",
+    "body": {
+      "timestamp": "2018-04-16T00:00:00Z"
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "timestamp": "2018-04-16T00:00:00Z",
+        "isAnomaly": false,
+        "isPositiveAnomaly": false,
+        "isNegativeAnomaly": false,
+        "period": 7,
+        "value": 35250105,
+        "expectedValue": 35344244.421857625,
+        "upperMargin": 353442.44421857625,
+        "lowerMargin": 353442.44421857625
+      }
+    }
+  }
+}
