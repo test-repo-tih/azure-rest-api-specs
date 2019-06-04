@@ -1344,8 +1344,7 @@
       "required": [
         "inconsistentSeriesIds",
         "confidenceScores",
-        "begin",
-        "end"
+        "timestamp"
       ],
       "properties": {
         "inconsistentSeriesIds": {
@@ -1477,8 +1476,7 @@
     "ChangePointDetectOnTimestampRequest": {
       "type": "object",
       "required": [
-        "begin",
-        "end"
+        "timestamp"
       ],
       "properties": {
         "timestamp": {
