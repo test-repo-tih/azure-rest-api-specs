@@ -150,7 +150,7 @@
           }
         },
         "x-ms-examples": {
-          "Find anomalies for the entire series in batch example": {
+          "Detect change point example": {
             "$ref": "./examples/ChangePointDetect.json"
           }
         }
@@ -347,57 +347,11 @@
         }
       }
     },
-    "/timeseries/{timeSeriesId}/entire/detect": {
+    "/timeseries/{timeSeriesId}/detect": {
       "post": {
-        "summary": "Detect anomalies for the entire time range",
-        "description": "This operation will detect anomalies between begin and end time range, points between begin and end will be detected together with the same model",
-        "operationId": "TimeSeries_EntireDetectInTimeRange",
-        "parameters": [
-          {
-            "$ref": "#/parameters/timeSeriesId"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "description": "Begin and end is required in the request. Advanced model parameters (period, sensitivity, maxAnomalyRatio) can also be set in the request.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/AnomalyDetectInTimeRangeRequest"
-            }
-          }
-        ],
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful operation.",
-            "schema": {
-              "$ref": "#/definitions/AnomalyDetectInTimeRangeResponse"
-            }
-          },
-          "default": {
-            "description": "Error response.",
-            "schema": {
-              "$ref": "#/definitions/APIError"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Detect anomalies for all points in time range example": {
-            "$ref": "./examples/EntireDetectOfTimeRange.json"
-          }
-        }
-      }
-    },
-    "/timeseries/{timeSeriesId}/last/detect": {
-      "post": {
-        "summary": "Detect anomaly status of the latest points that hasn't been detected before in the given time range",
+        "summary": "Detect anomaly status on a given timestamp",
         "description": "This operation can be used in streaming monitoring scenario, when user would like to monitor a time series, the user only need to provide a time range, last detect API will check where last detection ends and will return detection results between last detection and the end time",
-        "operationId": "TimeSeries_LastDetectInTimeRange",
+        "operationId": "TimeSeries_DetectOnTimestamp",
         "parameters": [
           {
             "$ref": "#/parameters/timeSeriesId"
@@ -405,10 +359,10 @@
           {
             "name": "body",
             "in": "body",
-            "description": "Begin and end is required in the request. Advanced model parameters (period, sensitivity, maxAnomalyRatio) can also be set in the request.",
+            "description": "Timestamp is required in the request. Advanced model parameters (period, sensitivity, maxAnomalyRatio) can also be set in the request.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/AnomalyDetectInTimeRangeRequest"
+              "$ref": "#/definitions/AnomalyDetectOnTimestampRequest"
             }
           }
         ],
@@ -422,7 +376,7 @@
           "200": {
             "description": "Successful operation.",
             "schema": {
-              "$ref": "#/definitions/AnomalyDetectInTimeRangeResponse"
+              "$ref": "#/definitions/AnomalyDetectOnTimestampResponse"
             }
           },
           "default": {
@@ -433,8 +387,8 @@
           }
         },
         "x-ms-examples": {
-          "Detect anomaly status of the latest points in time range example": {
-            "$ref": "./examples/LastDetectOfTimeRange.json"
+          "Detect anomaly status of a point example": {
+            "$ref": "./examples/DetectOnTimestamp.json"
           }
         }
       }
@@ -443,7 +397,7 @@
       "post": {
         "summary": "Detect change point for the interval series",
         "description": "Evaluate change point score of every series point between start and end.",
-        "operationId": "TimeSeries_ChangePointDetectInTimeRange",
+        "operationId": "TimeSeries_ChangePointDetectOnTimestamp",
         "parameters": [
           {
             "$ref": "#/parameters/timeSeriesId"
@@ -451,10 +405,10 @@
           {
             "name": "body",
             "in": "body",
-            "description": "timeSeriesId, begin and end is needed. Advanced model parameters can also be set in the request if needed.",
+            "description": "Timestamp is needed. Advanced model parameters can also be set in the request if needed.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/ChangePointDetectInTimeRangeRequest"
+              "$ref": "#/definitions/ChangePointDetectOnTimestampRequest"
             }
           }
         ],
@@ -468,7 +422,7 @@
           "200": {
             "description": "Successful operation.",
             "schema": {
-              "$ref": "#/definitions/ChangePointDetectInTimeRangeResponse"
+              "$ref": "#/definitions/ChangePointDetectOnTimestampResponse"
             }
           },
           "default": {
@@ -479,8 +433,8 @@
           }
         },
         "x-ms-examples": {
-          "Find anomalies for the entire series in batch example": {
-            "$ref": "./examples/ChangePointDetectInTimeRange.json"
+          "Changepoint example": {
+            "$ref": "./examples/ChangePointDetectOnTimestamp.json"
           }
         }
       }
@@ -522,7 +476,7 @@
           }
         },
         "x-ms-examples": {
-          "Detect anomaly status of the latest points in time range example": {
+          "Label example": {
             "$ref": "./examples/Label.json"
           }
         }
@@ -644,7 +598,7 @@
           }
         },
         "x-ms-examples": {
-          "Detect anomaly status of the latest point in time series example": {
+          "Get a timeseries group example": {
             "$ref": "./examples/TimeSeriesGroupGet.json"
           }
         }
@@ -685,7 +639,7 @@
           }
         },
         "x-ms-examples": {
-          "Detect anomaly status of the latest point in time series example": {
+          "Create a time series group example": {
             "$ref": "./examples/TimeSeriesGroupCreate.json"
           }
         }
@@ -717,7 +671,7 @@
           }
         },
         "x-ms-examples": {
-          "Detect anomaly status of the latest point in time series example": {
+          "Delete a time series group example": {
             "$ref": "./examples/TimeSeriesGroupDelete.json"
           }
         }
@@ -754,7 +708,7 @@
           }
         },
         "x-ms-examples": {
-          "Detect anomaly status of the latest point in time series example": {
+          "List a time series group example": {
             "$ref": "./examples/TimeSeriesGroupList.json"
           }
         }
@@ -772,7 +726,7 @@
           {
             "name": "body",
             "in": "body",
-            "description": "Start time and end time is necessary, and a parameter called epsilon is needed to tune the result. Epsilon should be within 0 and 1.",
+            "description": "Timestamp is necessary, and a parameter called epsilon is needed to tune the result. Epsilon should be within 0 and 1.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/InconsistencyDetectRequest"
@@ -800,7 +754,7 @@
           }
         },
         "x-ms-examples": {
-          "Detect anomaly status of the latest point in time series example": {
+          "Inconsistency detect example": {
             "$ref": "./examples/InconsistencyDetect.json"
           }
         }
@@ -846,7 +800,7 @@
           }
         },
         "x-ms-examples": {
-          "Detect anomaly status of the latest point in time series example": {
+          "Inconsistency query example": {
             "$ref": "./examples/InconsistencyQuery.json"
           }
         }
@@ -1370,19 +1324,13 @@
     "InconsistencyDetectRequest": {
       "type": "object",
       "required": [
-        "begin",
-        "end"
+        "timestamp"
       ],
       "properties": {
-        "begin": {
+        "timestamp": {
           "type": "string",
           "format": "date-time",
-          "description": "Start time of the time series group."
-        },
-        "end": {
-          "type": "string",
-          "format": "date-time",
-          "description": "End time of the time series group."
+          "description": "Inconsistency detect timestamp."
         },
         "epsilon": {
           "type": "number",
@@ -1417,15 +1365,10 @@
             "x-nullable": false
           }
         },
-        "begin": {
+        "timestamp": {
           "type": "string",
           "format": "date-time",
-          "description": "Start time of the time series group."
-        },
-        "end": {
-          "type": "string",
-          "format": "date-time",
-          "description": "End time of the time series group."
+          "description": "Inconsistency detect timestamp."
         },
         "epsilon": {
           "type": "number",
@@ -1531,22 +1474,17 @@
         }
       }
     },
-    "ChangePointDetectInTimeRangeRequest": {
+    "ChangePointDetectOnTimestampRequest": {
       "type": "object",
       "required": [
         "begin",
         "end"
       ],
       "properties": {
-        "begin": {
+        "timestamp": {
           "type": "string",
           "format": "date-time",
-          "description": "The begin timestamp of you want to detect."
-        },
-        "end": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The end timestamp of you want to detect."
+          "description": "The timestamp of a data point."
         },
         "period": {
           "type": "integer",
@@ -1565,13 +1503,13 @@
         }
       }
     },
-    "ChangePointDetectInTimeRangeResponse": {
+    "ChangePointDetectOnTimestampResponse": {
       "type": "object",
       "required": [
         "isChangePoint",
-        "confidenceScores",
+        "confidenceScore",
         "period",
-        "timestamps"
+        "timestamp"
       ],
       "properties": {
         "period": {
@@ -1580,31 +1518,21 @@
           "description": "Frequency extracted from the series, zero means no recurrent pattern has been found."
         },
         "isChangePoint": {
-          "type": "array",
-          "description": "ChangePoints contains change point properties for each input point. True means an anomaly either negative or positive has been detected. The index of the array is consistent with the input series.",
-          "items": {
-            "type": "boolean",
-            "x-nullable": false
-          }
+          "description": "Change point property. True means a change point has been detected.",
+          "type": "boolean",
+          "x-nullable": false
         },
-        "confidenceScores": {
-          "type": "array",
-          "description": "the change point confidence of each point",
-          "items": {
-            "type": "number",
-            "format": "float",
-            "x-nullable": false
-          }
+        "confidenceScore": {
+          "description": "The change point confidence score.",
+          "type": "number",
+          "format": "float",
+          "x-nullable": false
         },
-        "timestamps": {
-          "type": "array",
-          "description": "All timestamps in range",
-          "items": {
-            "type": "string",
-            "format": "date-time",
-            "x-nullable": false,
-            "description": "Timestamp of a data point (ISO8601 format)."
-          }
+        "timestamp": {
+          "type": "string",
+          "format": "date-time",
+          "x-nullable": false,
+          "description": "Timestamp of a data point (ISO8601 format)."
         }
       }
     },
@@ -1684,22 +1612,16 @@
         }
       }
     },
-    "AnomalyDetectInTimeRangeRequest": {
+    "AnomalyDetectOnTimestampRequest": {
       "type": "object",
       "required": [
-        "begin",
-        "end"
+        "timestamp"
       ],
       "properties": {
-        "begin" : {
+        "timestamp" : {
           "type": "string",
           "format": "date-time",
-          "description": "begin of a detection time range"
-        },
-        "end" : {
-          "type": "string",
-          "format": "date-time",
-          "description": "end of a detection time range"
+          "description": "Timestamp of a data point"
         },
         "period": {
           "type": "integer",
@@ -1718,17 +1640,17 @@
         }
       }
     },
-    "AnomalyDetectInTimeRangeResponse": {
+    "AnomalyDetectOnTimestampResponse": {
       "type": "object",
       "required": [
-        "timestamps",
-        "values",
-        "expectedValues",
+        "timestamp",
+        "value",
+        "expectedValue",
         "isAnomaly",
         "isNegativeAnomaly",
         "isPositiveAnomaly",
-        "lowerMargins",
-        "upperMargins",
+        "lowerMargin",
+        "upperMargin",
         "period"
       ],
       "properties": {
@@ -1737,74 +1659,50 @@
           "format": "int32",
           "description": "Frequency extracted from the series, zero means no recurrent pattern has been found."
         },
-        "timestamps": {
-          "type": "array",
-          "description": "timestamps contain timestamp for each point in the range.",
-          "items": {
-            "type": "string",
-            "format": "date-time",
-            "x-nullable": false
-          }
+        "timestamp": {
+          "type": "string",
+          "description": "Timestamp of a point.",
+          "format": "date-time",
+          "x-nullable": false
         },
-        "values": {
-          "type": "array",
-          "description": "values contain value for each point in the range. The index of the array is consistent with timestamps array.",
-          "items": {
-            "type": "number",
-            "format": "float",
-            "x-nullable": false
-          }
+        "value": {
+          "description": "Value of a point.",
+          "type": "number",
+          "format": "float",
+          "x-nullable": false
         },
-        "expectedValues": {
-          "type": "array",
-          "description": "ExpectedValues contain expected value for each point in the range. The index of the array is consistent with timestamps array.",
-          "items": {
-            "type": "number",
-            "format": "float",
-            "x-nullable": false
-          }
+        "expectedValue": {
+          "description": "ExpectedValue of a point on the timestamp.",
+          "type": "number",
+          "format": "float",
+          "x-nullable": false
         },
-        "upperMargins": {
-          "type": "array",
-          "description": "UpperMargins contain upper margin of each point in the range. UpperMargin is used to calculate upperBoundary, which equals to expectedValue + (100 - marginScale)*upperMargin. Anomalies in response can be filtered by upperBoundary and lowerBoundary. By adjusting marginScale value, less significant anomalies can be filtered in client side. The index of the array is consistent with timestamps.",
-          "items": {
-            "type": "number",
-            "format": "float",
-            "x-nullable": false
-          }
+        "upperMargin": {
+          "description": "UpperMargin of a point on the timestamp. UpperMargin is used to calculate upperBoundary, which equals to expectedValue + (100 - marginScale)*upperMargin. Anomalies in response can be filtered by upperBoundary and lowerBoundary. By adjusting marginScale value, less significant anomalies can be filtered in client side.",
+          "type": "number",
+          "format": "float",
+          "x-nullable": false
         },
-        "lowerMargins": {
-          "type": "array",
-          "description": "LowerMargins contain lower margin of each point in the range. LowerMargin is used to calculate lowerBoundary, which equals to expectedValue - (100 - marginScale)*lowerMargin. Points between the boundary can be marked as normal ones in client side. The index of the array is consistent with timestamps.",
-          "items": {
-            "type": "number",
-            "format": "float",
-            "x-nullable": false
-          }
+        "lowerMargin": {
+          "description": "LowerMargin of a point on the timestamp. LowerMargin is used to calculate lowerBoundary, which equals to expectedValue - (100 - marginScale)*lowerMargin. Points between the boundary can be marked as normal ones in client side.",
+          "type": "number",
+          "format": "float",
+          "x-nullable": false
         },
         "isAnomaly": {
-          "type": "array",
-          "description": "IsAnomaly contain anomaly properties each point in the range. True means an anomaly either negative or positive has been detected. The index of the array is consistent with timestamps.",
-          "items": {
-            "type": "boolean",
-            "x-nullable": false
-          }
+          "description": "Anomaly property of a point on the timestamp. True means an anomaly either negative or positive has been detected.",
+          "type": "boolean",
+          "x-nullable": false
         },
         "isNegativeAnomaly": {
-          "type": "array",
-          "description": "IsNegativeAnomaly contain anomaly status in negative direction in the range. True means a negative anomaly has been detected. A negative anomaly means the point is detected as an anomaly and its real value is smaller than the expected one. The index of the array is consistent with timestamps.",
-          "items": {
-            "type": "boolean",
-            "x-nullable": false
-          }
+          "description": "Anomaly status in negative direction on the timestamp. True means a negative anomaly has been detected. A negative anomaly means the point is detected as an anomaly and its real value is smaller than the expected one.",
+          "type": "boolean",
+          "x-nullable": false
         },
         "isPositiveAnomaly": {
-          "type": "array",
-          "description": "IsPositiveAnomaly contain anomaly status in positive direction in the range. True means a positive anomaly has been detected. A positive anomaly means the point is detected as an anomaly and its real value is larger than the expected one. The index of the array is consistent with timestamps.",
-          "items": {
-            "type": "boolean",
-            "x-nullable": false
-          }
+          "description": "Anomaly status in positive direction on the timestamp. True means a positive anomaly has been detected. A positive anomaly means the point is detected as an anomaly and its real value is larger than the expected one.",
+          "type": "boolean",
+          "x-nullable": false
         }
       }
     },
