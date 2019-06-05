@@ -192,7 +192,7 @@
           }
         }
       },
-      "put": {
+      "post": {
         "summary": "Creat a timeseries.",
         "description": "Create series, user need to provide timeSeriesId and granularity, if the series has dimension or name, description can be provided through the interface.",
         "operationId": "TimeSeries_Create",
@@ -603,7 +603,7 @@
           }
         }
       },
-      "put": {
+      "post": {
         "summary": "Create a time series group.",
         "description": "Create a time series group.",
         "operationId": "TimeSeriesGroup_Create",
@@ -847,7 +847,7 @@
       }
     },
     "/timeseriesgroups/{timeSeriesGroupId}/timeseries/{timeSeriesId}": {
-      "put": {
+      "post": {
         "summary": "Add a TimeSeries to TimeSeriesGroup.",
         "description": "Add a TimeSeries to TimeSeriesGroup.",
         "operationId": "TimeSeriesGroup_AddTimeSeries",
