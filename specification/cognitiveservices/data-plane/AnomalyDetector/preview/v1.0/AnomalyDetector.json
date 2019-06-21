@@ -1316,7 +1316,7 @@
     },
     "LabelValue": {
       "type": "string",
-      "description": "Value of a label, can be true, false",
+      "description": "Value of a label, can be positiveAnomaly, negativeAnomaly, positiveChangePoint and negativeChangePoint",
       "x-nullable": false,
       "x-ms-enum": {
         "name": "LabelValue",
