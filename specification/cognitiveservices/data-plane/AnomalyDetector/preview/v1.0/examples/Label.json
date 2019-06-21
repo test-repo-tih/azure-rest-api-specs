@@ -8,7 +8,7 @@
       "type": "anomaly",
       "begin": "2018-04-10T00:00:00Z",
       "end": "2018-04-10T00:00:00Z",
-      "value": "true"
+      "value": "positiveAnomaly"
     }
   },
   "responses": {
