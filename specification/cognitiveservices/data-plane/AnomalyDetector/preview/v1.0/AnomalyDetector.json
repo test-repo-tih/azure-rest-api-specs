@@ -179,6 +179,12 @@
               "$ref": "#/definitions/TimeSeries"
             }
           },
+          "404": {
+            "description": "Specidied time series does not exist.",
+            "schema": {
+              "$ref": "#/definitions/APIError"
+            }
+          },
           "default": {
             "description": "Error response.",
             "schema": {
@@ -192,7 +198,7 @@
           }
         }
       },
-      "post": {
+      "put": {
         "summary": "Creat a timeseries.",
         "description": "Create series, user need to provide timeSeriesId and granularity, if the series has dimension or name, description can be provided through the interface.",
         "operationId": "TimeSeries_Create",
@@ -217,8 +223,17 @@
           "application/json"
         ],
         "responses": {
-          "200": {
-            "description": "Successful operation."
+          "204": {
+            "description": "Successful operation. If the time series already exists will not create it again."
+          },
+          "201": {
+            "description": "New time series has been created successfully."
+          },
+          "409": {
+            "description": "Specified time series already exsits and the client offers different property for the same series.",
+            "schema": {
+              "$ref": "#/definitions/APIError"
+            }
           },
           "default": {
             "description": "Error response.",
@@ -247,8 +262,8 @@
           "application/json"
         ],
         "responses": {
-          "200": {
-            "description": "Successful operation."
+          "204": {
+            "description": "Specified time series has been deleted from the server side."
           },
           "default": {
             "description": "Error response.",
@@ -302,7 +317,7 @@
       }
     },
     "/timeseries/{timeSeriesId}/write": {
-      "put": {
+      "post": {
         "description": "Insert or replace timeseries data for specified timeSeriesId. Note that this interface only stores data and do not detect these data.",
         "operationId": "TimeSeries_Write",
         "consumes": [
@@ -330,8 +345,14 @@
           }
         ],
         "responses": {
-          "200": {
+          "204": {
             "description": "A successful call returns an empty response body."
+          },
+          "404": {
+            "description": "The specified time series does not exist in server side.",
+            "schema": {
+              "$ref": "#/definitions/APIError"
+            }
           },
           "default": {
             "description": "Error response.",
@@ -377,6 +398,12 @@
             "description": "Successful operation.",
             "schema": {
               "$ref": "#/definitions/AnomalyDetectOnTimestampResponse"
+            }
+          },
+          "404": {
+            "description": "The specified time series does not exist in server side.",
+            "schema": {
+              "$ref": "#/definitions/APIError"
             }
           },
           "default": {
@@ -425,6 +452,12 @@
               "$ref": "#/definitions/ChangePointDetectOnTimestampResponse"
             }
           },
+          "404": {
+            "description": "The specified time series does not exist in server side.",
+            "schema": {
+              "$ref": "#/definitions/APIError"
+            }
+          },
           "default": {
             "description": "Error response.",
             "schema": {
@@ -467,6 +500,12 @@
         "responses": {
           "200": {
             "description": "Successful operation."
+          },
+          "404": {
+            "description": "The specified time series does not exist in server side.",
+            "schema": {
+              "$ref": "#/definitions/APIError"
+            }
           },
           "default": {
             "description": "Error response.",
@@ -513,6 +552,12 @@
               "$ref": "#/definitions/TimeSeriesQueryResponse"
             }
           },
+          "404": {
+            "description": "The specified time series does not exist in server side.",
+            "schema": {
+              "$ref": "#/definitions/APIError"
+            }
+          },
           "default": {
             "description": "Error response.",
             "schema": {
@@ -527,206 +572,16 @@
         }
       }
     },
-    "/timeseries/{timeSeriesId}/timeseriesgroups": {
-      "get": {
-        "summary": "List TimeSeriesGroups that a TimeSeries belongs to.",
-        "description": "List TimeSeriesGroups that a TimeSeries belongs to. One TimeSeries could belong to multiple TimeSeriesGroups.",
-        "operationId": "TimeSeries_ListGroups",
-        "parameters": [
-          {
-            "$ref": "#/parameters/timeSeriesId"
-          },
-          {
-            "$ref": "#/parameters/next"
-          }
-        ],
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful operation.",
-            "schema": {
-              "$ref": "#/definitions/TimeSeriesGroupList"
-            }
-          },
-          "default": {
-            "description": "Error response.",
-            "schema": {
-              "$ref": "#/definitions/APIError"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Get TimeSeriesGroups of a TimeSeries" : {
-          "$ref": "./examples/TimeSeriesListGroups.json"
-          }
-        }
-      }
-    },
-    "/timeseriesgroups/{timeSeriesGroupId}": {
-      "get": {
-        "summary": "Get meta information of the specified time series group.",
-        "description": "This operation fetches detailed information about the specified time series group.",
-        "operationId": "TimeSeriesGroup_Get",
-        "parameters": [
-          {
-            "$ref": "#/parameters/timeSeriesGroupId"
-          }
-        ],
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful operation.",
-            "schema": {
-              "$ref": "#/definitions/TimeSeriesGroup"
-            }
-          },
-          "default": {
-            "description": "Error response.",
-            "schema": {
-              "$ref": "#/definitions/APIError"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Get a timeseries group example": {
-            "$ref": "./examples/TimeSeriesGroupGet.json"
-          }
-        }
-      },
-      "post": {
-        "summary": "Create a time series group.",
-        "description": "Create a time series group.",
-        "operationId": "TimeSeriesGroup_Create",
-        "parameters": [
-          {
-            "$ref": "#/parameters/timeSeriesGroupId"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "description": "GroupId and granularity are needed to create a time series group",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/TimeSeriesGroupCreateRequest"
-            }
-          }
-        ],
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful operation."
-          },
-          "default": {
-            "description": "Error response.",
-            "schema": {
-              "$ref": "#/definitions/APIError"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Create a time series group example": {
-            "$ref": "./examples/TimeSeriesGroupCreate.json"
-          }
-        }
-      },
-      "delete": {
-        "summary": "Delete a time series group.",
-        "description": "Delete a time series group.",
-        "operationId": "TimeSeriesGroup_Delete",
-        "parameters": [
-          {
-            "$ref": "#/parameters/timeSeriesGroupId"
-          }
-        ],
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful operation."
-          },
-          "default": {
-            "description": "Error response.",
-            "schema": {
-              "$ref": "#/definitions/APIError"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Delete a time series group example": {
-            "$ref": "./examples/TimeSeriesGroupDelete.json"
-          }
-        }
-      }
-    },
-    "/timeseriesgroups": {
-      "get": {
-        "summary": "List time series groups.",
-        "description": "List time series groups page by page using the \"next\" field. It means that all time series groups have been returned when the \"next\" field is null.",
-        "operationId": "TimeSeriesGroup_List",
-        "parameters": [
-          {
-            "$ref": "#/parameters/next"
-          }
-        ],
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful operation.",
-            "schema": {
-              "$ref": "#/definitions/TimeSeriesGroupList"
-            }
-          },
-          "default": {
-            "description": "Error response.",
-            "schema": {
-              "$ref": "#/definitions/APIError"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "List a time series group example": {
-            "$ref": "./examples/TimeSeriesGroupList.json"
-          }
-        }
-      }
-    },
-    "/timeseriesgroups/{timeSeriesGroupId}/inconsistency/detect": {
+    "/timeseries/inconsistency/detect": {
       "post": {
         "summary": "Detect inconsistent time series from a group of similar time series.",
         "description": "This operation helps detect the inconsistent series among a group series with similar trend.",
-        "operationId": "TimeSeriesGroup_InconsistencyDetect",
+        "operationId": "TimeSeries_InconsistencyDetect",
         "parameters": [
-          {
-            "$ref": "#/parameters/timeSeriesGroupId"
-          },
           {
             "name": "body",
             "in": "body",
-            "description": "Timestamp is necessary, and a parameter called epsilon is needed to tune the result. Epsilon should be within 0 and 1.",
+            "description": "Timestamp is necessary, and a parameter called epsilon is needed to tune the result. Epsilon should be within 0 and 1. A list of time series ids need to be provided to the service.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/InconsistencyDetectRequest"
@@ -746,6 +601,12 @@
               "$ref": "#/definitions/Inconsistency"
             }
           },
+          "404": {
+            "description": "The specified time series does not exist in server side.",
+            "schema": {
+              "$ref": "#/definitions/APIError"
+            }
+          },
           "default": {
             "description": "Error response.",
             "schema": {
@@ -756,164 +617,6 @@
         "x-ms-examples": {
           "Inconsistency detect example": {
             "$ref": "./examples/InconsistencyDetect.json"
-          }
-        }
-      }
-    },
-    "/timeseriesgroups/{timeSeriesGroupId}/inconsistency/query": {
-      "post": {
-        "summary": "Query time series properties from a group of similar time series.",
-        "description": "This operation helps query properties of one group, for example the inconsistent series among a group series with similar trend.",
-        "operationId": "TimeSeriesGroup_InconsistencyQuery",
-        "parameters": [
-          {
-            "$ref": "#/parameters/timeSeriesGroupId"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "description": "Start time and end time is necessary.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/InconsistencyQueryRequest"
-            }
-          }
-        ],
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful operation.",
-            "schema": {
-              "$ref": "#/definitions/InconsistencyQueryResponse"
-            }
-          },
-          "default": {
-            "description": "Error response.",
-            "schema": {
-              "$ref": "#/definitions/APIError"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Inconsistency query example": {
-            "$ref": "./examples/InconsistencyQuery.json"
-          }
-        }
-      }
-    },
-    "/timeseriesgroups/{timeSeriesGroupId}/timeseries": {
-      "get": {
-        "summary": "List TimeSeries that belongs to a TimeSeriesGroup.",
-        "description": "List TimeSeries that belongs to a TimeSeriesGroup. One TimeSeriesGroup could have multiple TimeSeries.",
-        "operationId": "TimeSeriesGroup_ListSeries",
-        "parameters": [
-          {
-            "$ref": "#/parameters/timeSeriesGroupId"
-          },
-          {
-            "$ref": "#/parameters/next"
-          }
-        ],
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful operation.",
-            "schema": {
-              "$ref": "#/definitions/TimeSeriesList"
-            }
-          },
-          "default": {
-            "description": "Error response.",
-            "schema": {
-              "$ref": "#/definitions/APIError"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Get TimeSeries of a TimeSeriesGroup" : {
-            "$ref": "./examples/TimeSeriesGroupListTimeSeries.json"
-          }
-        }
-      }
-    },
-    "/timeseriesgroups/{timeSeriesGroupId}/timeseries/{timeSeriesId}": {
-      "post": {
-        "summary": "Add a TimeSeries to TimeSeriesGroup.",
-        "description": "Add a TimeSeries to TimeSeriesGroup.",
-        "operationId": "TimeSeriesGroup_AddTimeSeries",
-        "parameters": [
-          {
-            "$ref": "#/parameters/timeSeriesGroupId"
-          },
-          {
-            "$ref": "#/parameters/timeSeriesId"
-          }
-        ],
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "responses": {
-          "200": {
-            "description": "A successful call returns an empty response body."
-          },
-          "default": {
-            "description": "Error response.",
-            "schema": {
-              "$ref": "#/definitions/APIError"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Add TimeSeries to a TimeSeriesGroup" : {
-            "$ref": "./examples/TimeSeriesGroupAddTimeSeries.json"
-          }
-        }
-      },
-      "delete": {
-        "summary": "Remove a TimeSeries from TimeSeriesGroup.",
-        "description": "Remove a TimeSeries from TimeSeriesGroup.",
-        "operationId": "TimeSeriesGroup_DeleteTimeSeries",
-        "parameters": [
-          {
-            "$ref": "#/parameters/timeSeriesGroupId"
-          },
-          {
-            "$ref": "#/parameters/timeSeriesId"
-          }
-        ],
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "responses": {
-          "200": {
-            "description": "A successful call returns an empty response body."
-          },
-          "default": {
-            "description": "Error response.",
-            "schema": {
-              "$ref": "#/definitions/APIError"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Delete TimeSeries from a TimeSeriesGroup" : {
-            "$ref": "./examples/TimeSeriesGroupDeleteTimeSeries.json"
           }
         }
       }
@@ -932,7 +635,12 @@
             "InvalidGranularity",
             "InvalidPeriod",
             "InvalidModelArgument",
-            "InvalidSeries"
+            "InvalidSeries",
+            "InvalidJsonFormat",
+            "InsufficientPoints",
+            "RequiredGranularity",
+            "RequiredSeries",
+            "StorageException"
           ],
           "x-ms-enum": {
             "name": "AnomalyDetectorErrorCodes",
@@ -1152,11 +860,6 @@
       "description": "Unique id for time series.",
       "x-nullable": false
     },
-    "GroupId": {
-      "type": "string",
-      "description": "Unique id for time series group.",
-      "x-nullable": false
-    },
     "Dictionary": {
       "type": "object",
       "additionalProperties": {
@@ -1178,10 +881,6 @@
           "$ref": "#/definitions/Granularity",
           "description": "Can only be one of yearly, monthly, weekly, daily, hourly or minutely. Granularity is used for verify whether input series is valid."
         },
-        "dimensions": {
-          "description": "Property of a time series",
-          "$ref": "#/definitions/Dictionary"
-        },
         "customInterval": {
           "description": "Custom Interval is used to set non-standard time interval, for example, if the series is 5 minutes, request can be set as {\"granularity\":\"minutely\", \"customInterval\":5}.",
           "$ref": "#/definitions/CustomInterval"
@@ -1190,14 +889,6 @@
           "type": "integer",
           "format": "int32",
           "description": "Hours that the data is kept."
-        },
-        "description": {
-          "type": "string",
-          "description": "Description for the time series."
-        },
-        "name": {
-          "type": "string",
-          "description": "Name of the time series."
         }
       }
     },
@@ -1211,10 +902,6 @@
           "$ref": "#/definitions/Granularity",
           "description": "Can only be one of yearly, monthly, weekly, daily, hourly or minutely. Granularity is used for verify whether input series is valid."
         },
-        "dimensions": {
-          "description": "Property of a time series",
-          "$ref": "#/definitions/Dictionary"
-        },
         "customInterval": {
           "description": "Custom Interval is used to set non-standard time interval, for example, if the series is 5 minutes, request can be set as {\"granularity\":\"minutely\", \"customInterval\":5}.",
           "$ref": "#/definitions/CustomInterval"
@@ -1223,14 +910,6 @@
           "type": "integer",
           "format": "int32",
           "description": "Hours that the data is kept."
-        },
-        "description": {
-          "type": "string",
-          "description": "Description for the time series."
-        },
-        "name": {
-          "type": "string",
-          "description": "Name of the time series."
         }
       }
     },
@@ -1244,76 +923,6 @@
           "description": "Array of TimeSeries objects.",
           "items": {
             "$ref": "#/definitions/TimeSeries"
-          }
-        },
-        "next": {
-          "type": "string"
-        }
-      }
-    },
-    "TimeSeriesGroup": {
-      "type": "object",
-      "required": [
-        "groupId",
-        "granularity"
-      ],
-      "properties": {
-        "groupId": {
-          "description": "Unique id for time series group.",
-          "$ref": "#/definitions/GroupId"
-        },
-        "description": {
-          "type": "string",
-          "description": "Description of the time series group"
-        },
-        "name": {
-          "type": "string",
-          "description": "Name of the time series group"
-        },
-        "granularity": {
-          "$ref": "#/definitions/Granularity",
-          "description": "Can only be one of yearly, monthly, weekly, daily, hourly or minutely. Granularity is used for verify whether input series is valid."
-        },
-        "customInterval": {
-          "description": "Custom Interval is used to set non-standard time interval, for example, if the series is 5 minutes, request can be set as {\"granularity\":\"minutely\", \"customInterval\":5}.",
-          "$ref": "#/definitions/CustomInterval"
-        }
-      }
-    },
-    "TimeSeriesGroupCreateRequest": {
-      "type": "object",
-      "required": [
-        "granularity"
-      ],
-      "properties": {
-        "description": {
-          "type": "string",
-          "description": "Description of the time series group"
-        },
-        "name": {
-          "type": "string",
-          "description": "Name of the time series group"
-        },
-        "granularity": {
-          "$ref": "#/definitions/Granularity",
-          "description": "Can only be one of yearly, monthly, weekly, daily, hourly or minutely. Granularity is used for verify whether input series is valid."
-        },
-        "customInterval": {
-          "description": "Custom Interval is used to set non-standard time interval, for example, if the series is 5 minutes, request can be set as {\"granularity\":\"minutely\", \"customInterval\":5}.",
-          "$ref": "#/definitions/CustomInterval"
-        }
-      }
-    },
-    "TimeSeriesGroupList": {
-      "required": [
-        "groups"
-      ],
-      "properties": {
-        "groups": {
-          "type": "array",
-          "description": "A list of TimeSeriesGroup.",
-          "items": {
-            "$ref": "#/definitions/TimeSeriesGroup"
           }
         },
         "next": {
@@ -1336,6 +945,14 @@
           "type": "number",
           "format": "float",
           "description": "Parameter to be tuned to get inconsistency."
+        },
+        "timeSeriesIds": {
+          "type": "array",
+          "description": "IDs of time series need to be detected.",
+          "items": {
+            "description": "Unique id for time series.",
+            "$ref": "#/definitions/SeriesId"
+          }
         }
       }
     },
@@ -1344,7 +961,7 @@
       "required": [
         "inconsistentSeriesIds",
         "confidenceScores",
-        "timestamp"
+        "principleTrend"
       ],
       "properties": {
         "inconsistentSeriesIds": {
@@ -1364,42 +981,15 @@
             "x-nullable": false
           }
         },
-        "timestamp": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Inconsistency detect timestamp."
-        },
-        "epsilon": {
-          "type": "number",
-          "format": "float",
-          "description": "Parameter to be tuned to get inconsistency."
+        "principleTrend": {
+          "type": "array",
+          "description": "The principle trend of the group of time series.",
+          "items": {
+            "type": "number",
+            "format": "float",
+            "x-nullable": false
+          }
         }
-      }
-    },
-    "InconsistencyQueryRequest": {
-      "type": "object",
-      "required": [
-        "begin",
-        "end"
-      ],
-      "properties": {
-        "begin": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Start time of the time series group."
-        },
-        "end": {
-          "type": "string",
-          "format": "date-time",
-          "description": "End time of the time series group."
-        }
-      }
-    },
-    "InconsistencyQueryResponse": {
-      "type": "array",
-      "description": "Inconsistencies result at different timestamp.",
-      "items": {
-        "$ref": "#/definitions/Inconsistency"
       }
     },
     "ChangePointDetectRequest": {
@@ -1649,7 +1239,8 @@
         "isPositiveAnomaly",
         "lowerMargin",
         "upperMargin",
-        "period"
+        "period",
+        "confidenceScore"
       ],
       "properties": {
         "period": {
@@ -1701,6 +1292,12 @@
           "description": "Anomaly status in positive direction on the timestamp. True means a positive anomaly has been detected. A positive anomaly means the point is detected as an anomaly and its real value is larger than the expected one.",
           "type": "boolean",
           "x-nullable": false
+        },
+        "confidenceScore": {
+          "description": "Confidence score of the anomaly, significiant anomalies will get higher score.",
+          "type": "number",
+          "format": "float",
+          "x-nullable": false
         }
       }
     },
@@ -1726,8 +1323,10 @@
         "modelAsString": false
       },
       "enum": [
-        "true",
-        "false"
+        "positiveAnomaly",
+        "negativeAnomaly",
+        "positiveChangePoint",
+        "negativeChangePoint"
       ]
     },
     "LabelRequest": {
@@ -1771,16 +1370,6 @@
     "timeSeriesId": {
       "name": "timeSeriesId",
       "description": "Unique id for time series.",
-      "x-ms-parameter-location": "method",
-      "required": true,
-      "type": "string",
-      "in": "path",
-      "maxLength": 64,
-      "pattern": "^[a-z0-9-_]+$"
-    },
-    "timeSeriesGroupId": {
-      "name": "timeSeriesGroupId",
-      "description": "Unique id for time series group.",
       "x-ms-parameter-location": "method",
       "required": true,
       "type": "string",
