@@ -180,7 +180,7 @@
             }
           },
           "404": {
-            "description": "Specidied time series does not exist.",
+            "description": "Specified time series does not exist.",
             "schema": {
               "$ref": "#/definitions/APIError"
             }
@@ -230,7 +230,7 @@
             "description": "New time series has been created successfully."
           },
           "409": {
-            "description": "Specified time series already exsits and the client offers different property for the same series.",
+            "description": "Specified time series already exists and the client offers different property for the same series.",
             "schema": {
               "$ref": "#/definitions/APIError"
             }
@@ -466,7 +466,7 @@
           }
         },
         "x-ms-examples": {
-          "Changepoint example": {
+          "ChangePoint example": {
             "$ref": "./examples/ChangePointDetectOnTimestamp.json"
           }
         }
@@ -1294,7 +1294,7 @@
           "x-nullable": false
         },
         "confidenceScore": {
-          "description": "Confidence score of the anomaly, significiant anomalies will get higher score.",
+          "description": "Confidence score of the anomaly, significant anomalies will get higher score.",
           "type": "number",
           "format": "float",
           "x-nullable": false
