@@ -14,9 +14,7 @@
           "Market": "en-us",
           "Country": "Canada"
         },
-        "retentionDurationInHours": 4320,
-        "description": "Sample Daily Series",
-        "name": "SampleSeries"
+        "retentionDurationInHours": 4320
       }
     }
   }
