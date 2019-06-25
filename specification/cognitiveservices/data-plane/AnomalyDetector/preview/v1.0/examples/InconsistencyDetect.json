@@ -3,10 +3,15 @@
     "Endpoint": "{Endpoint}",
     "Content-Type": "application/json",
     "Ocp-Apim-Subscription-Key": "{API key}",
-    "timeSeriesGroupId": "4751cb38-4929-4579-8a94-dd1a21622913",
     "body": {
         "timestamp": "2018-06-10T00:00:00Z",
-        "epsilon": 0.5
+        "epsilon": 0.5,
+        "timeSeriesIds": [
+          "f9f0114c-3c4c-4d3a-a6c7-f4d6d595f4f7",
+          "0bc711c4-f1e9-4d07-8901-aea8be733fcb",
+          "cea9f54f-99e2-4113-91d4-330a98abeaab",
+          "4bb59da1-d11d-4860-9edb-b41122508e59"
+        ]
     }
   },
   "responses": {
