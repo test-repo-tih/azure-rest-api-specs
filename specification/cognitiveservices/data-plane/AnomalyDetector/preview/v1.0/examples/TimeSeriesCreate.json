@@ -12,6 +12,15 @@
   "responses": {
     "201": {
       "body": ""
+    },
+    "204": {
+      "body": ""
+    },
+    "409": {
+      "body" : {
+        "code": "ConflictSeries",
+        "message": "Specified time series is already exists and the client offers different property for the time series."
+      }
     }
   }
 }

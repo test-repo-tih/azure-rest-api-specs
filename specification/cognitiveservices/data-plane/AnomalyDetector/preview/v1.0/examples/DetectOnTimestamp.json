@@ -22,6 +22,12 @@
         "lowerMargin": 353442.44421857625,
         "confidenceScore": 1
       }
+    },
+    "404": {
+      "body" : {
+        "code": "InvalidSeries",
+        "message": "Specified time series is not exists."
+      }
     }
   }
 }

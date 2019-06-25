@@ -637,7 +637,7 @@
             "InvalidModelArgument",
             "InvalidSeries",
             "InvalidJsonFormat",
-            "InsufficientPoints",
+            "ConflictSeries",
             "RequiredGranularity",
             "RequiredSeries",
             "StorageException"
@@ -925,7 +925,7 @@
             "$ref": "#/definitions/TimeSeries"
           }
         },
-        "next": {
+        "nextLink": {
           "type": "string"
         }
       }
@@ -1169,7 +1169,9 @@
         "expectedValue",
         "upperMargin",
         "lowerMargin",
-        "period"
+        "period",
+        "changePointConfidenceScore",
+        "anomalyConfidenceScore"
       ]
     },
     "TimeSeriesQueryResponse": {

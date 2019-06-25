@@ -198,6 +198,12 @@
   "responses": {
     "204": {
       "body": ""
+    },
+    "404": {
+      "body" : {
+        "code": "InvalidSeries",
+        "message": "Specified time series is not exists."
+      }
     }
   }
 }

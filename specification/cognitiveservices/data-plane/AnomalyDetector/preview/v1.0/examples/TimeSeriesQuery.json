@@ -304,6 +304,12 @@
           ]
         ]
       }
+    },
+    "404": {
+      "body" : {
+        "code": "InvalidSeries",
+        "message": "Specified time series is not exists."
+      }
     }
   }
 }
