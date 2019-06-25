@@ -933,7 +933,8 @@
     "InconsistencyDetectRequest": {
       "type": "object",
       "required": [
-        "timestamp"
+        "timestamp",
+        "timeSeriesIds"
       ],
       "properties": {
         "timestamp": {
