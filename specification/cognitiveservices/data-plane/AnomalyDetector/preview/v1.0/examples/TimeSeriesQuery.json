@@ -308,7 +308,7 @@
     "404": {
       "body" : {
         "code": "InvalidSeries",
-        "message": "Specified time series is not exists."
+        "message": "Specified time series does not exist."
       }
     }
   }

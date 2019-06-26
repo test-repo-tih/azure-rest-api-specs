@@ -113,7 +113,7 @@
         }
       }
     },
-    "/timeseries/changepoint/detect": {
+    "/timeseries/changePoint/detect": {
       "post": {
         "summary": "Detect change point for the entire series",
         "description": "Evaluate change point score of every series point",
@@ -420,7 +420,7 @@
         }
       }
     },
-    "/timeseries/{timeSeriesId}/changepoint/detect": {
+    "/timeseries/{timeSeriesId}/changePoint/detect": {
       "post": {
         "summary": "Detect change point for the interval series",
         "description": "Evaluate change point score of every series point between start and end.",
@@ -640,7 +640,8 @@
             "ConflictSeries",
             "RequiredGranularity",
             "RequiredSeries",
-            "StorageException"
+            "StorageException",
+            "AmbiguousPrincipleTrend"
           ],
           "x-ms-enum": {
             "name": "AnomalyDetectorErrorCodes",

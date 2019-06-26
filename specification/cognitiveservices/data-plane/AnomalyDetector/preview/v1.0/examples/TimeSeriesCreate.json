@@ -19,7 +19,7 @@
     "409": {
       "body" : {
         "code": "ConflictSeries",
-        "message": "Specified time series is already exists and the client offers different property for the time series."
+        "message": "Specified time series already exists and the client offers different property for the time series."
       }
     }
   }
