@@ -1096,7 +1096,7 @@
     "ChangePointDetectOnTimestampResponse": {
       "type": "object",
       "required": [
-        "isChangePoint",
+        "changePoint",
         "confidenceScore",
         "period",
         "timestamp"
