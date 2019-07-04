@@ -422,8 +422,8 @@
     },
     "/timeseries/{timeSeriesId}/changePoint/detect": {
       "post": {
-        "summary": "Detect change point for the interval series",
-        "description": "Evaluate change point score of every series point between start and end.",
+        "summary": "Detect the closest change point before the given timestamp",
+        "description": "Evaluate change point score before the given timestamp and give the closest change point.",
         "operationId": "TimeSeries_ChangePointDetectOnTimestamp",
         "parameters": [
           {
@@ -1107,21 +1107,19 @@
           "format": "int32",
           "description": "Frequency extracted from the series, zero means no recurrent pattern has been found."
         },
-        "isChangePoint": {
-          "description": "Change point property. True means a change point has been detected.",
-          "type": "boolean",
-          "x-nullable": false
+        "changePoint": {
+          "description": "The closest change point's timestamp.",
+          "type": "string",
+          "format": "date-time"
         },
         "confidenceScore": {
           "description": "The change point confidence score.",
           "type": "number",
-          "format": "float",
-          "x-nullable": false
+          "format": "float"
         },
         "timestamp": {
           "type": "string",
           "format": "date-time",
-          "x-nullable": false,
           "description": "Timestamp of a data point (ISO8601 format)."
         }
       }
