@@ -1,4 +1,5 @@
 {
+  "$schema": "https://openapistoragetest.blob.core.windows.net/sdkautomation/test/schemas/specificationRepositoryConfiguration.schema.json",
   "sdkAutomationBaseBranch": "sdkautomationmaster",
   "sdkRepositoryMappings": {
     "azure-sdk-for-go": "test-repo-billy/azure-sdk-for-go",
