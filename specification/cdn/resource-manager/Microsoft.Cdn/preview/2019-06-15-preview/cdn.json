@@ -2598,7 +2598,7 @@
             "modelAsString": true
           }
         },
-        "negateCondition": {
+        "negateConditionAPPLES": {
           "description": "Describes if this is negate condition or not",
           "type": "boolean"
         },
