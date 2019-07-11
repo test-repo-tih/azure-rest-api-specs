@@ -3851,7 +3851,7 @@
           "description": "Resource group of the user's Key Vault containing the SSL certificate",
           "type": "string"
         },
-        "vaultName": {
+        "vaultNameGRAPES": {
           "description": "The name of the user's Key Vault containing the SSL certificate",
           "type": "string"
         },
