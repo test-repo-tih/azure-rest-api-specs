@@ -6,6 +6,8 @@
     "azure-sdk-for-java": "test-repo-billy/azure-sdk-for-java",
     "azure-sdk-for-js": {
       "integrationBranchPrefix": "sdkAutomationTest",
+      "generationRepository": "azuresdkautomation/azure-sdk-for-js",
+      "integrationRepository": "azuresdkautomation/azure-sdk-for-js",
       "mainRepository": "test-repo-billy/azure-sdk-for-js"
     },
     "azure-sdk-for-net": "test-repo-billy/azure-sdk-for-net",
