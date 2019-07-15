@@ -1,18 +1,48 @@
 {
-  "$schema": "https://openapistorageprod.blob.core.windows.net/sdkautomation/prod/schemas/specificationRepositoryConfiguration.schema.json",
+  "$schema": "https://openapistoragetest.blob.core.windows.net/sdkautomation/test/schemas/specificationRepositoryConfiguration.schema.json",
   "sdkAutomationBaseBranch": "sdkautomationmaster",
   "sdkRepositoryMappings": {
     "azure-sdk-for-go": {
-      "main_branch": "latest",
-      "mainRepository": "Azure/azure-sdk-for-go"
+      "integrationBranchPrefix": "sdkAutomationTest",
+      "mainBranch": "latest",
+      "generationRepository": "test-repo-billy/azure-sdk-for-go",
+      "integrationRepository": "test-repo-billy/azure-sdk-for-go",
+      "mainRepository": "test-repo-billy/azure-sdk-for-go"
     },
-    "azure-sdk-for-java": "Azure/azure-sdk-for-java",
-    "azure-sdk-for-js": "Azure/azure-sdk-for-js",
-    "azure-sdk-for-net": "Azure/azure-sdk-for-net",
-    "azure-sdk-for-python": "Azure/azure-sdk-for-python",
+    "azure-sdk-for-java": {
+      "integrationBranchPrefix": "sdkAutomationTest",
+      "mainBranch": "master",
+      "generationRepository": "test-repo-billy/azure-sdk-for-java",
+      "integrationRepository": "test-repo-billy/azure-sdk-for-java",
+      "mainRepository": "test-repo-billy/azure-sdk-for-java"
+    },
+    "azure-sdk-for-js": {
+      "integrationBranchPrefix": "sdkAutomationTest",
+      "mainBranch": "master",
+      "generationRepository": "test-repo-billy/azure-sdk-for-js",
+      "integrationRepository": "test-repo-billy/azure-sdk-for-js",
+      "mainRepository": "test-repo-billy/azure-sdk-for-js"
+    },
+    "azure-sdk-for-net": {
+      "integrationBranchPrefix": "sdkAutomationTest",
+      "mainBranch": "master",
+      "generationRepository": "test-repo-billy/azure-sdk-for-net",
+      "integrationRepository": "test-repo-billy/azure-sdk-for-net",
+      "mainRepository": "test-repo-billy/azure-sdk-for-net"
+    },
+    "azure-sdk-for-python": {
+      "integrationBranchPrefix": "sdkAutomationTest",
+      "mainBranch": "master",
+      "generationRepository": "test-repo-billy/azure-sdk-for-python",
+      "integrationRepository": "test-repo-billy/azure-sdk-for-python",
+      "mainRepository": "test-repo-billy/azure-sdk-for-python"
+    },
     "azure-sdk-for-ruby": {
-      "main_branch": "latest",
-      "mainRepository": "Azure/azure-sdk-for-ruby"
+      "integrationBranchPrefix": "sdkAutomationTest",
+      "mainBranch": "latest",
+      "generationRepository": "test-repo-billy/azure-sdk-for-ruby",
+      "integrationRepository": "test-repo-billy/azure-sdk-for-ruby",
+      "mainRepository": "test-repo-billy/azure-sdk-for-ruby"
     }
   }
 }
