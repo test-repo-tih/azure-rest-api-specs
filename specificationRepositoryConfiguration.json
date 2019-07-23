@@ -1,47 +1,30 @@
 {
-  "$schema": "https://openapistoragetest.blob.core.windows.net/sdkautomation/test/schemas/specificationRepositoryConfiguration.schema.json",
-  "sdkAutomationBaseBranch": "sdkautomationmaster",
+  "$schema": "https://openapistorageprod.blob.core.windows.net/sdkautomation/prod/schemas/specificationRepositoryConfiguration.schema.json",
   "sdkRepositoryMappings": {
     "azure-sdk-for-go": {
-      "integrationBranchPrefix": "sdkAutomationTest",
       "mainBranch": "latest",
-      "generationRepository": "test-repo-tih/azure-sdk-for-go",
-      "integrationRepository": "test-repo-tih/azure-sdk-for-go",
+      "generationRepository": "AzureSDKAutomation/azure-sdk-for-go",
       "mainRepository": "Azure/azure-sdk-for-go"
     },
     "azure-sdk-for-java": {
-      "integrationBranchPrefix": "sdkAutomationTest",
-      "mainBranch": "master",
-      "generationRepository": "test-repo-tih/azure-sdk-for-java",
-      "integrationRepository": "test-repo-tih/azure-sdk-for-java",
+      "generationRepository": "AzureSDKAutomation/azure-sdk-for-java",
       "mainRepository": "Azure/azure-sdk-for-java"
     },
     "azure-sdk-for-js": {
-      "integrationBranchPrefix": "sdkAutomationTest",
-      "mainBranch": "master",
-      "generationRepository": "test-repo-tih/azure-sdk-for-js",
-      "integrationRepository": "test-repo-tih/azure-sdk-for-js",
+      "generationRepository": "AzureSDKAutomation/azure-sdk-for-js",
       "mainRepository": "Azure/azure-sdk-for-js"
     },
     "azure-sdk-for-net": {
-      "integrationBranchPrefix": "sdkAutomationTest",
-      "mainBranch": "master",
-      "generationRepository": "test-repo-tih/azure-sdk-for-net",
-      "integrationRepository": "test-repo-tih/azure-sdk-for-net",
+      "generationRepository": "AzureSDKAutomation/azure-sdk-for-net",
       "mainRepository": "Azure/azure-sdk-for-net"
     },
     "azure-sdk-for-python": {
-      "integrationBranchPrefix": "sdkAutomationTest",
-      "mainBranch": "master",
-      "generationRepository": "test-repo-tih/azure-sdk-for-python",
-      "integrationRepository": "test-repo-tih/azure-sdk-for-python",
+      "generationRepository": "AzureSDKAutomation/azure-sdk-for-python",
       "mainRepository": "Azure/azure-sdk-for-python"
     },
     "azure-sdk-for-ruby": {
-      "integrationBranchPrefix": "sdkAutomationTest",
       "mainBranch": "latest",
-      "generationRepository": "test-repo-tih/azure-sdk-for-ruby",
-      "integrationRepository": "test-repo-tih/azure-sdk-for-ruby",
+      "generationRepository": "AzureSDKAutomation/azure-sdk-for-ruby",
       "mainRepository": "Azure/azure-sdk-for-ruby"
     }
   }
