@@ -116,7 +116,7 @@
         "tags": [
           "Clusters"
         ],
-        "operationId": "Clusters_Update",
+        "operationId": "Clusters_Update_Test",
         "x-ms-examples": {
           "KustoClustersUpdate": {
             "$ref": "./examples/KustoClustersUpdate.json"
