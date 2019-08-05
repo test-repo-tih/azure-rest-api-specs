@@ -15,7 +15,6 @@
         "type": "Microsoft.SecurityInsights/entities",
         "kind": "Host",
         "properties": {
-          "friendlyName": "vm1",
           "dnsDomain": "contoso",
           "ntDomain": "domain",
           "hostName": "vm1",

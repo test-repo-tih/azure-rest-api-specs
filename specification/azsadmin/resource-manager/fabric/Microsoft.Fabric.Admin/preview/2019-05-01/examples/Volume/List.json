@@ -22,7 +22,6 @@
               "remainingCapacityGB": 1317,
               "healthStatus": "Healthy",
               "operationalStatus": "OK",
-              "repairStatus": "",
               "description": "",
               "action": "",
               "volumeLabel": "ObjStore_1"

@@ -9,7 +9,9 @@
     "backupType": "CloudSnapshot"
   },
   "responses": {
-    "202": {},
+    "202": {
+      "body": ""
+    },
     "204": {}
   }
 }

@@ -12,12 +12,10 @@
   },
   "responses": {
     "201": {
-      "body": {
-        "id": "app1",
-        "displayName": "myAppName",
-        "packages": [],
-        "allowUpdates": false
-      }
+      "id": "app1",
+      "displayName": "myAppName",
+      "packages": [],
+      "allowUpdates": false
     }
   }
 }

@@ -8,6 +8,8 @@
     "api-version": "2017-03-01-preview"
   },
   "responses": {
-    "200": {}
+    "200": {
+      "body": ""
+    }
   }
 }

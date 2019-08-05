@@ -6,7 +6,7 @@
   "responses": {
     "200": {
       "body": {
-        "nextLink": null,
+        "nextLink": "",
         "value": [
           {
             "properties": {

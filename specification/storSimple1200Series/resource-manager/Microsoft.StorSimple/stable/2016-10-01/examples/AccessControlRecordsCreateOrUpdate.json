@@ -48,6 +48,8 @@
         "type": "Microsoft.StorSimple/managers/accessControlRecords"
       }
     },
-    "202": {}
+    "202": {
+      "body": ""
+    }
   }
 }

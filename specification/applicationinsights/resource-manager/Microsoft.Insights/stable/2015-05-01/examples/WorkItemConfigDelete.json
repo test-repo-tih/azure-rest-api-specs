@@ -7,6 +7,8 @@
     "workItemConfigId": "Visual Studio Team Services"
   },
   "responses": {
-    "200": {}
+    "200": {
+      "body": {}
+    }
   }
 }

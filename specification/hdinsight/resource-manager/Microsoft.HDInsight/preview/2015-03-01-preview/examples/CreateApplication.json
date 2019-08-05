@@ -38,6 +38,7 @@
             ]
           }
         ],
+        "provisioningState": "",
         "applicationType": "CustomApplication",
         "errors": []
       }

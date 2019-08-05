@@ -6,6 +6,8 @@
     "faceListId": "sample_face_list"
   },
   "responses": {
-    "200": {}
+    "200": {
+      "body": ""
+    }
   }
 }

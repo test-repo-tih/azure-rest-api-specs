@@ -49,6 +49,8 @@
         "type": "dataBoxEdgeDevices/bandwidthSchedules"
       }
     },
-    "202": {}
+    "202": {
+      "body": ""
+    }
   }
 }

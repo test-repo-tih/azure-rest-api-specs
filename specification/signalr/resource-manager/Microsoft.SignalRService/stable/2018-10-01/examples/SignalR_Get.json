@@ -28,13 +28,7 @@
               "value": "Serverless",
               "properties": {}
             }
-          ],
-          "cors": {
-            "allowedOrigins": [
-              "https://foo.com",
-              "https://bar.com"
-            ]
-          }
+          ]
         },
         "location": "eastus",
         "tags": {

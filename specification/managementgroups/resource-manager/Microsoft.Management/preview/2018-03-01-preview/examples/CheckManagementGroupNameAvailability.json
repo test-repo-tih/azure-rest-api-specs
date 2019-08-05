@@ -9,11 +9,9 @@
   },
   "responses": {
     "200": {
-      "body": {
-        "nameAvailable": false,
-        "reason": "AlreadyExists",
-        "message": "<error message>"
-      }
+      "nameAvailable": "true|false",
+      "reason": "Invalid|AlreadyExists",
+      "message": "<error message>"
     }
   }
 }

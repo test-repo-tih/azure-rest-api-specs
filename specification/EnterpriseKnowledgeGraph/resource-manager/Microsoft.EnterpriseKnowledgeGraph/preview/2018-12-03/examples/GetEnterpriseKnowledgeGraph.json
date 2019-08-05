@@ -7,13 +7,11 @@
   },
   "responses": {
     "200": {
-      "body": {
-        "name": "samplename",
-        "type": "sampletype",
-        "id": "someid",
-        "properties": {
-          "provisioningState": "Succeeded"
-        }
+      "name": "samplename",
+      "type": "sampletype",
+      "id": "someid",
+      "properties": {
+        "provisioningState": "Succeedded"
       }
     }
   }

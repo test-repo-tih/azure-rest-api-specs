@@ -104,7 +104,6 @@ asyncoperation
 australiaeast
 australiasoutheast
 authenticatable
-Authenticode
 authorizationrules
 authsettings
 authsid
@@ -161,7 +160,6 @@ bangla
 baremetal
 BATCHAI
 BCDR
-BCWG
 beider
 Bfor
 bigint
@@ -454,9 +452,7 @@ eventhubconnections
 eventhubs
 eventtime
 eventtypes
-EWDG
 exceptiontype
-exfiltrate
 Exfiltration
 explicitlist
 exportconfiguration
@@ -464,7 +460,6 @@ exportdevices
 exporterrors
 exportstatus
 externaldatasources
-EYWQ
 faceapi
 facelists
 facetable
@@ -573,7 +568,6 @@ HHMMSS
 hierarchicalentities
 hierarchyid
 hivevar
-HKEY
 homepagetest
 Horovod
 hostnames
@@ -613,7 +607,6 @@ inkrecognizer
 inlinecount
 innererror
 Inprogress
-integrationaccount
 Intelli
 intervaled
 intset
@@ -651,7 +644,6 @@ ITSM
 janedoe
 japaneast
 japanwest
-Jedobot
 Jira
 jobcompletion
 jobid
@@ -705,7 +697,6 @@ ldaps
 ldom
 leavingpool
 LEDs
-Lfot
 libtrust
 lifecycle
 lifetimejobstats
@@ -745,7 +736,6 @@ lookback
 lovins
 lowpriority
 lpar
-LQUP
 LRO's
 Lucene
 Lumia
@@ -863,7 +853,6 @@ Ngfw
 NICs
 nillable
 nist
-NLSTEXT
 noaccess
 noaction
 noartifactsource
@@ -933,7 +922,6 @@ overridable
 OWASP
 oxxm
 pageable
-paramref
 PARAVIRTUAL
 Passthrough
 patternanyentities
@@ -1131,8 +1119,6 @@ rhel
 Rolledback
 rollouts
 rolloverdetails
-rosettanetprocessconfigurations
-rootfs
 rotatediskencryptionkey
 routable
 routingendpointhealth
@@ -1225,7 +1211,6 @@ skiptoken
 SKU's
 skus
 SLES
-Sllb
 slotsdiffs
 slotsswap
 slowlog
@@ -1246,7 +1231,6 @@ sourcecontrols
 southcentralus
 southeastasia
 southindia
-sparql
 SQLAG
 SQLDB
 SQLMI
@@ -1454,7 +1438,6 @@ vcenter
 Vcore
 Vcores
 Vertica
-Vfyc
 vhds
 videosearch
 virtualclusters
@@ -1475,7 +1458,6 @@ vmextension
 VMILR
 vmimage
 vmname
-VMQS
 vmsizes
 VMSS
 VMSSVM
@@ -1521,7 +1503,6 @@ westeurope
 westindia
 Westlake
 westus
-WGXM
 whitelisted
 Whitelisting
 Whitelistings
@@ -1536,12 +1517,10 @@ workspaces
 wrapkey
 WSFC
 WTGCTBG
-WWKZ
 XBing
 Xeon
 Xero
 XSMB
-Ywhk
 YYMMDD
 Zabbix
 Zerto

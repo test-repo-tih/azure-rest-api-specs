@@ -19,6 +19,9 @@
         "ApplicationDefinitionKind": "ServiceFabricApplicationDescription"
       }
     },
-    "204": {}
+    "204": {
+      "headers": {},
+      "body": ""
+    }
   }
 }

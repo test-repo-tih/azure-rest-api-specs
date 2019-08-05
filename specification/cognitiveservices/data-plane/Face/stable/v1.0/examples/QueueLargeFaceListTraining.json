@@ -6,6 +6,8 @@
     "largeFaceListId": "abc"
   },
   "responses": {
-    "202": {}
+    "202": {
+      "body": ""
+    }
   }
 }

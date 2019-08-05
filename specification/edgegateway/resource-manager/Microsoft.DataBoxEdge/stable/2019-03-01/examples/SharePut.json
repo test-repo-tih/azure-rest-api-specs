@@ -68,6 +68,8 @@
         "type": "dataBoxEdgeDevices/shares"
       }
     },
-    "202": {}
+    "202": {
+      "body": ""
+    }
   }
 }

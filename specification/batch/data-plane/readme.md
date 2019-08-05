@@ -26,16 +26,7 @@ These are the global settings for the Batch API.
 
 ``` yaml
 openapi-type: data-plane
-tag: package-2019-08.10.0
-```
-
-### Tag: package-2019-08.10.0
-
-These settings apply only when `--tag=package-2019-08.10.0` is specified on the command line.
-
-``` yaml $(tag) == 'package-2019-08.10.0'
-input-file:
-- Microsoft.Batch/stable/2019-08-01.10.0/BatchService.json
+tag: package-2019-06.9.0
 ```
 
 ### Tag: package-2019-06.9.0

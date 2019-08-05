@@ -62,6 +62,8 @@
         "type": "Microsoft.StorSimple/managers/devices/iscsiServers/disks"
       }
     },
-    "202": {}
+    "202": {
+      "body": ""
+    }
   }
 }

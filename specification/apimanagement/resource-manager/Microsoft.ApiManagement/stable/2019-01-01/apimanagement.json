@@ -167,6 +167,7 @@
       "description": "API identifier. Must be unique in the current API Management service instance.",
       "minLength": 1,
       "maxLength": 80,
+      "pattern": "^[^*#&+:<>?]+$",
       "x-ms-parameter-location": "method"
     },
     "ApiIdRevParameter": {
@@ -228,6 +229,7 @@
       "description": "Identifier of the Backend entity. Must be unique in the current API Management service instance.",
       "minLength": 1,
       "maxLength": 80,
+      "pattern": "^[^*#&+:<>?]+$",
       "x-ms-parameter-location": "method"
     },
     "CacheIdParameter": {
@@ -476,6 +478,7 @@
       "description": "Operation identifier within an API. Must be unique in the current API Management service instance.",
       "minLength": 1,
       "maxLength": 80,
+      "pattern": "^[^*#&+:<>?]+$",
       "x-ms-parameter-location": "method"
     },
     "PolicyExportFormat": {
@@ -528,6 +531,7 @@
       "description": "Product identifier. Must be unique in the current API Management service instance.",
       "minLength": 1,
       "maxLength": 256,
+      "pattern": "^[^*#&+:<>?]+$",
       "x-ms-parameter-location": "method"
     },
     "PropertyIdParameter": {
@@ -681,6 +685,7 @@
       "description": "User identifier. Must be unique in the current API Management service instance.",
       "minLength": 1,
       "maxLength": 80,
+      "pattern": "^[^*#&+:<>?]+$",
       "x-ms-parameter-location": "method"
     }
   }

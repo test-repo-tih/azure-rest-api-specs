@@ -33,6 +33,8 @@
         "type": "Microsoft.Sql/servers/databases/syncGroups"
       }
     },
-    "202": {}
+    "202": {
+      "body": ""
+    }
   }
 }

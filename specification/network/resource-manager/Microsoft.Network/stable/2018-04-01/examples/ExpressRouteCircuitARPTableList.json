@@ -9,17 +9,24 @@
   },
   "responses": {
     "200": {
-      "body": {
-        "value": [
-          {
-            "age": 0,
-            "interface": "Microsoft",
-            "ipAddress": "IPAddress",
-            "macAddress": "macAddress"
-          }
-        ]
-      }
+      "value": [
+        {
+          "age": 0,
+          "interface": "Microsoft",
+          "ipAddress": "IPAddress",
+          "macAddress": "macAddress"
+        }
+      ]
     },
-    "202": {}
+    "202": {
+      "value": [
+        {
+          "age": 0,
+          "interface": "Microsoft",
+          "ipAddress": "IPAddress",
+          "macAddress": "macAddress"
+        }
+      ]
+    }
   }
 }

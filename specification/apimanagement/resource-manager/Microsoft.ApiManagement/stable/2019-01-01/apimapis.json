@@ -253,9 +253,6 @@
           },
           "ApiManagementCreateApiWithOpenIdConnect": {
             "$ref": "./examples/ApiManagementCreateApiWithOpenIdConnect.json"
-          },
-          "ApiManagementCreateApiUsingImportOverrideServiceUrl": {
-            "$ref": "./examples/ApiManagementCreateApiUsingImportOverrideServiceUrl.json"
           }
         },
         "parameters": [

@@ -46,6 +46,8 @@
         "type": "Microsoft.DataBoxEdge/dataBoxEdgeDevices/storageAccountCredentials"
       }
     },
-    "202": {}
+    "202": {
+      "body": ""
+    }
   }
 }

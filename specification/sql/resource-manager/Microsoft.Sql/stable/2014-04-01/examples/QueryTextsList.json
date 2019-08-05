@@ -9,15 +9,13 @@
   },
   "responses": {
     "200": {
-      "body": {
-        "value": [
-          {
-            "name": "current",
-            "queryText": "select 1",
-            "type": "Microsoft.Sql/servers/databases/topQueries/queryText"
-          }
-        ]
-      }
+      "value": [
+        {
+          "name": "current",
+          "queryText": "select 1",
+          "type": "Microsoft.Sql/servers/databases/topQueries/queryText"
+        }
+      ]
     }
   }
 }

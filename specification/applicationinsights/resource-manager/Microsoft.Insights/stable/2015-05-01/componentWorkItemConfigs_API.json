@@ -172,7 +172,8 @@
         ],
         "responses": {
           "200": {
-            "description": "The work item configuration that was successfully deleted."
+            "description": "The work item configuration that was successfully deleted.",
+            "schema": {}
           }
         },
         "x-ms-examples": {

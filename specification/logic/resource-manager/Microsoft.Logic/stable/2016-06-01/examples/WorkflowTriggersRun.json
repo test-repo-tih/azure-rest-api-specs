@@ -7,8 +7,6 @@
     "triggerName": "manual"
   },
   "responses": {
-    "default": {
-      "body": {}
-    }
+    "default": {}
   }
 }

@@ -15,13 +15,11 @@
   },
   "responses": {
     "201": {
-      "body": {
-        "name": "samplename",
-        "type": "sampletype",
-        "id": "someid",
-        "properties": {
-          "provisioningState": "Creating"
-        }
+      "name": "samplename",
+      "type": "sampletype",
+      "id": "someid",
+      "properties": {
+        "provisioningState": "Accepted"
       }
     }
   }

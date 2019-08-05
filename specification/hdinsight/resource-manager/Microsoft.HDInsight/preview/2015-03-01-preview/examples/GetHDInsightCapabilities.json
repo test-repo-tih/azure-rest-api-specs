@@ -2743,8 +2743,6 @@
           "VMSIZES_AUX"
         ],
         "quota": {
-          "cores_used": 0,
-          "max_cores_allowed": 3000,
           "regionalQuotas": [
             {
               "region_name": "Australia East",

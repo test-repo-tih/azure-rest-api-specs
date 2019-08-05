@@ -9,7 +9,7 @@
     "parameters": {
       "properties": {
         "state": "Enabled",
-        "isAzureMonitorTargetEnabled": true
+        "IsAzureMonitorTargetEnabled": true
       }
     }
   },

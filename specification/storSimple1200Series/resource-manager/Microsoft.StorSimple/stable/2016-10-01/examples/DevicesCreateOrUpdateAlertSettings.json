@@ -49,6 +49,8 @@
         "type": "Microsoft.StorSimple/managers/devices/alertSettings"
       }
     },
-    "202": {}
+    "202": {
+      "body": ""
+    }
   }
 }

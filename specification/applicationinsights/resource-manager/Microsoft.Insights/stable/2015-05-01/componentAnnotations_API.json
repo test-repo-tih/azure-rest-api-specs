@@ -154,7 +154,8 @@
         ],
         "responses": {
           "200": {
-            "description": "The annotation that was successfully deleted."
+            "description": "The annotation that was successfully deleted.",
+            "schema": {}
           }
         },
         "x-ms-examples": {

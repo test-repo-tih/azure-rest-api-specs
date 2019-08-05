@@ -40,6 +40,8 @@
         "type": "Microsoft.Sql/servers/syncAgents"
       }
     },
-    "202": {}
+    "202": {
+      "body": ""
+    }
   }
 }

@@ -55,6 +55,8 @@
         "type": "Microsoft.StorSimple/managers/devices/fileServers"
       }
     },
-    "202": {}
+    "202": {
+      "body": ""
+    }
   }
 }

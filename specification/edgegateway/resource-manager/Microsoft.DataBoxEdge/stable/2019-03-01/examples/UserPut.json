@@ -39,6 +39,8 @@
         "type": "Microsoft.DataBoxEdge/dataBoxEdgeDevices/users"
       }
     },
-    "202": {}
+    "202": {
+      "body": ""
+    }
   }
 }

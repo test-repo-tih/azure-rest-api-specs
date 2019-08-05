@@ -9,7 +9,13 @@
     }
   },
   "responses": {
-    "200": {},
-    "409": {}
+    "200": {
+      "headers": {},
+      "body": null
+    },
+    "409": {
+      "headers": {},
+      "body": null
+    }
   }
 }

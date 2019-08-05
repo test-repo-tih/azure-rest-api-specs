@@ -54,6 +54,8 @@
         "type": "Microsoft.StorSimple/managers/storageDomains"
       }
     },
-    "202": {}
+    "202": {
+      "body": ""
+    }
   }
 }

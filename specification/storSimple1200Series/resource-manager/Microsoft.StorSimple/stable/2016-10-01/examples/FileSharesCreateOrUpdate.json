@@ -62,6 +62,8 @@
         "type": "Microsoft.StorSimple/managers/devices/fileServers/shares"
       }
     },
-    "202": {}
+    "202": {
+      "body": ""
+    }
   }
 }

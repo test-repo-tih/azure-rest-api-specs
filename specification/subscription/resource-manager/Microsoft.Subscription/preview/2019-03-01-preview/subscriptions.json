@@ -16,6 +16,36 @@
     "application/json"
   ],
   "paths": {
+    "/providers/Microsoft.Subscription/operations": {
+      "get": {
+        "description": "Lists all of the available Microsoft.Subscription API operations.",
+        "operationId": "Operations_List",
+        "x-ms-examples": {
+          "getOperations": {
+            "$ref": "./examples/getOperations.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Subscription/cancel": {
       "post": {
         "operationId": "Subscriptions_Cancel",
@@ -24,7 +54,7 @@
             "$ref": "./examples/cancelSubscription.json"
           }
         },
-        "description": "The operation to cancel a subscription",
+        "description": "Cancels the subscription",
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionIdParameter"
@@ -41,7 +71,7 @@
             }
           },
           "default": {
-            "description": "Describes the error if the operation is not successful.",
+            "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
@@ -57,7 +87,7 @@
             "$ref": "./examples/renameSubscription.json"
           }
         },
-        "description": "The operation to rename a subscription",
+        "description": "Renames the subscription",
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionIdParameter"
@@ -77,7 +107,7 @@
             }
           },
           "default": {
-            "description": "Describes the error if the operation is not successful.",
+            "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
@@ -135,20 +165,20 @@
       }
     },
     "CanceledSubscriptionId": {
-      "description": "The ID of the canceled subscription",
+      "description": "Canceled Subscription Id",
       "properties": {
         "value": {
-          "description": "The ID of the canceled subscription",
+          "description": "Canceled Subscription Id",
           "type": "string",
           "readOnly": true
         }
       }
     },
     "RenamedSubscriptionId": {
-      "description": "The ID of the subscriptions that is being renamed",
+      "description": "Renamed Subscription Id",
       "properties": {
         "value": {
-          "description": "The ID of the subscriptions that is being renamed",
+          "description": "Renamed Subscription Id",
           "type": "string",
           "readOnly": true
         }
@@ -166,7 +196,7 @@
     },
     "SubscriptionName": {
       "type": "object",
-      "description": "The new name of the subscription.",
+      "description": "New name of the subscription.",
       "properties": {
         "subscriptionName": {
           "type": "string",
