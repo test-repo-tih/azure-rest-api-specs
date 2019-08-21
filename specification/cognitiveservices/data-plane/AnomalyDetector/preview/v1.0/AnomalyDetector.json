@@ -172,11 +172,8 @@
             "InvalidModelArgument",
             "InvalidSeries",
             "InvalidJsonFormat",
-            "ConflictSeries",
             "RequiredGranularity",
-            "RequiredSeries",
-            "StorageException",
-            "AmbiguousPrincipleTrend"
+            "RequiredSeries"
           ],
           "x-ms-enum": {
             "name": "AnomalyDetectorErrorCodes",
