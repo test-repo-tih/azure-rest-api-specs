@@ -2827,6 +2827,18 @@
         "protocolConfiguration": {
           "$ref": "#/definitions/ProtocolConfiguration",
           "description": "Configuration of the protocol."
+        },
+        "preferredIPVersion": {
+          "type": "string",
+          "description": "Preferred IP version.",
+          "enum": [
+            "IPv4",
+            "IPv6"
+          ],
+          "x-ms-enum": {
+            "name": "PreferredIPVersion",
+            "modelAsString": true
+          }
         }
       }
     },
