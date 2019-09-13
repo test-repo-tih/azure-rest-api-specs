@@ -2830,7 +2830,7 @@
         },
         "preferredIPVersion": {
           "$ref": "./network.json#/definitions/IPVersion",
-          "description": "Preferred IP version."
+          "description": "Preferred IP version of the connection."
         }
       }
     },
