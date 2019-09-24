@@ -546,7 +546,7 @@
             "type": "string"
           },
           {
-            "name": "endpointName",
+            "name": "endpointNamee",
             "in": "path",
             "description": "Name of the endpoint under the profile which is unique globally.",
             "required": true,
