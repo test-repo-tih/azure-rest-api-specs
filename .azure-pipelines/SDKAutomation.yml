@@ -23,8 +23,8 @@ jobs:
       BLOB_STORAGE_PREFIX: sdkautomation-pipeline
       SPEC_REPO: $(Build.Repository.Name)
       PR_NUMBER: $(System.PullRequest.PullRequestId)
-      BLOB_STORAGE_KEY: $(BLOB_STORAGE_KEY)
-      GITHUBAPP_PRIVATE_KEY: $(GITHUBAPP_PRIVATE_KEY)
+      BLOB_STORAGE_KEY: $(blob-storage-key)
+      GITHUBAPP_PRIVATE_KEY: $(githubapp-private-key)
 
     strategy:
       matrix:
