@@ -3,45 +3,38 @@ trigger:
   branches:
     include:
       - master
-
-# resources:
-#   containers:
-#     - container: SDKAutomationContainer
-#       image: openapidevtih.azurecr.io/openapi-sdk-automation:latest
-#       endpoint: openapidevtih
-
 jobs:
-  - job: "SDKAutomation"
-    pool:
-      vmImage: 'Ubuntu 16.04'
-    container:
-      image: openapidevtih.azurecr.io/openapi-sdk-automation:latest
-      endpoint: openapidevtih
-    timeoutInMinutes: 180
-    variables:
+- job: "SDKAutomation"
+  pool:
+    vmImage: 'Ubuntu 16.04'
+  container:
+    image: openapidevtih.azurecr.io/openapi-sdk-automation:latest
+    endpoint: openapidevtih
+  timeoutInMinutes: 180
+
+  variables:
       NODE_OPTIONS: '--max-old-space-size=8192'
       BLOB_STORAGE_PREFIX: sdkautomation-pipeline
       SPEC_REPO: $(Build.Repository.Name)
-      PR_NUMBER: $(System.PullRequest.PullRequestId)
+      PR_NUMBER: $(System.PullRequest.PullRequestNumber)
       BLOB_STORAGE_KEY: $(blob-storage-key)
       GITHUBAPP_PRIVATE_KEY: $(githubapp-private-key)
-
-    strategy:
-      matrix:
-        java:
-          SDK_REPO_NAME: azure-sdk-for-java
-        javascript:
-          SDK_REPO_NAME: azure-sdk-for-js
-        python:
-          SDK_REPO_NAME: azure-sdk-for-python
-        go:
-          SDK_REPO_NAME: azure-sdk-for-go
-    steps:
-    - checkout: none
-    - script: printenv
-      displayName: Display ENV
-    - script: git config --global user.email "sdkautomation@microsoft.com" && git config --global user.name "SDK Automation"
-      displayName: Configure Git
-    - script: npm start
-      displayName: SDK Automation
-      workingDirectory: /usr/app
+  strategy:
+    matrix:
+      java:
+        SDK_REPO_NAME: azure-sdk-for-java
+      javascript:
+        SDK_REPO_NAME: azure-sdk-for-js
+      python:
+        SDK_REPO_NAME: azure-sdk-for-python
+      go:
+        SDK_REPO_NAME: azure-sdk-for-go
+  steps:
+  - checkout: none
+  - script: printenv
+    displayName: Display ENV
+  - script: git config --global user.email "sdkautomation@microsoft.com" && git config --global user.name "SDK Automation"
+    displayName: Configure Git
+  - script: sudo npm start
+    displayName: SDK Automation
+    workingDirectory: /usr/app
