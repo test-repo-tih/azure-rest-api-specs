@@ -380,6 +380,48 @@
         }
       }
     },
+    "/{scope}/providers/Microsoft.ManagedServices/marketplaceRegistrationDefinitions/{marketplaceIdentifier}": {
+      "get": {
+        "tags": [
+          "MarketplaceRegistrationDefinitions"
+        ],
+        "operationId": "MarketplaceRegistrationDefinitions_List",
+        "description": "Gets a list of the marketplace registration definitions for the marketplace identifier.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ScopeParameter"
+          },
+          {
+            "$ref": "#/parameters/MarketplaceIdentifier"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK - Returns a list of the marketplace registration definitions.",
+            "schema": {
+              "$ref": "#/definitions/MarketplaceRegistrationDefinitionList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Get Registration Definitions": {
+            "$ref": "./examples/GetMarketplaceRegistrationDefinitions.json"
+          }
+        }
+      }
+    },
     "/providers/Microsoft.ManagedServices/operations": {
       "get": {
         "tags": [
@@ -684,6 +726,24 @@
       },
       "description": "List of registration assignments."
     },
+    "MarketplaceRegistrationDefinitionList": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/RegistrationDefinition"
+          },
+          "description": "List of marketplace registration definitions."
+        },
+        "nextLink": {
+          "description": "Link to next page of marketplace registration definitions.",
+          "type": "string",
+          "readOnly": true
+        }
+      },
+      "description": "List of marketplace registration definitions."
+    },
     "Plan": {
       "properties": {
         "name": {
@@ -811,6 +871,15 @@
       "x-ms-skip-url-encoding": true,
       "type": "string",
       "description": "Scope of the resource."
+    },
+    "MarketplaceIdentifier": {
+      "name": "marketplaceIdentifier",
+      "in": "path",
+      "required": true,
+      "x-ms-parameter-location": "method",
+      "x-ms-skip-url-encoding": true,
+      "type": "string",
+      "description": "Market place identifer. Expected Formats - {publisher}.{product[-preview]}.{planName}.{version} or {publisher}.{product[-preview]}.{planName} or {publisher}.{product[-preview]} or {publisher})."
     },
     "ApiVersionParameter": {
       "name": "api-version",
