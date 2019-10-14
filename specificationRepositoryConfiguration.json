@@ -3,25 +3,19 @@
   "pipelineName": "automation - sdk",
   "sdkRepositoryMappings": {
     "azure-sdk-for-go": {
-      "mainBranch": "latest",
-      "integrationRepository": "AzureSDKAutomation/azure-sdk-for-go",
-      "mainRepository": "Azure/azure-sdk-for-go"
+      "mainRepository": "test-repo-arcturus/azure-sdk-for-go"
     },
     "azure-sdk-for-java": {
-      "integrationRepository": "AzureSDKAutomation/azure-sdk-for-java",
-      "mainRepository": "Azure/azure-sdk-for-java"
+      "mainRepository": "test-repo-tih/azure-sdk-for-java"
     },
     "azure-sdk-for-js": {
-      "integrationRepository": "AzureSDKAutomation/azure-sdk-for-js",
-      "mainRepository": "Azure/azure-sdk-for-js"
+      "mainRepository": "test-repo-tih/azure-sdk-for-js"
     },
     "azure-sdk-for-net": {
-      "integrationRepository": "AzureSDKAutomation/azure-sdk-for-net",
-      "mainRepository": "Azure/azure-sdk-for-net"
+      "mainRepository": "test-repo-tih/azure-sdk-for-net"
     },
     "azure-sdk-for-python": {
-      "integrationRepository": "AzureSDKAutomation/azure-sdk-for-python",
-      "mainRepository": "Azure/azure-sdk-for-python"
+      "mainRepository": "test-repo-tih/azure-sdk-for-python"
     },
     "azure-cli-extensions": {
       "integrationRepository": "AzureSDKAutomation/azure-cli-extensions",
@@ -29,8 +23,8 @@
     },
     "azure-sdk-for-ruby": {
       "mainBranch": "latest",
-      "integrationRepository": "AzureSDKAutomation/azure-sdk-for-ruby",
-      "mainRepository": "Azure/azure-sdk-for-ruby"
-    }
+      "mainRepository": "test-repo-tih/azure-sdk-for-ruby"
+    },
+    "azure-sdk-for-node": "test-repo-tih/azure-sdk-for-node"
   }
 }
