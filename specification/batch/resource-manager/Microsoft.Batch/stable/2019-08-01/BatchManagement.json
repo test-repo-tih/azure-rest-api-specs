@@ -72,7 +72,7 @@
             "schema": {
               "$ref": "#/definitions/BatchAccountCreateParameters"
             },
-            "description": "Additional parameters for account creation."
+            "description": "Additional parameters for account creation test."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
