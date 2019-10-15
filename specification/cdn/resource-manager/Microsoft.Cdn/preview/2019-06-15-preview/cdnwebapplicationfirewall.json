@@ -39,7 +39,7 @@
         "tags": [
           "WebApplicationFirewallPolicies"
         ],
-        "description": "Lists all of the protection policies within a resource group.",
+        "description": "Lists all of the protection policies within a resource group. Test.",
         "operationId": "Policies_List",
         "parameters": [
           {
