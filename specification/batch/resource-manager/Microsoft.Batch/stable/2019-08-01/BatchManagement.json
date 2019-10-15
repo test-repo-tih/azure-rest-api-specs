@@ -502,7 +502,7 @@
             "schema": {
               "$ref": "#/definitions/ActivateApplicationPackageParameters"
             },
-            "description": "The parameters for the request."
+            "description": "The parameters for the request. Test."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
