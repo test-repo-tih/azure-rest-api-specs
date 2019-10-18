@@ -476,6 +476,10 @@
             "password"
           ],
           "properties": {
+            "testOnly": {
+              "descrption": "For test",
+              "type": "boolean"
+            },
             "friendlyName": {
               "description": "Friendly name of the certificate.",
               "type": "string",
