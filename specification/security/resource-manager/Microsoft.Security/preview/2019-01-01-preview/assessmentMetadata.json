@@ -34,7 +34,7 @@
     }
   },
   "paths": {
-    "/providers/Microsoft.Security/assessmentsMetadata": {
+    "/providers/Microsoft.Security/assessmentMetadata": {
       "get": {
         "x-ms-examples": {
           "List security assessment metadata": {
@@ -70,7 +70,7 @@
         }
       }
     },
-    "/providers/Microsoft.Security/assessmentsMetadata/{assessmentsMetadataName}": {
+    "/providers/Microsoft.Security/assessmentMetadata/{assessmentMetadataName}": {
       "get": {
         "x-ms-examples": {
           "Get security assessment metadata": {
@@ -106,7 +106,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Security/assessmentsMetadata": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Security/assessmentMetadata": {
       "get": {
         "x-ms-examples": {
           "List security assessment metadata for subscription": {
@@ -145,7 +145,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Security/assessmentsMetadata/{assessmentsMetadataName}": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Security/assessmentMetadata/{assessmentMetadataName}": {
       "get": {
         "x-ms-examples": {
           "Get security assessment metadata for subscription": {
@@ -386,7 +386,7 @@
   },
   "parameters": {
     "AssessmentsMetadataName": {
-      "name": "assessmentsMetadataName",
+      "name": "assessmentMetadataName",
       "in": "path",
       "required": true,
       "type": "string",

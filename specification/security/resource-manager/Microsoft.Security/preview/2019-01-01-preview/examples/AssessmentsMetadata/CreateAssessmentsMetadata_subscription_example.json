@@ -2,7 +2,7 @@
   "parameters": {
     "api-version": "2019-01-01-preview",
     "subscriptionId": "0980887d-03d6-408c-9566-532f3456804e",
-    "assessmentsMetadataName": "ca039e75-a276-4175-aebc-bcd41e4b14b7",
+    "assessmentMetadataName": "ca039e75-a276-4175-aebc-bcd41e4b14b7",
     "assessmentMetadata": {
       "properties": {
         "displayName": "Install endpoint protection solution on virtual machine scale sets",
