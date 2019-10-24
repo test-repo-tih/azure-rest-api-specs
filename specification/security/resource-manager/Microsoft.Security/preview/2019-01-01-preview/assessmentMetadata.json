@@ -321,31 +321,27 @@
         },
         "severity": {
           "readOnly": true,
-          "type": "array",          
-          "description": "",
-          "items": {
-            "type": "string",
-            "description": "The required Azure Security Center pricing bundle name. One of the bundles must be Standard. Empty list is a free assessment.",
-            "enum": [
-              "Low",
-              "Medium",
-              "High"
-            ],
-            "x-ms-enum": {
-              "name": "severity",
-              "modelAsString": true,
-              "values": [
-                {
-                  "value": "Low"
-                },
-                {
-                  "value": "Medium"
-                },
-                {
-                  "value": "High"
-                }
-              ]
-            }
+          "type": "string",          
+          "description": "The severity level of the assessment",
+          "enum": [
+            "Low",
+            "Medium",
+            "High"
+          ],
+          "x-ms-enum": {
+            "name": "severity",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Low"
+              },
+              {
+                "value": "Medium"
+              },
+              {
+                "value": "High"
+              }
+            ]
           }
         },
         "preview": {
