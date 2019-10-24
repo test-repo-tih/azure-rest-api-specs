@@ -17,7 +17,7 @@
           "category": [
             "Compute"
           ],
-          "secureScoreWeight": 15,
+          "severity": "Medium",
           "assessmentType": "Custom"
         }
       }

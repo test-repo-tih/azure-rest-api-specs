@@ -18,10 +18,7 @@
               "category": [
                 "Compute"
               ],
-              "requiredPricingBundle": [
-                "VirtualMachines"
-              ],
-              "secureScoreWeight": 15,
+              "severity": "Medium",
               "assessmentType": "BuiltIn"
             }
           },
@@ -37,12 +34,9 @@
               "category": [
                 "Networking"
               ],
-              "requiredPricingBundle": [
-                "VirtualMachines"
-              ],
-              "secureScoreWeight": 10,
+              "severity": "Medium",
               "preview": true,
-              "assessmentType": "Custom"
+              "assessmentType": "CustomPolicy"
             }
           }
         ]

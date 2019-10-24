@@ -182,6 +182,46 @@
             }
           }
         }
+      },
+      "put": {
+        "x-ms-examples": {
+          "Get security assessment metadata for subscription": {
+            "$ref": "./examples/AssessmentsMetadata/CreateAssessmentsMetadata_subscription_example.json"
+          }
+        },
+        "tags": [
+          "Assessments Metadata"
+        ],
+        "description": "Create metadata information on an assessment type in a specific subscription",
+        "operationId": "AssessmentsMetadataSubscription_Create",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/AssessmentsMetadataName"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/SecurityAssessmentMetadata"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SecurityAssessmentMetadata"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
+            }
+          }
+        }
       }
     }
   },
@@ -251,7 +291,7 @@
             "description": "The category of resource that is at risk when the assessment is unhealthy",
             "enum": [
               "Compute",
-              "Network",
+              "Networking",
               "Data",
               "IdentityAndAccess",
               "IoT"
@@ -264,7 +304,7 @@
                   "value": "Compute"
                 },
                 {
-                  "value": "Network"
+                  "value": "Networking"
                 },
                 {
                   "value": "Data"
@@ -279,38 +319,30 @@
             }
           }
         },
-        "secureScoreWeight": {
+        "severity": {
           "readOnly": true,
-          "type": "integer",
-          "description": "Weight for the security score calculation. the higher this number, this severity  of this assessment is higher"
-        },
-        "requiredPricingBundle": {
-          "readOnly": true,
-          "type": "array",
+          "type": "array",          
+          "description": "",
           "items": {
             "type": "string",
             "description": "The required Azure Security Center pricing bundle name. One of the bundles must be Standard. Empty list is a free assessment.",
             "enum": [
-              "VirtualMachines",
-              "SqlServers",
-              "AppServices",
-              "StorageAccounts"
+              "Low",
+              "Medium",
+              "High"
             ],
             "x-ms-enum": {
-              "name": "requiredPricingBundle",
+              "name": "severity",
               "modelAsString": true,
               "values": [
                 {
-                  "value": "VirtualMachines"
+                  "value": "Low"
                 },
                 {
-                  "value": "SqlServers"
+                  "value": "Medium"
                 },
                 {
-                  "value": "AppServices"
-                },
-                {
-                  "value": "StorageAccounts"
+                  "value": "High"
                 }
               ]
             }
@@ -327,17 +359,24 @@
           "description": "BuiltIn if the assessment based on built-in Azure Policy definition, Custom if the assessment based on custom Azure Policy definition",
           "enum": [
             "BuiltIn",
-            "Custom"
+            "CustomPolicy",
+            "CustomerManaged"
           ],
           "x-ms-enum": {
             "name": "assessmentType",
             "modelAsString": true,
             "values": [
               {
-                "value": "BuiltIn"
+                "value": "BuiltIn",
+                "description": "Azure Security Center managed assessments"
               },
               {
-                "value": "Custom"
+                "value": "CustomPolicy",
+                "description": "User defined custom assessments ingested automatically by Azure Security Center"
+              },
+              {
+                "value": "CustomerManaged",
+                "description": "User asssesments pushed directly by the user or other third party to Azure Security Center"
               }
             ]
           }
@@ -352,6 +391,16 @@
       "required": true,
       "type": "string",
       "description": "The Assessment Key - Unique key for the assessment type",
+      "x-ms-parameter-location": "method"
+    },
+    "SecurityAssessmentMetadata": {
+      "name": "assessmentMetadata",
+      "in": "body",
+      "required": true,
+      "description": "AssessmentMetadata object",
+      "schema": {
+        "$ref": "#/definitions/SecurityAssessmentMetadata"
+      },
       "x-ms-parameter-location": "method"
     }
   }
