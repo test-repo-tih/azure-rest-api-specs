@@ -20,6 +20,7 @@
       "mainBranch": "latest",
       "mainRepository": "test-repo-tih/azure-sdk-for-ruby"
     },
-    "azure-sdk-for-node": "test-repo-tih/azure-sdk-for-node"
+    "azure-sdk-for-node": "test-repo-tih/azure-sdk-for-node",
+    "azure-cli-extensions": "test-repo-tih/azure-cli-extensions"
   }
 }
