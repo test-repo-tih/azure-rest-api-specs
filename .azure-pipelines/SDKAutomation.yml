@@ -8,7 +8,7 @@ jobs:
 - job: "SDKAutomation"
   displayName: SDK Automation
   pool:
-    vmImage: 'Ubuntu 16.04'
+    vmImage: 'Ubuntu 18.04'
   container:
     image: sdkautomation.azurecr.io/openapi-sdk-automation:test
     endpoint: sdkautomationv2-registry
