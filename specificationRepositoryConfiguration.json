@@ -1,6 +1,6 @@
 {
   "$schema": "https://openapistorageprod.blob.core.windows.net/sdkautomation/prod/schemas/specificationRepositoryConfiguration.schema.json",
-  "pipelineName": "automation - sdk",
+  "pipelineName": "automation - sdk - test",
   "sdkRepositoryMappings": {
     "azure-sdk-for-go": {
       "mainRepository": "test-repo-arcturus/azure-sdk-for-go"
