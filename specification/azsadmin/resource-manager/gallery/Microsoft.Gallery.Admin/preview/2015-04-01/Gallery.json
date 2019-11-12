@@ -3,7 +3,7 @@
   "info": {
     "version": "2015-04-01",
     "title": "GalleryManagementClient",
-    "description": "The Admin Gallery Management Client."
+    "description": "The Admin Gallery Management Client!"
   },
   "host": "adminmanagement.local.azurestack.external",
   "schemes": [
