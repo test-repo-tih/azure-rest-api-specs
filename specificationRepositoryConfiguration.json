@@ -23,5 +23,10 @@
     },
     "azure-sdk-for-node": "test-repo-tih/azure-sdk-for-node",
     "azure-cli-extensions": "test-repo-tih/azure-cli-extensions"
+  },
+  "overrides": {
+    "test-repo-tih/azure-rest-api-specs": { 
+      "pipelineName": "automation - sdk - test - tih"
+    }
   }
 }
