@@ -211,7 +211,7 @@
           "200": {
             "description": "",
             "schema": {
-              "$ref": "#/definitions/DataSourceListResult"
+              "$ref": "#/definitions/ListDataSourcesResult"
             }
           }
         }
@@ -518,7 +518,7 @@
           "200": {
             "description": "",
             "schema": {
-              "$ref": "#/definitions/IndexerListResult"
+              "$ref": "#/definitions/ListIndexersResult"
             }
           }
         }
@@ -790,7 +790,7 @@
           "200": {
             "description": "The list is successfully returned.",
             "schema": {
-              "$ref": "#/definitions/SkillsetListResult"
+              "$ref": "#/definitions/ListSkillsetsResult"
             }
           }
         }
@@ -1021,7 +1021,7 @@
           "200": {
             "description": "",
             "schema": {
-              "$ref": "#/definitions/SynonymMapListResult"
+              "$ref": "#/definitions/ListSynonymMapsResult"
             }
           }
         }
@@ -1144,7 +1144,7 @@
           "200": {
             "description": "",
             "schema": {
-              "$ref": "#/definitions/IndexListResult"
+              "$ref": "#/definitions/ListIndexesResult"
             }
           }
         }
@@ -1341,7 +1341,7 @@
           "200": {
             "description": "",
             "schema": {
-              "$ref": "#/definitions/IndexGetStatisticsResult"
+              "$ref": "#/definitions/GetIndexStatisticsResult"
             }
           }
         }
@@ -1748,34 +1748,34 @@
         "modelAsString": true,
         "values": [
           {
-            "value": "arabic_normalization", 
-            "name": "ArabicNormalization", 
+            "value": "arabic_normalization",
+            "name": "ArabicNormalization",
             "description": "A token filter that applies the Arabic normalizer to normalize the orthography. See http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/ar/ArabicNormalizationFilter.html"
           },
           {
-            "value": "apostrophe", 
-            "name": "Apostrophe", 
-            "description": "Strips all characters after an apostrophe (including the apostrophe itself). See http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/tr/ApostropheFilter.html" 
+            "value": "apostrophe",
+            "name": "Apostrophe",
+            "description": "Strips all characters after an apostrophe (including the apostrophe itself). See http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/tr/ApostropheFilter.html"
           },
           {
-            "value": "asciifolding", 
-            "name": "AsciiFolding", 
-            "description": "Converts alphabetic, numeric, and symbolic Unicode characters which are not in the first 127 ASCII characters (the \"Basic Latin\" Unicode block) into their ASCII equivalents, if such equivalents exist. See http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/miscellaneous/ASCIIFoldingFilter.html" 
+            "value": "asciifolding",
+            "name": "AsciiFolding",
+            "description": "Converts alphabetic, numeric, and symbolic Unicode characters which are not in the first 127 ASCII characters (the \"Basic Latin\" Unicode block) into their ASCII equivalents, if such equivalents exist. See http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/miscellaneous/ASCIIFoldingFilter.html"
           },
           {
-            "value": "cjk_bigram", 
-            "name": "CjkBigram", 
-            "description": "Forms bigrams of CJK terms that are generated from StandardTokenizer. See http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/cjk/CJKBigramFilter.html" 
+            "value": "cjk_bigram",
+            "name": "CjkBigram",
+            "description": "Forms bigrams of CJK terms that are generated from StandardTokenizer. See http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/cjk/CJKBigramFilter.html"
           },
           {
-            "value": "cjk_width", 
-            "name": "CjkWidth", 
-            "description": "Normalizes CJK width differences. Folds fullwidth ASCII variants into the equivalent basic Latin, and half-width Katakana variants into the equivalent Kana. See http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/cjk/CJKWidthFilter.html" 
+            "value": "cjk_width",
+            "name": "CjkWidth",
+            "description": "Normalizes CJK width differences. Folds fullwidth ASCII variants into the equivalent basic Latin, and half-width Katakana variants into the equivalent Kana. See http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/cjk/CJKWidthFilter.html"
           },
           {
-            "value": "classic", 
-            "name": "Classic", 
-            "description": "Removes English possessives, and dots from acronyms. See http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/standard/ClassicFilter.html" 
+            "value": "classic",
+            "name": "Classic",
+            "description": "Removes English possessives, and dots from acronyms. See http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/standard/ClassicFilter.html"
           },
           {
             "value": "common_grams",
@@ -3853,7 +3853,7 @@
       ],
       "description": "Represents a datasource definition, which can be used to configure an indexer."
     },
-    "DataSourceListResult": {
+    "ListDataSourcesResult": {
       "properties": {
         "value": {
           "x-ms-client-name": "DataSources",
@@ -4040,7 +4040,7 @@
       },
       "description": "Represents an indexer."
     },
-    "IndexerListResult": {
+    "ListIndexersResult": {
       "properties": {
         "value": {
           "x-ms-client-name": "Indexers",
@@ -4763,7 +4763,7 @@
       ],
       "description": "Represents a search index definition, which describes the fields and search behavior of an index."
     },
-    "IndexGetStatisticsResult": {
+    "GetIndexStatisticsResult": {
       "properties": {
         "documentCount": {
           "type": "integer",
@@ -4782,7 +4782,7 @@
       },
       "description": "Statistics for a given index. Statistics are collected periodically and are not guaranteed to always be up-to-date."
     },
-    "IndexListResult": {
+    "ListIndexesResult": {
       "properties": {
         "value": {
           "x-ms-client-name": "Indexes",
@@ -4814,7 +4814,8 @@
           "description": "A list of skills in the skillset."
         },
         "cognitiveServices": {
-          "$ref": "#/definitions/CognitiveServices",
+          "x-ms-client-name": "CognitiveServicesAccount",
+          "$ref": "#/definitions/CognitiveServicesAccount",
           "description": "Details about cognitive services to be used when running skills."
         },
         "@odata.etag": {
@@ -4833,7 +4834,7 @@
       },
       "description": "A list of skills."
     },
-    "CognitiveServices": {
+    "CognitiveServicesAccount": {
       "discriminator": "@odata.type",
       "properties": {
         "@odata.type": {
@@ -4848,21 +4849,21 @@
       ],
       "description": "Abstract base class for describing any cognitive service resource attached to the skillset."
     },
-    "DefaultCognitiveServices": {
+    "DefaultCognitiveServicesAccount": {
       "description": "An empty object that represents the default cognitive service resource for a skillset.",
       "x-ms-discriminator-value": "#Microsoft.Azure.Search.DefaultCognitiveServices",
       "allOf": [
         {
-          "$ref": "#/definitions/CognitiveServices"
+          "$ref": "#/definitions/CognitiveServicesAccount"
         }
       ]
     },
-    "CognitiveServicesByKey": {
+    "CognitiveServicesAccountKey": {
       "description": "A cognitive service resource provisioned with a key that is attached to a skillset.",
       "x-ms-discriminator-value": "#Microsoft.Azure.Search.CognitiveServicesByKey",
       "allOf": [
         {
-          "$ref": "#/definitions/CognitiveServices"
+          "$ref": "#/definitions/CognitiveServicesAccount"
         }
       ],
       "properties": {
@@ -5275,7 +5276,7 @@
       },
       "description": "A dictionary of http request headers."
     },
-    "SkillsetListResult": {
+    "ListSkillsetsResult": {
       "properties": {
         "value": {
           "x-ms-client-name": "Skillsets",
@@ -6193,7 +6194,7 @@
             "description": "Welsh"
           },
           {
-            "value": "yua", 
+            "value": "yua",
             "description": "Yucatec Maya"
           }
         ]
@@ -6262,7 +6263,7 @@
       ],
       "description": "Represents a synonym map definition."
     },
-    "SynonymMapListResult": {
+    "ListSynonymMapsResult": {
       "properties": {
         "value": {
           "x-ms-client-name": "SynonymMaps",
@@ -6388,7 +6389,7 @@
       "description": "The tracking ID sent with the request to help with debugging.",
       "x-ms-client-request-id": true,
       "x-ms-parameter-grouping": {
-        "name": "search-request-options"
+        "name": "request-options"
       },
       "x-ms-parameter-location": "method"
     },
