@@ -61,7 +61,7 @@
       "get": {
         "tags": [ "Skus" ],
         "summary": "List all the available Skus and information related to them.",
-        "operationId": "Skus_ListAvailableSkus",
+        "operationId": "Skus_List",
         "parameters": [
           { "$ref": "#/parameters/subscriptionIdParameter" },
           { "$ref": "#/parameters/apiVersionParameter" },
