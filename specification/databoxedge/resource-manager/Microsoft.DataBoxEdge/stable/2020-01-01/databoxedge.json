@@ -3106,6 +3106,10 @@
           "type": "array",
           "items": { "$ref": "#/definitions/MountPointMap" }
         },
+        "ioTEdgeAgentInfo": {
+          "$ref": "#/definitions/IoTEdgeAgentInfo",
+          "description": "Iot edge agent details to download the agent and bootstrap iot runtime."
+        },
         "roleStatus": {
           "description": "Role status.",
           "enum": [ "Enabled", "Disabled" ],
