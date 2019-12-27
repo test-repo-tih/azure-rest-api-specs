@@ -2991,7 +2991,7 @@
     },
     "ImageRepositoryCredential": {
       "description": "Image repository credential.",
-      "required": [ "imageRepositoryUrl", "userName", "password" ],
+      "required": [ "imageRepositoryUrl", "userName" ],
       "type": "object",
       "properties": {
         "imageRepositoryUrl": {
