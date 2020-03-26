@@ -392,6 +392,105 @@
           }
         ]
       }
+    },
+    "/providers/Microsoft.Subscription/subscriptions/{subscriptionId}": {
+      "put": {
+        "description": "The operation to create a new subscription or update the display name of an existing subscription.",
+        "operationId": "Subscription_PutSubscription",
+        "x-ms-examples": {
+          "createSubscription": {
+            "$ref": "./examples/PutSubscription.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "responses": {
+          "200": {
+            "description": "Normal response for a successful query.",
+            "schema": {
+              "$ref": "#/definitions/PutSubscriptionResponse"
+            }
+          },
+          "202": {
+            "description": "Accepted. Subscription creation is in progress.",
+            "headers": {
+              "Location": {
+                "description": "GET this URL to retrieve the status of the asynchronous operation.",
+                "type": "string"
+              },
+              "Retry-After": {
+                "description": "The amount of delay to use while the status of the operation is checked. The value is expressed in seconds.",
+                "type": "integer"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PutSubscriptionRequest"
+            }
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ]
+      },
+      "get": {
+        "description": "Get Subscription.",
+        "operationId": "Subscription_GetSubscription",
+        "x-ms-examples": {
+          "getSubscription": {
+            "$ref": "./examples/GetSubscription.json"
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Subscription details.",
+            "schema": {
+              "$ref": "#/definitions/PutSubscriptionResponse"
+            }
+          },
+          "202": {
+            "description": "Subscription creation is in progress.",
+            "headers": {
+              "Location": {
+                "description": "GET this URL to retrieve the status of the asynchronous operation.",
+                "type": "string"
+              },
+              "Retry-After": {
+                "description": "The amount of delay to use while the status of the operation is checked. The value is expressed in seconds.",
+                "type": "integer"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ]
+      }
     }
   },
   "definitions": {
@@ -557,7 +656,7 @@
           "type": "string"
         },
         "skuId": {
-          "description": "The SKU ID of the Azure plan. Azure plan determines the pricing and service-level agreement of the subscription.  Use 001 for Microsoft Azure Plan and 002 for Microsoft Azure Plan for DevTest.",
+          "description": "The SKU ID of the Azure plan. Azure plan determines the pricing and service-level agreement of the subscription. Use 0001 for Microsoft Azure Plan and 0002 for Microsoft Azure Plan for DevTest.",
           "type": "string"
         },
         "costCenter": {
@@ -586,11 +685,97 @@
           "type": "string"
         },
         "skuId": {
-          "description": "The SKU ID of the Azure plan. Azure plan determines the pricing and service-level agreement of the subscription.  Use 001 for Microsoft Azure Plan and 002 for Microsoft Azure Plan for DevTest.",
+          "description": "The SKU ID of the Azure plan. Azure plan determines the pricing and service-level agreement of the subscription. Use 0001 for Microsoft Azure Plan and 0002 for Microsoft Azure Plan for DevTest.",
           "type": "string"
         },
         "resellerId": {
           "description": "Reseller ID, basically MPN Id.",
+          "type": "string"
+        }
+      }
+    },
+    "PutSubscriptionRequest": {
+      "description": "The parameters required to create a new subscription.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/PutSubscriptionRequestProperties",
+          "description": "Put subscription request properties."
+        }
+      }
+    },
+    "PutSubscriptionRequestProperties": {
+      "description": "Put subscription properties.",
+      "required": [
+        "displayName",
+        "skuId",
+        "billingScope"
+      ],
+      "properties": {
+        "displayName": {
+          "description": "The friendly name of the subscription.",
+          "type": "string"
+        },
+        "skuId": {
+          "description": "The SKU ID of the Azure plan. Azure plan determines the pricing and service-level agreement of the subscription. Use 0001 for Microsoft Azure Plan and 0002 for Microsoft Azure Plan for DevTest.",
+          "type": "string"
+        },
+        "billingScope": {
+          "description": "Determines customerLed / fieldLed (/billingAccounts/{billingAccountId}/billingProfiles/{billingProfileId}/invoiceSections/{invoiceSectionId}), partnerLed (/billingAccounts/{billingAccountId}/customers/{customerId}).",
+          "type": "string"
+        },
+        "initialOwnerPrincipalId": {
+          "description": "Initial owner principal Id.",
+          "type": "string"
+        },
+        "initialOwnerTenantId": {
+          "description": "Initial owner tenant Id.",
+          "type": "string"
+        }
+      }
+    },
+    "PutSubscriptionResponse": {
+      "description": "Subscription information (same as Microsoft.Resources/subscription).",
+      "properties": {
+        "id": {
+          "description": "Fully qualified ID for the subscription resource.",
+          "type": "string"
+        },
+        "name": {
+          "description": "Subscription ID.",
+          "type": "string"
+        },
+        "type": {
+          "description": "Resource type, Microsoft.Subscriptions.",
+          "type": "string"
+        },
+        "properties": {
+          "$ref": "#/definitions/PutSubscriptionResponseProperties",
+          "description": "Put subscription response properties."
+        }
+      }
+    },
+    "PutSubscriptionResponseProperties": {
+      "description": "Put subscription creation result properties.",
+      "properties": {
+        "displayName": {
+          "description": "The friendly name of the subscription.",
+          "type": "string"
+        },
+        "skuId": {
+          "description": "The SKU ID of the Azure plan.",
+          "type": "string"
+        },
+        "billingScope": {
+          "description": "Corresponding billing scope.",
+          "type": "string"
+        },
+        "initialOwnerPrincipalId": {
+          "description": "Initial owner principal Id.",
+          "type": "string"
+        },
+        "initialOwnerTenantId": {
+          "description": "Initial owner tenant Id.",
           "type": "string"
         }
       }
