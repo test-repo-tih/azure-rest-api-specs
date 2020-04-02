@@ -2036,6 +2036,7 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 
 **Output Message** : Enum must not contain duplicated value (case insentive).
 
+
 **Description** : Enum must not contain duplicated value (case insentive).
 
 **CreatedAt**: February 18, 2020
