@@ -8,8 +8,8 @@ pr:
   autoCancel: false
 
 variables:
-  IMAGE: azopenapi.azurecr.io/openapi/sdk-automation:prod
-  REGISTRY_ENDPOINT: azopenapi-registry
+  IMAGE: sdkautomation.azurecr.io/openapi-sdk-automation:test
+  REGISTRY_ENDPOINT: sdkautomationv2-registry
 
 jobs:
 - job: "SDKAutomation"
