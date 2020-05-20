@@ -1751,6 +1751,8 @@ MSAZRUSGO
 hypervcollectors
 vmwarecollectors
 updatepolicy
+supportplans
+prodirect
 createbsl
 deletebsl
 getbsl
