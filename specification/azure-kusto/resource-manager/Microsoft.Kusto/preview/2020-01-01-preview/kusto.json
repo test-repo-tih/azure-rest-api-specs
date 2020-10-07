@@ -1,0 +1,388 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "KustoManagementClient",
+    "version": "2020-01-01-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Kusto/clusters/{clusterName}/listLanguageExtensions": {
+      "post": {
+        "tags": [
+          "Clusters"
+        ],
+        "description": "Returns a list of language extensions that can run within KQL queries.",
+        "operationId": "Clusters_ListLanguageExtensions",
+        "x-ms-examples": {
+          "KustoClusterListLanguageExtensions": {
+            "$ref": "./examples/KustoClusterListLanguageExtensions.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the list of language extensions.",
+            "schema": {
+              "$ref": "#/definitions/LanguageExtensionsList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Kusto/clusters/{clusterName}/addLanguageExtensions": {
+      "post": {
+        "tags": [
+          "Clusters"
+        ],
+        "description": "Add a list of language extensions that can run within KQL queries.",
+        "operationId": "Clusters_AddLanguageExtensions",
+        "x-ms-examples": {
+          "KustoClusterAddLanguageExtensions": {
+            "$ref": "./examples/KustoClusterAddLanguageExtensions.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "languageExtensionsToAdd",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/LanguageExtensionsList"
+            },
+            "description": "The language extensions to add."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/LanguageExtensionsList"
+            }
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Kusto/clusters/{clusterName}/removeLanguageExtensions": {
+      "post": {
+        "tags": [
+          "Clusters"
+        ],
+        "description": "Remove a list of language extensions that can run within KQL queries.",
+        "operationId": "Clusters_RemoveLanguageExtensions",
+        "x-ms-examples": {
+          "KustoClusterRemoveLanguageExtensions": {
+            "$ref": "./examples/KustoClusterRemoveLanguageExtensions.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "languageExtensionsToRemove",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/LanguageExtensionsList"
+            },
+            "description": "The language extensions to remove."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/LanguageExtensionsList"
+            }
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Kusto/operations": {
+      "get": {
+        "tags": [
+          "Operations"
+        ],
+        "operationId": "Operations_List",
+        "x-ms-examples": {
+          "KustoOperationsList": {
+            "$ref": "./examples/KustoOperationsList.json"
+          }
+        },
+        "description": "Lists available operations for the Microsoft.Kusto provider.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The operation was successful. The response contains the list of available operations.",
+            "schema": {
+              "$ref": "#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    }
+  },
+  "definitions": {
+    "CloudError": {
+      "x-ms-external": true,
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/CloudErrorBody",
+          "description": "An error response from Kusto."
+        }
+      },
+      "description": "An error response from Kusto."
+    },
+    "CloudErrorBody": {
+      "x-ms-external": true,
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "An identifier for the error. Codes are invariant and are intended to be consumed programmatically."
+        },
+        "message": {
+          "type": "string",
+          "description": "A message describing the error, intended to be suitable for displaying in a user interface."
+        },
+        "target": {
+          "type": "string",
+          "description": "The target of the particular error. For example, the name of the property in error."
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CloudErrorBody"
+          },
+          "description": "A list of additional details about the error."
+        }
+      },
+      "description": "An error response from Kusto."
+    },
+    "LanguageExtensionName": {
+      "description": "Language extension that can run within KQL query.",
+      "type": "string",
+      "enum": [
+        "PYTHON",
+        "R"
+      ],
+      "x-ms-enum": {
+        "name": "languageExtensionName",
+        "modelAsString": true
+      }
+    },
+    "LanguageExtension": {
+      "type": "object",
+      "description": "The language extension object.",
+      "properties": {
+        "languageExtensionName": {
+          "$ref": "#/definitions/LanguageExtensionName",
+          "description": "The language extension name."
+        }
+      }
+    },
+    "LanguageExtensionsList": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/LanguageExtension"
+          },
+          "description": "The list of language extensions."
+        }
+      },
+      "description": "The list of language extension objects."
+    },
+    "OperationListResult": {
+      "title": "Result of the request to list REST API operations. It contains a list of operations and a URL nextLink to get the next set of results.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Operation"
+          },
+          "title": "The list of operations supported by the resource provider."
+        },
+        "nextLink": {
+          "type": "string",
+          "title": "The URL to get the next set of operation list results if there are any."
+        }
+      }
+    },
+    "Operation": {
+      "title": "A REST API operation",
+      "type": "object",
+      "properties": {
+        "name": {
+          "title": "The operation name.",
+          "description": "This is of the format {provider}/{resource}/{operation}.",
+          "type": "string"
+        },
+        "display": {
+          "title": "The object that describes the operation.",
+          "properties": {
+            "provider": {
+              "title": "Friendly name of the resource provider.",
+              "type": "string"
+            },
+            "operation": {
+              "title": "The operation type.",
+              "description": "For example: read, write, delete.",
+              "type": "string"
+            },
+            "resource": {
+              "title": "The resource type on which the operation is performed.",
+              "type": "string"
+            },
+            "description": {
+              "title": "The friendly name of the operation.",
+              "type": "string"
+            }
+          }
+        },
+        "origin": {
+          "title": "The intended executor of the operation.",
+          "type": "string"
+        },
+        "properties": {
+          "title": "Properties of the operation.",
+          "type": "object",
+          "x-ms-client-flatten": true
+        }
+      }
+    }
+  },
+  "parameters": {
+    "SubscriptionIdParameter": {
+      "name": "subscriptionId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Gets subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call."
+    },
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "Client API Version."
+    },
+    "ClusterNameParameter": {
+      "name": "clusterName",
+      "in": "path",
+      "description": "The name of the Kusto cluster.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "ResourceGroupParameter": {
+      "name": "resourceGroupName",
+      "in": "path",
+      "description": "The name of the resource group containing the Kusto cluster.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  }
+}
