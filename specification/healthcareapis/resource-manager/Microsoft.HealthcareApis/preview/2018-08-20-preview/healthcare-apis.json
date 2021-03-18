@@ -62,7 +62,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The body contains all of the properties of the service instance.",
+            "description": "The body contains all of the properties of the service instance!",
             "schema": {
               "$ref": "#/definitions/ServicesDescription"
             }
