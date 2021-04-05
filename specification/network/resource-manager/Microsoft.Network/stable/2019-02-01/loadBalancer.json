@@ -1120,6 +1120,22 @@
       },
       "description": "SKU of a load balancer"
     },
+    "LoadBalancerAllocationPolicy": {
+      "description": "Dynamic snat allocation policy for load balancer.",
+      "properties" : {
+        "onDemandAllocation": {
+          "type": "bool",
+          "description": "On Demand allocation is True for Dynamic SNAT"
+         },
+         "portReuse" : {
+          "type": "string",
+          "description": "Port Reuse policy for Dynamic SNAT, default: FirstAvailable",
+           "enum": [
+              "FirstAvailable"
+           ]
+       }
+     }
+    },
     "FrontendIPConfigurationPropertiesFormat": {
       "properties": {
         "inboundNatRules": {
@@ -1595,6 +1611,13 @@
             "$ref": "./network.json#/definitions/SubResource"
           },
           "description": "The Frontend IP addresses of the load balancer."
+        },
+        "AllocationPolicy": {
+          "type": "string",
+          "items": {
+            "$ref": "./loadBalancer.json#/definitions/LoadBalancerAllocationPolicy"
+          },
+          "description": "Outbound Rules allocation policy for dynamic snat"
         },
         "backendAddressPool": {
           "$ref": "./network.json#/definitions/SubResource",
