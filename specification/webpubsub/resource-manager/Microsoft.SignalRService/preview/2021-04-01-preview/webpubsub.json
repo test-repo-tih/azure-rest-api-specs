@@ -52,58 +52,6 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.SignalRService/locations/{location}/checkNameAvailability": {
-      "post": {
-        "tags": [
-          "WebPubSub"
-        ],
-        "description": "Checks that the resource name is valid and is not already in use.",
-        "operationId": "WebPubSub_CheckNameAvailability",
-        "parameters": [
-          {
-            "name": "location",
-            "in": "path",
-            "description": "the region",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "parameters",
-            "in": "body",
-            "description": "Parameters supplied to the operation.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/NameAvailabilityParameters"
-            }
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success. The response describes the name availability.",
-            "schema": {
-              "$ref": "#/definitions/NameAvailability"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "WebPubSub_CheckNameAvailability": {
-            "$ref": "./examples/WebPubSub_CheckNameAvailability.json"
-          }
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.SignalRService/locations/{location}/usages": {
       "get": {
         "tags": [
