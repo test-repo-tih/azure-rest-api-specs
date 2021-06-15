@@ -14,14 +14,6 @@ go:
 ``` yaml $(go) && $(multiapi)
 batch:
   - tag: package-2020-09
-  - tag: package-2020-04
-  - tag: package-2019-06
-  - tag: package-2019-04
-  - tag: package-2017-10
-  - tag: package-2017-04
-  - tag: package-2016-10
-  - tag: package-2016-04
-  - tag: package-2015-06
 ```
 
 ### Tag: package-2020-09 and go
